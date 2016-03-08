@@ -1,0 +1,162 @@
+\documentclass[12pt]{upenndiss}
+
+%bibliography
+\usepackage{natbib}
+\bibpunct[:]{(}{)}{,}{a}{}{,}
+
+% phonological examples
+
+
+% fonts
+%\usepackage{mathspec}
+%\setmainfont[Mapping=tex-text]{Linux Libertine}
+%\setmathfont(Digits,Greek,Latin){Linux Libertine}
+%\usepackage{microtype}
+%\usepackage{coptic}
+
+\usepackage{setspace}
+
+% tables and figures
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{floatrow}
+\usepackage{multirow}
+\usepackage{enumitem}
+\setlist{noitemsep}
+\usepackage{multirow,sectsty}
+\usepackage{subfigure,graphicx}
+\graphicspath{{../images/}}
+
+% Add packages and definitions you want to use here:
+
+\usepackage[papersize={8.5 in, 11 in}, nohead, includeheadfoot, left=1.5 in, right = 1 in, vmargin= 1 in]{geometry}
+
+\usepackage{times}
+
+\usepackage{amsmath,amsthm,amsfonts, amssymb}
+\theoremstyle{definition} \newtheorem{definition}{Definition} 
+
+\usepackage{linguex}
+\usepackage[english,greek]{betababel}
+
+\usepackage{tikz-qtree}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,chains,matrix,positioning,scopes}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\usepackage{tipa}
+\usepackage[normalem]{ulem}
+
+
+\usepackage{epigraph}
+\usepackage{hyperref}
+
+
+
+% titles
+\title{Parameterising Germanic ditransitive variation:\newline A historical-comparative study}
+\author{Hezekiah Akiva Bacovcin}
+\supervisor{Anthony Kroch}
+
+\copyrighttrue
+\department{Linguistics}
+
+% Abstract
+\abstractfile{Abstract} 
+% Acknowledgement
+\acknowledgementsfile{Acknowledgements}
+
+% Dedication
+%\dedication{
+%}
+
+
+
+\begin{document}
+
+\thispagestyle{empty}\enlargethispage{\the\footskip}%
+\null\vskip.1in%
+\begin{center}
+        {\setstretch{2.5} \MakeUppercase{Parameterising Germanic ditransitive variation}\par }%
+        \vskip.3in
+        Hezekiah Akiva Bacovcin
+        \vskip .3in
+        A DISSERTATION \\[.1in]
+        in \\[.1in]
+        Linguistics
+        \vfill
+Presented to the Faculties of the University of Pennsylvania in Partial \\
+Fulfillment of the Requirements for the Degree of Doctor of Philosophy
+\\[0.3in]
+        2016
+  \end{center}
+  
+  \parbox[t]{12cm}{\parindent=0pt Supervisor of Dissertation \vskip 0.5in
+  \par \hrule width 7cm \vskip .1in Anthony Kroch, Professor of  Linguistics}
+  
+  \vskip 0.3in
+  
+  \parbox[t]{12cm}{\parindent=0pt Graduate Group Chairperson \vskip 0.5in
+  \par \hrule width 7cm \vskip .1in Rolf Noyer, Associate Professor of Linguistics}
+
+  \vskip 0.3in
+  
+  \parbox[t]{12cm}{\parindent=0pt Dissertation committee 
+  \vskip -.1in
+  David Embick, Professor of Linguistics
+  \vskip -.1in
+  William Haddican, Associate Professor of Linguistics, CUNY
+  \vskip -.1in  
+  Julie Legate, Professor of Linguistics
+  \vskip -.1in
+  Don Ringe, Professor of Linguistics
+  }
+
+
+
+\newpage 
+
+
+\FrontMatter
+
+% {\addcontentsline{toc}{chapter}{\listtablename}\listoftables}
+
+%%%%%%%%%
+%\part{Introduction}
+% Introduction
+\include{chapter1}
+% Germanic Langauges
+\include{chapter2}
+% Introduction to Ditransitives
+\include{chapter3}
+
+%%%%%%%%%
+\part{Case and Scrambling}
+% Germanic Word Orders and Recipient Marking
+\include{chapter4}
+% Scrambling
+\include{chapter5}
+% English Dative Shift
+\include{chapter6}
+
+%%%%%%%%%
+\part{Passive Locality}
+% Locality
+\include{chapter7}
+% Ditransitive Passive
+\include{chapter8}
+
+\part{Extensions}
+% Formal Implementation
+\include{chapter9}
+% Historical Implications (Case studies in actuation)
+\include{chapter10}
+% Conclusion and Further Implications
+\include{chapter11}
+
+% Bibliography
+\bibliographystyle{mcbride}
+\bibliography{diss}
+
+\end{document}
