@@ -1,0 +1,29 @@
+Extensions:
+	Formalisation
+		-DM analysis of dative shift morphology
+		-Minimalist analysis of locality issue (features and AGREE)
+	Historical Implications:
+		-Trade off between dative-to-nominative, obligatory subject
+		and nominative subject
+		-Two case studies on actuation from English:
+			-Actuation of `to'-marked recipients
+			-Actuation of the loss of bare recipient passives (via
+				recipient passives and bare recipient actives) 
+
+Conclusion: Violations of strict locality in ditransitive passive can be caused by sensitivity to case.
+
+Components:
+There are violations of strict locality in ditransitive passives
+
+Passives are sensitive to case
+	-What is case?
+		-Preposition vs morphological case (Syntactic K-head)
+		-Difference between structural and inherent?
+	-Sensitivity:
+		-German double accusatives
+		-
+
+Causal connection
+	-Cannot be attributed to other causes
+		-Not (always) A-scrambling
+		-Not (always) cliticization
