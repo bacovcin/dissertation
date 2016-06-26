@@ -69,16 +69,32 @@ In order to explain how dative-to-nominative conversion occurs, a theory of nomi
 
 \cite{Alexiadou.2014} propose a mechanism for removing the PP layer, namely P-incorporation, which was briefly introduced in the last chapter. This operation unites dative-to-nominative conversion with theories of pseudopassivsation, where passivisation of the object of preposition required incorporation of the preposition into the verbal domain \citep{Herslund.1984}. This section argues that both pseudopassivisation and nominative recipient passivisation rely on the same underlying mechanism of P-incorporation, however, the structural/semantic differences between prepositional objects (complements of the main verb) and recipients (specifiers of an applicative phrase) mean that pseudopassivisation and nominative recipient passivisation need not co-occur in the same language (or that the reflex of P-incorporation need not be the same across the two constructions in the same language).
 
-P-incorporation is a type of head excorporation, which must be distinct from standard head movement. P-incorporation moves the P-head from the specifier of the recipient -- itself in the specifier of the applicative phrase -- and adjoins it to the head of the next highest functional projection. Below, I show that this has implications for the structure of OV and VO clauses, since OV and VO languages show different reflexes of P-incorporation.
+P-incorporation is a type of head excorporation, which must be distinct from standard head movement. P-incorporation moves the P-head from the specifier of the recipient -- itself in the specifier of the applicative phrase -- and adjoins it to the head of the nearest C-commanding phrase. This description of the landing site can be seen from the Swedish data shown in the previous chapter, namely that VP-internal scrambling is unavailable with verbs that show P-incorporation (by having a prefix, e.g. er-). After VP-internal scrambling, the theme C-commands the recipient and is thus the nearest C-commanding phrase. Since the verb \textit{erbjoda} `offer' is built from P-incorporation, if the dative P does not incorporate, the verb cannot be used (since it cannot be built).
+	\begin{exe}
+		\exr{ex:Swedish-complex-act} Swedish:
+			\begin{xlist}
+				\ex[ ]{\gll Han erbjöd Jan ett nytt jobb\\
+				he.NOM offered John a new job\\
+			\trans `He offered John a new job'}
+				\ex[??]{\gll Han erbjöd ett nytt jobb til Jan\\
+				he.NOM offered a new job to John\\
+			\trans `He offered a new job to John'}
+				\ex[*]{\gll Han erbjöd ett nytt jobb Jan\\
+				he.NOM offered a new job John\\
+			\trans `He offered a new job to John'}
+			\end{xlist}
+	\end{exe}
+
+After reviewing some more data, I show that the target site also has implications for the structure of OV and VO clauses, since OV and VO languages show different reflexes of P-incorporation.
 
 \begin{exe}
-	\ex \label{ex:VO-Pincorp}
+	\ex P-incorporation (VO Word Order)\label{ex:VO-Pincorp}\\
 			\xymatrix@=2pt{
 			& VoiceP\ar@{-}[dl]\ar@{-}[dr]\\
 			V+Appl+Voice\ar@{<-}[dd] && ApplP\ar@{-}[dl]\ar@{-}[drr]\\
 			& PP_{\text{Recipient}}\ar@{-}[dl]\ar@{-}[dr] & & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
-			\sout{P} & & DP_{\text{Recipient}} & \sout{Appl} & & VP\ar@{-}[dl]\ar@{-}[dr]\\
-			&  &  &  & \sout{V} & & DP_{\text{Theme}}}
+			\text{\sout{P}} & & DP_{\text{Recipient}} & \text{\sout{Appl}} & & VP\ar@{-}[dl]\ar@{-}[dr]\\
+			&  &  &  & \text{\sout{V}} & & DP_{\text{Theme}}}
 \end{exe}
 
 
@@ -404,7 +420,7 @@ Figure \ref{fig:amdata} shows the results from this study with respect to \texti
 
 }
 
-\caption{LOESS lines for \textit{to} use in Modern American theme--recipient actives (with pronominal recipients) and theme passives.\label{fig:amdata}}\label{fig:amtoset-graph}
+\caption{LOESS lines for \textit{to} use in Modern American theme--recipient actives (with pronominal themes) and theme passives, both with pronominal recipients.\label{fig:amdata}}\label{fig:amtoset-graph}
 \end{figure}
 
 In combination with the results from Haddican's studies, this suggests that there is a complete dissociation between bare theme--recipients in the active and bare theme passives. All possible combinations of bare vs \textit{to}-marked theme--recipient actives and bare vs \textit{to}-marked theme passives are attested in different dialects/time periods. The analysis presented here predicts this dissociation, since the presence of case-based restrictions on locality are neither connected to nor solely dependent on pronoun cliticisation.
@@ -416,8 +432,8 @@ As discussed above, Swedish presents one of the clearest cases for the P-incorpo
 
 \begin{exe}
 	\ex \gll Ett nytt jobb erbjöds=honom.\\
-A job offered.PASS=him.OBL.\\
-\trans `A job was offered to him (\citealt{Anward.1989},\citealt{Falk.1990},\citealt{Lundquist.2006}).'
+A new job offered.PASS=him.OBL.\\
+\trans `A new job was offered to him (\citealt{Anward.1989},\citealt{Falk.1990},\citealt{Lundquist.2006}).'
 \end{exe}
 
 If this is true, Swedish gives further clarity about the cliticisation process, since theme passivisation with unmarked recipients is \textbf{only} available with particle verbs. This suggests that in Swedish, the cliticisation process is restricted to DP pronouns. Pronouns in a dative PP (i.e., in non particle verbs) are unable to cliticise and thus serve as defective interveners for direct theme passivisation (see previous subsection).
