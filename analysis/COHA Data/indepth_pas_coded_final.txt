@@ -1,0 +1,342 @@
+Verb	id	startnum	endnum	textname	author	genre	year	Voice	IO	DO	To	Order	IOAnim	DOAnim	IODef	DODef	LengthDiff	IONum	DONum
+offer	747536	53096	53139	"A concise exposition of the doctrine of association, or Plan for a re-organization of society : which will secure to the human race, individually and "	Albert Brisbane	NF	1843	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	5	Plural	Singular
+offer	747473	12496	12546	"A discourse on the genius and character of the Rev. Horace Holley, LL. D., "	Charles Caldwell	NF	1828	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	2	Singular	Singular
+offer	554364	3060	3183	British Poetry at the Close of the Last Century		MAG	1836	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	2	Singular	Singular
+offer	501175	879	914	By Rail to the Rocky Mountains	I. Edwards Clarke	MAG	1868	Passive	Noun	Noun	To	AccDat	Inanimate	Animate	Definite	Definite	0	Plural	Singular
+offer	565585	15971	16040	Christian Union		MAG	1846	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-1	Singular	Singular
+offer	568518	7439	7512	Ward's Life of Percival	Professor Dwight	MAG	1867	Passive	Noun	Noun	To	AccDat	Inanimate	Animate	Indefinite	Definite	3	Singular	Singular
+offer	754438	6550	6615	"Personal Narrative of Travels to the Equinoctial Regions of America, During the Year 1799-1804 -- Vo"	"Humboldt, Alexander von, 1769-1859"	NF	1848	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+offer	748017	3514	3580	Essay on the union of church and state 	Baptist Wriothesley Noel	NF	1849	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	0	Singular	Plural
+offer	7039	15642	15660	Letters from New-York		FIC	1843	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-2	Singular	Singular
+offer	554122	3089	3129	Harvard University		MAG	1831	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-7	Singular	Plural
+offer	554153	5914	5985	Indian Biography		MAG	1832	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	2	Plural	Plural
+offer	7145	16088	16129	"Cromwell: An Historical Novel, Volume 2"		FIC	1838	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	1	Plural	Singular
+offer	7084	10511	10525	"Bonfield; or, The Outlaw of the Bermudas. A Nautical Novel . . "		FIC	1846	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-3	Singular	Plural
+offer	554216	5334	5415	History of Philadelphia		MAG	1833	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	10	Singular	Plural
+offer	747803	4122	4183	View of the Hebrews : exhibiting the destruction of Jerusalem; the certain restoration of Judah and Israel; the present state of Judah and Israel; and	Ethan Smith	NF	1823	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Plural	Singular
+offer	7063	403	446	Norman Leslie: A Tale of the Present Times Volume 1		FIC	1835	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	0	Singular	Singular
+offer	569041	3677	3700	Yale College - Some Thoughts Respecting its Future. Second Article	Professor Timothy Dwight	MAG	1870	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-5	Plural	Plural
+offer	557160	7033	7067	Michigan		MAG	1861	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	3	Singular	Plural
+offer	554422	1464	1513	Principle of Emulation		MAG	1836	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	2	Singular	Singular
+offer	554274	2446	2477	Life and Writings of Crabbe		MAG	1834	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	2	Plural	Singular
+offer	557421	199	242	Madame Swetchine		MAG	1862	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	0	Plural	Singular
+offer	8767	964	993	Pontiac		FIC	1835	Passive	Noun	Noun	To	AccDat	Inanimate	Animate	Indefinite	Indefinite	-1	Plural	Plural
+offer	553757	2311	2400	Army of the United States		MAG	1826	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	2	Singular	Plural
+offer	527592	2065	2156	Cyril Wilde		MAG	1861	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	2	Plural	Singular
+offer	568363	6476	6502	The New Era	President Woolsey	MAG	1866	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	7	Plural	Singular
+offer	5402	17819	17853	The Ranger or The Fugitives of the Border		FIC	1863	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	3	Singular	Singular
+offer	7284	8969	9019	Myrtis: With Other Etchings and Sketchings		FIC	1846	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-3	Singular	Singular
+offer	739244	1093	1124	American Steel Cannon		NEWS	1861	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-1	Plural	Singular
+offer	752545	15144	15264	Life of Chopin	"Cook, Martha Elizabeth Duncan Walker, 1806-1874"	NF	1863	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Plural	Plural
+offer	558546	8730	8741	The Labor Question	Simon Newcomb	MAG	1870	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-2	Plural	Plural
+offer	564568	666	718	The Prospects of Poetry and Science	G.	MAG	1833	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	3	Singular	Plural
+offer	770957	53174	53249	"Parochial and Plain Sermons, Vol. VII (of 8)"	"Newman, John Henry, 1801-1890"	NF	1868	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+offer	747853	72974	73036	"An Inquiry Into the Foundation, Evidences, and Truths of Religion"	Henry Ware	NF	1842	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	-2	Singular	Singular
+offer	7216	123499	123538	"Mardi and a Voyage Thither, Volume 2"		FIC	1849	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Plural	Singular
+offer	563996	1271	1295	Music		MAG	1831	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+offer	622	193004	193027	The Pioneers		FIC	1845	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-3	Plural	Singular
+offer	747487	28309	28329	Lectures on school-keeping	Samuel Read Hall	NF	1830	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-2	Singular	Singular
+offer	747960	73966	73982	On the extent of the Atonement in its relation to God and the universe	Thomas W. Jenkyn	NF	1837	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	3	Singular	Singular
+offer	554993	10783	10810	Classical Studies at Cambridge		MAG	1842	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	4	Plural	Singular
+offer	747994	53724	53782	"Psychology; Or, A View of the Human Soul, Including Anthropology, Adapted for the Use of Colleges"	Friedriech August Rauch	NF	1841	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	1	Singular	Singular
+offer	9188	57730	57766	"The Sunny South; or, The Southerner at Home Embracing Five Years' Experience of a Northern Governess in the Land of the Sugar and the Cotton"		FIC	1860	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Plural
+offer	553423	6884	6936	The Life of Pitt		MAG	1822	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Plural
+offer	747950	43816	43849	Life and writings of Ebenezer Porter Mason; interspersed with hints to parents and instructors on the training and education of a child of genius 	Denison Olmsted	NF	1842	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+offer	754867	22711	22745	Army Life in a Black Regiment	"Higginson, Thomas Wentworth, 1823-1911"	NF	1870	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Singular
+offer	7177	99352	99381	"Swallow Barn; or, A Sojourn in the Old Dominion, Volume 2"		FIC	1832	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	12	Singular	Singular
+offer	553343	7091	7105	Warden on America		MAG	1821	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	0	Plural	Singular
+offer	747853	14498	14538	"An Inquiry Into the Foundation, Evidences, and Truths of Religion"	Henry Ware	NF	1842	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	1	Plural	Singular
+offer	554151	1704	1747	Audobon's Biography of Birds		MAG	1832	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	1	Singular	Plural
+offer	9759	40149	40188	The Novels . . 		FIC	1827	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-3	Singular	Plural
+offer	565338	13001	13053	Romanists and the Roman Catholic Controversy		MAG	1844	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	3	Plural	Singular
+offer	524570	8641	8676	Mr. Slidell's Mission to Mexico	D. D. B.	MAG	1847	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	2	Singular	Singular
+offer	554993	10486	10538	Classical Studies at Cambridge		MAG	1842	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	0	Singular	Singular
+offer	533544	4773	4812	The Gods of Wo Lee	Sidney Andrews	MAG	1870	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	2	Plural	Plural
+offer	558071	376	390	The Mexican Question		MAG	1866	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	5	Singular	Singular
+offer	7002	81720	81786	Tales of the Puritans. The Regicides - The Fair Pilgrim - Castine		FIC	1831	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-11	Singular	Singular
+offer	7276	54275	54306	The Poor Rich Man and the Rich Poor Man		FIC	1836	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+offer	557951	9972	10018	John C. Calhoun		MAG	1865	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	0	Singular	Singular
+offer	749455	52494	52544	History of the Conquest of Peru	"Prescott, William Hickling, 1796-1859"	NF	1847	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Plural	Singular
+offer	755017	61471	61494	The History of the Reign of Ferdinand and Isabella the Catholic -- Volume 1	"Prescott, William Hickling, 1796-1859"	NF	1864	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-1	Singular	Singular
+offer	555518	12026	12048	The Life and Opinions of Sismondi		MAG	1848	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	6	Singular	Singular
+offer	747603	17984	18075	Remarks on Changes Lately Proposed Or Adopted in Harvard University 	George Ticknor	NF	1825	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	4	Singular	Singular
+offer	554167	688	727	Habits of Insects		MAG	1832	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	7	Singular	Plural
+offer	7350	20632	20683	"The Partisan Leader: A Tale of the Future. By Edward William Sidney [pseud], Volume 1"		FIC	1836	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	1	Singular	Singular
+offer	8085	10066	10116	Ximena		FIC	1844	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Definite	Indefinite	-2	Plural	Singular
+offer	747473	43346	43359	"A discourse on the genius and character of the Rev. Horace Holley, LL. D., "	Charles Caldwell	NF	1828	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+offer	7277	20825	20865	"Redwood: A Tale, Volume 1"		FIC	1824	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-1	Singular	Singular
+offer	747536	26128	26150	"A concise exposition of the doctrine of association, or Plan for a re-organization of society : which will secure to the human race, individually and "	Albert Brisbane	NF	1843	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-1	Plural	Singular
+offer	7327	93207	93237	"Clinton Bradshaw; or, The Adventures of a Lawyer, Volume 1"		FIC	1835	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	13	Singular	Singular
+offer	8533	1081	1119	Semiramis		FIC	1845	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Singular	Plural
+offer	527986	7497	7546	Recollections of a Gifted Woman	Nathaniel Hawthorne	MAG	1863	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	0	Singular	Singular
+offer	755525	4298	4337	Memoirs of General Lafayette : with an Account of His Visit to America and His Reception By the Peop	"Knapp, Samuel L. (Samuel Lorenzo), 1783-1838"	NF	1837	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-2	Plural	Singular
+offer	555103	5588	5616	Works of Alexandre Dumas		MAG	1843	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	3	Singular	Plural
+offer	7040	54795	54817	Philothea		FIC	1836	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+offer	7024	37025	37071	"The Adventures of Harry Franco, volume 2"		FIC	1839	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	2	Singular	Singular
+offer	7084	63059	63081	"Bonfield; or, The Outlaw of the Bermudas. A Nautical Novel . . "		FIC	1846	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Plural
+offer	7084	63042	63058	"Bonfield; or, The Outlaw of the Bermudas. A Nautical Novel . . "		FIC	1846	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	1	Singular	Singular
+offer	772692	16460	16470	Thoughts on Missions	"Dibble, Sheldon, 1809-1845"	NF	1844	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+offer	9757	9926	9997	The Novels . . 		FIC	1827	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	0	Singular	Singular
+offer	7200	5425	5466	Kavanagh		FIC	1849	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	6	Singular	Singular
+offer	747959	55519	55538	St. Pierre's Studies of nature	Bernardin de Saint-Pierre	NF	1836	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	1	Singular	Plural
+offer	528955	491	574	How my New Acquaintances Spin	Dr. B. G. Wilder	MAG	1866	Passive	Noun	Noun	To	DatAcc	Animate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+offer	552906	5677	5729	Ogilvie's Essays		MAG	1817	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	16	Singular	Singular
+offer	7017	87907	87936	"The Infidel; or, the Fall of Mexico, Volume 2"		FIC	1835	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	13	Singular	Singular
+offer	565252	7489	7522	Political State of Norway		MAG	1843	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Singular
+offer	747509	54782	54822	"Progressive education, commencing with the infant"	"Albertine-Adrienne Necker de Saussure;  Emma Willard;  Lincoln Phelps, Mrs"	NF	1835	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+offer	529720	2614	2675	The Pacific Railroad - open.  I	Samuel Bowles	MAG	1869	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	0	Plural	Plural
+offer	7012	117254	117284	"Calavar; or, The Knight of the Conquest. A Romance of Mexico, Volume 1"		FIC	1834	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	13	Singular	Singular
+offer	554974	13114	13156	Relations with England		MAG	1841	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+offer	558071	7977	8028	The Mexican Question		MAG	1866	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-4	Singular	Singular
+offer	557787	14581	14661	Ocean Steam Navigation		MAG	1864	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-2	Singular	Plural
+give	553838	6028	6084	America		MAG	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	1	Plural	Singular
+give	747651	56110	56132	"The Federalist, on the new Constitution, written in 1788, by Mr. Hamilton, Mr. Madison, and Mr. Jay: with an appendix, containing the letters of Pacif"	"Alexander Hamilton, James Madison, John Jay"	NF	1817	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	3	Singular	Plural
+give	747659	36956	36972	War inconsistent with the religion of Jesus Christ	David Low Dodge	NF	1815	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	0	Singular	Plural
+give	553765	10553	10630	Claims on France		MAG	1826	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-6	Plural	Singular
+give	748084	72267	72302	Report of a Committee of the Citizens of Boston and Vicinity Opposed to a Further Increase of Duties on Importations	Henry Lee	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-4	Singular	Singular
+give	553527	2611	2668	Law Reports		MAG	1824	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-9	Singular	Singular
+give	553373	716	768	Essay Writing		MAG	1822	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	0	Singular	Plural
+give	747651	110783	110884	"The Federalist, on the new Constitution, written in 1788, by Mr. Hamilton, Mr. Madison, and Mr. Jay: with an appendix, containing the letters of Pacif"	"Alexander Hamilton, James Madison, John Jay"	NF	1817	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Plural	Singular
+give	747582	64156	64228	"The Crisis: Or, Essays on the Usurpations of the Federal Government"	Brutus Robert James Turnbull	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	-1	Singular	Singular
+give	553765	4093	4153	Claims on France		MAG	1826	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	554071	10171	10196	Politics of Mexico		MAG	1830	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-4	Singular	Singular
+give	7259	47609	47625	"Charlotte's Daughter; or, The Three Orphans. A Sequel to Charlotte Temple"		FIC	1828	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-1	Plural	Plural
+give	748086	15223	15264	A view of the Constitution of the United States of America	William Rawle	NF	1829	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	4	Singular	Singular
+give	7285	29853	29875	"Sketch of Connecticut, Forty Years Since"		FIC	1824	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Plural	Singular
+give	748084	43828	43867	Report of a Committee of the Citizens of Boston and Vicinity Opposed to a Further Increase of Duties on Importations	Henry Lee	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	1	Singular	Singular
+give	7209	19959	20024	The Betrothed of Wyoming		FIC	1830	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-1	Plural	Singular
+give	553698	4144	4199	Claims for French Spoilations		MAG	1826	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-2	Plural	Plural
+give	748004	70277	70295	Christian Essays: To which is Added an Essay on the Influence of a Moral Life on Our Judgment in Matters of Faith	Samuel Charles Wilks	NF	1829	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	1	Singular	Plural
+give	747562	85297	85313	"The Life, Studies, and Works of Benjamin West, Esq.: Composed from Materials Furnished by Himself"	John Galt	NF	1816	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-1	Singular	Singular
+give	553758	2723	2802	Materials for American History		MAG	1826	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	2	Singular	Singular
+give	553119	6157	6215	A Bill to establish an uniform system of Bankruptcy throughout the United States		MAG	1818	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+give	7266	24854	24907	"Clarence; or, A Tale of Our Own Times, Volume 1"		FIC	1830	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	4	Plural	Singular
+give	747582	2835	2933	"The Crisis: Or, Essays on the Usurpations of the Federal Government"	Brutus Robert James Turnbull	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-7	Singular	Singular
+give	553765	1428	1513	Claims on France		MAG	1826	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	-3	Singular	Singular
+give	554068	1204	1220	Asylum for the Blind		MAG	1830	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	1	Singular	Singular
+give	747659	37630	37712	War inconsistent with the religion of Jesus Christ	David Low Dodge	NF	1815	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-10	Singular	Singular
+give	553349	869	949	Botta's American Revolution		MAG	1821	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-1	Singular	Plural
+give	749178	28083	28113	A Sketch of the life of Brig. Gen. Francis Marion and a history of his brigade	"James, William Dobein, 1764-1838"	NF	1821	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	2	Singular	Singular
+give	553480	2663	2693	European Politics		MAG	1823	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-7	Plural	Singular
+give	748084	72760	72794	Report of a Committee of the Citizens of Boston and Vicinity Opposed to a Further Increase of Duties on Importations	Henry Lee	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-2	Plural	Singular
+give	748084	46000	46017	Report of a Committee of the Citizens of Boston and Vicinity Opposed to a Further Increase of Duties on Importations	Henry Lee	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-2	Plural	Singular
+give	553405	11277	11371	Examination of the Russian Claims		MAG	1822	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-5	Singular	Singular
+give	747582	17953	17995	"The Crisis: Or, Essays on the Usurpations of the Federal Government"	Brutus Robert James Turnbull	NF	1827	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	3	Singular	Singular
+give	314	11662	11718	The Last of the Mohicans; A narrative of 1757		FIC	1826	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	-4	Singular	Singular
+give	7259	5040	5111	"Charlotte's Daughter; or, The Three Orphans. A Sequel to Charlotte Temple"		FIC	1828	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	1	Singular	Plural
+give	747803	24666	24706	View of the Hebrews : exhibiting the destruction of Jerusalem; the certain restoration of Judah and Israel; the present state of Judah and Israel; and	Ethan Smith	NF	1823	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-3	Plural	Singular
+give	748086	48161	48228	A view of the Constitution of the United States of America	William Rawle	NF	1829	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	7041	75920	75936	"The Rebels; or, Boston before the Revolution"		FIC	1825	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-5	Singular	Singular
+give	553906	13996	14021	Von Dohm's Memoirs		MAG	1828	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	-1	Singular	Plural
+give	748059	36982	37073	Introduction to the mechanical principles of carpentry 	Benjamin Hale	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	7168	601	645	"The Buccaneers: A Romance of Our Own Count[r]y in Its Ancient Day . . . [by] Yclept Terentius Phlogobombos [pseud] . . . In Five Books,  Volume 1"		FIC	1827	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	747635	14799	14855	Elementary catechism on the Constitution of the United States : for the use of schools	Arthur J. Stansbury	NF	1828	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	-8	Plural	Singular
+give	553357	1129	1142	Appropriation of Public Lands for Schools		MAG	1821	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	0	Singular	Singular
+give	7975	511	588	&quot;Died he as the soldier joys to die&quot;		FIC	1830	Passive	Noun	Noun	To	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+give	747651	129409	129428	"The Federalist, on the new Constitution, written in 1788, by Mr. Hamilton, Mr. Madison, and Mr. Jay: with an appendix, containing the letters of Pacif"	"Alexander Hamilton, James Madison, John Jay"	NF	1817	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	553969	831	910	Political Economy		MAG	1829	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	748059	1779	1797	Introduction to the mechanical principles of carpentry 	Benjamin Hale	NF	1827	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	1	Singular	Singular
+give	553698	7305	7329	Claims for French Spoilations		MAG	1826	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	3	Plural	Singular
+give	553568	3645	3670	Agriculture		MAG	1824	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Plural
+give	553350	10318	10352	Life of Bernardin de St. Pierre		MAG	1821	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	0	Singular	Singular
+give	747582	41002	41062	"The Crisis: Or, Essays on the Usurpations of the Federal Government"	Brutus Robert James Turnbull	NF	1827	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	2	Plural	Singular
+give	553359	2437	2478	Course of Mathematics		MAG	1821	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	2	Singular	Singular
+give	748086	63225	63247	A view of the Constitution of the United States of America	William Rawle	NF	1829	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	553593	760	776	Emigration to Africa and Hayti		MAG	1825	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	2	Singular	Plural
+give	747651	104149	104188	"The Federalist, on the new Constitution, written in 1788, by Mr. Hamilton, Mr. Madison, and Mr. Jay: with an appendix, containing the letters of Pacif"	"Alexander Hamilton, James Madison, John Jay"	NF	1817	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	1	Singular	Singular
+give	553959	2640	2664	Heeren's Historical Works		MAG	1829	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-1	Singular	Plural
+give	9763	24960	24971	The Novels . . 		FIC	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Plural	Singular
+give	747582	38389	38450	"The Crisis: Or, Essays on the Usurpations of the Federal Government"	Brutus Robert James Turnbull	NF	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-3	Plural	Singular
+give	748086	18366	18379	A view of the Constitution of the United States of America	William Rawle	NF	1829	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	747573	15122	15154	"Female Scripture Biographies, Volume I"	Francis Augustus Cox	NF	1817	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	553952	5626	5672	Austin's Life of Gerry		MAG	1829	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	0	Plural	Singular
+give	9758	63569	63608	The Novels . . 		FIC	1827	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-5	Plural	Singular
+give	553793	6241	6273	Cardozo's Notes on Political Economy		MAG	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-2	Plural	Singular
+give	553976	4621	4696	Massachusetts Rail Road		MAG	1829	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	553482	1628	1684	Miss Edgeworth		MAG	1823	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	0	Singular	Singular
+give	553788	2109	2144	Diplomacy of the United States		MAG	1827	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-3	Singular	Singular
+give	751465	24732	24755	Chronicle of the Conquest of Granada	"Irving, Washington, 1783-1859"	NF	1829	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	6	Singular	Singular
+give	553970	4159	4190	History of the Louisiana Treaty		MAG	1829	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	1	Singular	Singular
+give	553914	10544	10573	Captain Hall's Voyage to the Eastern Seas		MAG	1828	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	2	Singular	Singular
+give	553961	1439	1453	Saxe-Weimar's Travels		MAG	1829	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	553850	2281	2375	Conventions for Adopting the Federal Constitution		MAG	1827	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+give	553739	4420	4482	Popular Education		MAG	1826	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Plural	Singular
+give	7275	74971	74990	A New-England Tale		FIC	1822	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	747651	14817	14828	"The Federalist, on the new Constitution, written in 1788, by Mr. Hamilton, Mr. Madison, and Mr. Jay: with an appendix, containing the letters of Pacif"	"Alexander Hamilton, James Madison, John Jay"	NF	1817	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Plural
+give	554057	9061	9143	Politics of Europe		MAG	1830	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-5	Singular	Singular
+give	553698	7489	7542	Claims for French Spoilations		MAG	1826	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-5	Singular	Plural
+offer	394274	3666	3699	PETER PAN TURNS 100	"Allen, Norman"	MAG	2004	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-1	Plural	Singular
+offer	668193	361	387	GLOBETROTTING; BARGAINS IN THE SKY; [FIRST Edition]	Jerry Morris Globe Staff	NEWS	1981	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	5	Plural	Singular
+offer	416769	1086	1106	Probing the birth of starlight	Adam Frank	MAG	2001	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	5	Singular	Singular
+offer	420874	1005	1019	Fixing broken CLASS	Paul Attner	MAG	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	1	Singular	Singular
+offer	776266	6783	6821	So what :the life of Miles Davis	"Szwed, John F., 1936-"	NF	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	4	Singular	Singular
+offer	660097	523	545	Commuting coast to coast	Marilyn Gardner Staff writer of The Christian Science Monitor	NEWS	2001	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+offer	10690	249251	249304	True Love		FIC	1982	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	7	Singular	Singular
+offer	661947	3944	3957	Managing Editors:; Editors:		NEWS	2001	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	1	Plural	Plural
+offer	669910	1212	1230	Bond Prices Are Pushed Down by News Of $500 Million Drop in Money Supply	By Edward P. Foldessy and Tom Herman	NEWS	1985	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	8	Plural	Singular
+offer	746695	4449	4488	Providing access to linguistically diverse students	"Ellis, Patricia<BR>Stebbins, Consuelo"	NF	1996	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Definite	3	Plural	Singular
+offer	640210	1213	1245	SUPER BOWL XXXVIII - SPOTLIGHT ON JAKE DELHOMME Pride spans Breaux Bridge Panthers quarterback more popular than crawfish in small Louisiana hometown	"Anthony Cotton , Denver Post Sports Writer"	NEWS	2004	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Plural	Singular
+offer	432450	2445	2468	How Disney Does It	Charles Leerhsen	MAG	1989	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	2	Plural	Plural
+offer	30240	201	259	Samaritan /	"Price, Richard, 1949- "	FIC	2003	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	2	Singular	Singular
+offer	405371	0	43	Rape Kits in Cold Storage	Amy Goodwin	MAG	2009	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	10	Plural	Singular
+offer	43413	472	487	The boxcar adventure	Gertrude C Warner	FIC	1998	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	2	Singular	Plural
+offer	378795	93	126	B.Y.U. in Zion		MAG	1986	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Definite	Indefinite	1	Singular	Singular
+offer	487730	1660	1684	The Fifth Remembered	"Aronson, James"	MAG	1986	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Definite	1	Plural	Singular
+offer	16254	11523	11536	Medicine Man	"Schulman, Tom, fl. 1986-2003"	FIC	1992	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-2	Singular	Singular
+offer	641066	1295	1305	College chiefs^ pay debated Raise of CSU^s Yates tops list	"J. Sebastian Sinisi, Denver Post Staff Writer"	NEWS	1994	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	3	Singular	Singular
+offer	29558	3028	3055	Envy /	"Brown, Sandra, 1948- "	FIC	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-2	Singular	Plural
+offer	387286	304	314	An American Portrait	"Harnden, Toby"	MAG	2003	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-3	Singular	Singular
+offer	322511	269	284	[Milestones]		MAG	1983	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	2	Singular	Singular
+offer	388995	3473	3511	Old soldiers	Tony Hendra	MAG	1997	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-4	Plural	Singular
+offer	773918	19500	19520	"Philosophy: An Introduction Through Original Fiction, Discussion, and Readings"	Thomas D. Davis	NF	1987	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Plural	Singular
+offer	27741	2525	2564	Timbuktu : a novel /	"Auster, Paul, 1947- "	FIC	2000	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	3	Singular	Singular
+offer	492478	2271	2357	Dare to dialogue on cancer	"Ser Vaas, C."	MAG	1989	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+offer	412970	579	591	The stuff of legends	Peter Haldeman	MAG	2000	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	5	Singular	Singular
+offer	746143	696	734	A Critique of Faith-based Prison Programs		NF	2005	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	5	Plural	Singular
+offer	322912	122	131	School Days at Prudential High		MAG	1984	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	0	Plural	Singular
+offer	746570	878	909	Developing a corporate culture for the maximum balance between the utilization of human resources..	"Lidstad, Richard"	NF	1996	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	0	Plural	Plural
+offer	10675	37520	37561	Lion of Ireland		FIC	1981	Passive	Noun	Noun	NoTo	AccDat	Animate	Inanimate	Definite	Indefinite	2	Singular	Singular
+offer	671277	24	152	REAGAN SAYS CUBA AIMED TO TAKE GRENADA; BASTION REPORTED TO FALL; BATTLE GOES ON	"By STEVEN V. ROBERTS, Special to the New York Times"	NEWS	1983	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-2	Singular	Singular
+offer	773425	9013	9033	The Jews in America	Arthur Hertzberg	NF	1989	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	2	Singular	Singular
+offer	38624	4621	4656	The neon heart murders		FIC	2000	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-1	Plural	Plural
+offer	432247	1173	1194	How the World Views America	Stewart Powell	MAG	1985	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	4	Plural	Singular
+offer	432437	1560	1582	Shelley Winters's Tell-All Book	Shelley Winters	MAG	1989	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	1	Singular	Singular
+offer	669312	302	349	Investing	"By Marilyn Hoffman, Staff correspondent of The christian Science Monitor"	NEWS	1980	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	1	Plural	Singular
+offer	355408	101	118	RISING REPUBLICANS		MAG	1996	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	2	Singular	Singular
+offer	425226	4074	4095	Down and out	"Meacham, Jon"	MAG	1993	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	11	Singular	Singular
+offer	432450	2951	2967	How Disney Does It	Charles Leerhsen	MAG	1989	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-8	Plural	Plural
+offer	359503	304	318	The Things Kids Say	JULIE GRACE	MAG	1998	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Plural	Plural
+offer	10709	18966	18985	Hollywood Wives		FIC	1983	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	1	Singular	Singular
+offer	623939	925	952	Eating in Bed; ; SoMa^s Supperclub serves up good food in fantastical atmosphere; 	Michael Bauer	NEWS	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	2	Plural	Singular
+offer	888	32886	32915	Mark Twain's Letters — Volume 1 (1835-1866)	"Twain, Mark, 1835-1910"	FIC	1988	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-1	Singular	Plural
+offer	44640	12869	12908	The secret history of the Ornithopter	Jan Lars Jensen	FIC	1999	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Plural
+offer	625861	1235	1259	Increased hunting opportunity part of proposed rule changes; 	SHANNON TOMPKINS; Staff	NEWS	1996	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	4	Singular	Singular
+offer	776565	24844	24875	1776	"McCullough, David G."	NF	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	5	Singular	Singular
+offer	128902	1051	1066	WARNING: 'HOOPS' MAY BE ADDICTIVE		MAG	1987	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-2	Plural	Singular
+offer	638648	122	139	MIKE SHANAHAN MAN WITH A PLAN Denver job perfect fit for new coach	"Jim Armstrong, Denver Post Sports Writer"	NEWS	1995	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	3	Singular	Singular
+offer	643046	199	239	School Records on Special English Classes Are Called Works of Fiction by Critics		NEWS	2007	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	1	Plural	Plural
+offer	480700	716	753	Readings		MAG	1986	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	11	Singular	Singular
+offer	668547	218	249	DEA CHIEF WARNS DRUG SMUGGLERS	Associated Press	NEWS	1983	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	4	Plural	Singular
+offer	773867	20225	20239	Alternative Healing	Mark Kastner & Hugh Burrows	NF	1993	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	5	Singular	Singular
+offer	670247	479	505	Bergen Brunswig Panel Rejects Offer By Founders to Sell Controlling Stake	By Sonia L. Nazario	NEWS	1988	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	5	Plural	Singular
+offer	32505	7445	7465	"Tea with terrorists : who they are, why they kill, what will stop them /"	"Winn, Craig.  Power, Ken. "	FIC	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	2	Plural	Singular
+offer	607688	938	960	Philadelphia School Questioned;	"Mark Schlabach, Washington Post Staff Writer"	NEWS	2006	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-5	Singular	Plural
+offer	415623	3181	3204	Letter from Ground Zero	"Bartlett, Sarah"	MAG	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+offer	10687	27206	27225	Dean's December		FIC	1982	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	-2	Singular	Singular
+offer	747179	1606	1626	Containing Russia	"Tymoshenko, Yuliya"	NF	2007	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	5	Singular	Singular
+offer	735070	241	290	Acts of Love and Compassion in the Soviet Gulag	ROBERT KAGAN	NEWS	1981	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Plural	Plural
+offer	354810	437	479	A HEALTHY MERGER?	JILL SMOLOWE	MAG	1996	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	2	Plural	Singular
+offer	773732	11923	11962	"Cooking, Cuisine and Class"	Jack Goody	NF	1982	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	0	Plural	Plural
+offer	28214	111	141	The beach house : a novel /	"Patterson, James, 1947-  De Jonge, Peter. "	FIC	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	3	Singular	Singular
+offer	671216	904	945	PRESIDENT REAGAN^S ADDRESS ON CENTRAL AMERICA TO JOINT SESSION OF CONGRESS		NEWS	1983	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-2	Singular	Singular
+offer	671429	681	773	CRITIC^S NOTEBOOK; LITERARY BAIT FOR A MAIL ORDER HOOK	By CHRISTOPHER LEHMANN-HAUPT	NEWS	1985	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-6	Singular	Singular
+offer	773947	90	117	The Territorial Army 1906-1940	Peter Dennis	NF	1987	Passive	Noun	Noun	NoTo	AccDat	Animate	Inanimate	Indefinite	Definite	5	Plural	Singular
+offer	669023	400	407	"`Firsts' not exactly a new phenomenon; [NORTH SPORTS FINAL, C Edition]"	William Gruber.	NEWS	1989	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-1	Plural	Plural
+offer	776565	16934	16962	1776	"McCullough, David G."	NF	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Definite	6	Singular	Singular
+offer	432196	3162	3190	They're Killing Off the Rhino	Esmond Bradley Martin	MAG	1984	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-1	Plural	Plural
+offer	735282	697	733	Allen &amp; Co.'s Lucrative Ties to Columbia Seen Continuing After Coke Acquisition	STEPHEN J. SANSWEET Staff Reporter of 	NEWS	1982	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Indefinite	Indefinite	2	Singular	Singular
+offer	773630	26014	26051	Antique Collecting: A Sensible Guide to It's Art and Mystery	Timothy Trent Blade	NF	1989	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-1	Singular	Plural
+offer	670072	1532	1546	Fed Reduces Discount Rate Half Point to 6% --- Sluggish Economy Is Cited; Pressure Rises for Allies To Boost Their Growth	By Tom Herman and Paul Blustein	NEWS	1986	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	3	Plural	Plural
+offer	613518	421	464	PEACH BUZZ TALK OF OUR TOWN Aaron can^t escape those autographs	By Don O'Briant	NEWS	1993	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	0	Plural	Singular
+offer	746908	1026	1076	Futile Treatment and the Health Services Manager	"Darr, Kurt"	NF	2000	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+offer	492167	2635	2676	ALCOHOLICS ANONYMOUS CELEBRATES ITS 50TH YEAR	"Edmeades, Baz"	MAG	1985	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	16	Singular	Singular
+offer	334248	517	548	Freedom Of Choice		MAG	1987	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-1	Plural	Plural
+offer	343862	460	490	Passing The Late-Night Crown	RICHARD CORLISS	MAG	1991	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Singular	Plural
+offer	10746	45762	45800	Dark of the Moon		FIC	1986	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+offer	670997	27	62	JAPAN^S FOREIGN UNPOLICY; News Analysis	"By HENRY SCOTT STOKES, Special to the New York Times"	NEWS	1981	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	2	Singular	Singular
+offer	53811	5068	5077	Balance	"Davis, Claire"	FIC	1993	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	4	Singular	Singular
+offer	407768	802	817	Diggin' Boston now	Christina Ianzito	MAG	2003	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+offer	670075	500	523	GE Abandons Joint Venture By RCA Unit --- Construction of a Facility With Sharp Is Canceled; Severance Plan Outlined	By Janet Guyon	NEWS	1986	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-3	Plural	Plural
+offer	773757	8924	8939	Thinking Sociologically	Zygmunt Bauman	NF	1990	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	-3	Singular	Singular
+offer	746170	1716	1738	Mood Alterations in Mindful Versus Aerobic Exercise Modes		NF	2003	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	11	Singular	Plural
+offer	10756	147861	147871	Captive Bride		FIC	1987	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	1	Singular	Singular
+offer	384378	5163	5194	Mission of the Avant-Garde	Roni Feinstein	MAG	2006	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	13	Plural	Singular
+offer	670158	864	889	Bonds Post Second Consecutive Decline As Lack of Activity Brings Complaints	By Matthew Winkler and Tom Herman	NEWS	1987	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	13	Plural	Plural
+offer	780043	45547	45590	Texas	James Michener	FIC	1985	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Singular	Plural
+offer	373979	354	378	"Pigs, Dentures and King Charles II"	HEATHER WON TESORIERO	MAG	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	2	Plural	Singular
+offer	409086	3420	3450	Let's turn organizations into markets!		MAG	1994	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-1	Singular	Singular
+offer	392033	3069	3127	The dragon style in Norwegian decoration	Widar Halen	MAG	1997	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	2	Singular	Plural
+give	747137	2676	2713	Helping Children Transition from Kindergarten to First Grade	"Sink, Christopher A.<SUP>1</SUP><CITE> csink@spu.edu</CITE><BR>Edwards, Cher N.<SUP>2</SUP><BR>Weir,"	NF	2007	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-1	Plural	Singular
+give	374479	244	267	The Lure Of The Little Label	KATE BETTS	MAG	2003	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	2	Plural	Singular
+give	747134	3214	3405	RHETORIC VERSUS PRACTICE IN CZECH DRUG POLICY	"Radimecká, Josef<SUP>1,2</SUP>"	NF	2007	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-1	Singular	Singular
+give	774816	10750	10770	The irregulars :Roald Dahl and the British spy ring in wartime Washington	"Conant, Jennet."	NF	2008	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	776758	2325	2364	The Peloponnesian War	"Kagan, Donald."	NF	2003	Passive	Noun	Noun	NoTo	AccDat	Animate	Inanimate	Definite	Definite	1	Plural	Plural
+give	746899	319	356	"NEHA's 2003 Annual Educational Conference and Exhibition--Reno, Nevada"	"Benn, Kristin<BR>Miller, Julia<BR>Eils, Larry M."	NF	2003	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-5	Plural	Singular
+give	36654	3018	3061	Neptune Avenue :a Jack Leightner crime novel	"Cohen, Gabriel, 1961-"	FIC	2009	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	627694	5100	5139	HISTORY ON THE LINE;; Preservation law is under city^s review; 	RACHEL GRAVES	NEWS	2001	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Definite	Indefinite	-1	Plural	Singular
+give	746596	5827	5915	NUCLEAR POWER RATE REGULATION AFTER EASTERN ENTERPRISES: ARE RATEPAYERS BEING TAKEN FOR A RIDE?	"Watkins, Claire A."	NF	2000	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Definite	Indefinite	-4	Singular	Singular
+give	27548	920	948	This cold country /	"Davis-Goff, Annabel. "	FIC	2003	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Definite	Indefinite	-1	Plural	Plural
+give	641854	862	884	DYING TO TESTIFY Aid disparity leaves some witnesses in lurch LAST IN A SERIES&gt;&gt; LaToya Ray is in a new city but feels more abandoned than prote	David Olinger The Denver Post	NEWS	2007	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-2	Singular	Singular
+give	374585	343	378	Greatest Hitmaker	JOSH TYRANGIEL	MAG	2003	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+give	393180	5927	5945	Letter from Egypt	P J O'Rourke	MAG	2002	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-2	Singular	Singular
+give	394275	1085	1119	Treasure Quest	"Behar, Michael"	MAG	2004	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	3	Singular	Singular
+give	776018	1371	1395	We are Lincoln men :Abraham Lincoln and his friends	"Donald, David Herbert, 1920-2009."	NF	2003	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	385540	813	840	TRADING FACES	"Wilson, Jim"	MAG	2003	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-4	Plural	Singular
+give	405368	44	62	letters	Anonymous	MAG	2009	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Plural	Singular
+give	747139	4745	4778	Preparing Inner-City Adolescents to Transition into High School	"Turner, Sherri L.<SUP>1</SUP><CITE>turne047@umn.edu</CITE>"	NF	2007	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-16	Plural	Singular
+give	618143	1568	1584	Community Bulletin Board	Staff	NEWS	2006	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	-9	Plural	Singular
+give	389382	6548	6556	Gun Test '07	Jim Carmichel	MAG	2007	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	618090	1204	1230	"JOURNAL-CONSTITUTION SPECIAL REPORT; Cabinet official is primary user of CDC jet; The secretary^s trips, mostly to news conferences and other media ev"	ALISON YOUNG	NEWS	2006	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-4	Singular	Singular
+give	388231	19	52	What's Wrong With Our Flu Vaccine Supply? (cover story)	"Adrianson, Alex"	MAG	2004	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-13	Singular	Singular
+give	414088	669	693	Inside the Private World of Allen &amp; Co	Carol J Loomis	MAG	2004	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-3	Singular	Singular
+give	746318	163	188	Ambivalent Allies: Recent South Korean Perceptions of the United States Forces Korea (USFK)	"Kim, Jinwung"	NF	2004	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-6	Plural	Singular
+give	746393	2312	2353	The Effect of Theoretically-based Imagery Scripts on Field Hockey Performance		NF	2001	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-3	Plural	Singular
+give	746404	2056	2093	Viability of Resting Electroencephalograph Asymmetry as a Predictor of Exercise-induced Affect: A Lack of Consistent Support		NF	2006	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	4	Plural	Singular
+give	420874	1429	1449	Fixing broken CLASS	Paul Attner	MAG	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Plural
+give	386552	1495	1516	Who Was Deep Throat?	"Gaines, William"	MAG	2003	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Plural	Plural
+give	415656	2298	2331	The hidden face of hunger	Abigail Chipley	MAG	2001	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	0	Singular	Singular
+give	26638	257	264	Cat cross their graves : a Joe Grey mystery /	"Murphy, Shirley Rousseau. "	FIC	2005	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	417371	80	84	XAGD KNAVD EDAX JAONAVEB	Thomas M Seay	MAG	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Singular	Plural
+give	660057	909	927	Three teens move from nightmare to dream	Story by Lane Hartill Staff writer of The Christian Science Monitor	NEWS	2001	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	0	Plural	Singular
+give	34306	2539	2558	The pirate's daughter /	"Cezair-Thompson, Margaret. "	FIC	2007	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	1	Singular	Plural
+give	33425	948	972	The castle in the forest : a novel /	"Mailer, Norman. "	FIC	2007	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	643081	1546	1596	U.S. Arming Sunnis in Iraq To Battle Old Qaeda Allies	By JOHN F. BURNS and ALISSA J. RUBIN; Damien Cave and Richard A. Oppel Jr. contributed reporting.	NEWS	2007	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-4	Plural	Singular
+give	746744	3624	3736	Music Education Philosophy: Changing Times	"McCarthy, Marie<BR>Goble, J. Scott"	NF	2002	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	1	Plural	Singular
+give	747018	3415	3435	News		NF	2004	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-1	Plural	Singular
+give	746146	2042	2080	THE POSITIVE Virtues OF Physician-assisted Suicide	"Rogatz, Peter"	NF	2001	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-2	Plural	Singular
+give	411400	1099	1148	The Low-Carb Vegetarian	Lori Tobias	MAG	2004	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-6	Plural	Singular
+give	49215	9681	9698	So Good a Day	Sheila Finch	FIC	2004	Passive	Noun	Noun	To	DatAcc	Animate	Inanimate	Indefinite	Definite	-3	Plural	Singular
+give	746985	2320	2336	A Common Sense Approach to Design		NF	2002	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-1	Plural	Singular
+give	775717	802	839	"Nursing against the odds :how health care cost cutting, media stereotypes, and medical hubris undermine nurses and patient care"	"Gordon, Suzanne, 1945-"	NF	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-1	Singular	Singular
+give	417601	5549	5580	Let's Get Metaphysical	Gregory Volk	MAG	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	1	Singular	Singular
+give	747067	691	747	MAKING POVERTY HISTORY	"Hopkins, A.G."	NF	2005	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Definite	-2	Singular	Singular
+give	746293	2682	2717	AN ECONOMY IN DEBT TRAP: IRAQI DEBT 1980-2020	"Jiyad, Ahmed M."	NF	2001	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	2	Plural	Singular
+give	622949	8454	8479	The case of a lifetime; 	Stacy Finz	NEWS	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-6	Singular	Singular
+give	28265	1807	1833	Omerta /	"Puzo, Mario, 1920-1999. "	FIC	2001	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	0	Plural	Plural
+give	637019	212	226	"Peachtree: The makeover; ; Details emerge on proposed $1 billion overhaul to add streetcars, parks; "	"PAUL DONSKY, MARIA SAPORTA; Staff"	NEWS	2007	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	0	Singular	Plural
+give	618130	1447	1470	Facebook forces change in playbook; Social networking Web sites can play havoc with athletes^ --- and colleges^ --- reputations	CARTER STRICKLAND; Staff	NEWS	2006	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	0	Plural	Singular
+give	643081	1315	1372	U.S. Arming Sunnis in Iraq To Battle Old Qaeda Allies	By JOHN F. BURNS and ALISSA J. RUBIN; Damien Cave and Richard A. Oppel Jr. contributed reporting.	NEWS	2007	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-4	Singular	Singular
+give	623962	1092	1153	LETTERS TO THE EDITOR; 		NEWS	2006	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-5	Singular	Singular
+give	389180	1807	1829	Good As gold		MAG	2007	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	-5	Singular	Singular
+give	36308	3295	3330	Songs for the butcher''s daughter :a novel	"Manseau, Peter."	FIC	2008	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	-3	Plural	Singular
+give	776565	23734	23760	1776	"McCullough, David G."	NF	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	0	Singular	Singular
+give	414182	1003	1033	Consumer news: Mean and green	Tracey C Rembert	MAG	2001	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-1	Singular	Singular
+give	747122	1442	1457	"Comments on Mika's Critique of Hartnett, Nelson, and Rinn's Article, ""Gifted or ADHD? The Possibilities of Misdiagnosis"""		NF	2006	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-2	Plural	Plural
+give	29282	1881	1935	The big nap /	"Waldman, Ayelet. "	FIC	2002	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-11	Plural	Plural
+give	29316	247	265	Second wind /	"Francis, Dick. "	FIC	2005	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	-3	Plural	Singular
+give	633255	875	890	Act quickly to limit medical negligence; 		NEWS	2000	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	1	Plural	Singular
+give	31948	1950	1978	The golem's eye /	"Stroud, Jonathan. "	FIC	2006	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-2	Plural	Singular
+give	370504	270	289	Still Not Out Of The Woods	CHRISTINE GORMAN	MAG	2001	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	0	Plural	Plural
+give	28009	4376	4395	Water touching stone /	"Pattison, Eliot. "	FIC	2002	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	1	Plural	Singular
+give	747015	233	252	2004 PSA International Exhibition. (cover story)	"Consoli Jr., Alfred T"	NF	2004	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	0	Singular	Singular
+give	30916	9918	9946	Seeing through places : reflections on geography and identity /	"Gordon, Mary, 1949- "	FIC	2001	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Definite	0	Singular	Singular
+give	746113	820	833	An Apologia for Ed Schools		NF	2001	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-3	Plural	Singular
+give	29283	4232	4245	Valhalla rising /	"Cussler, Clive. "	FIC	2002	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Indefinite	Indefinite	-3	Singular	Plural
+give	775801	2302	2345	The spiral staircase :my climb out of darkness	"Armstrong, Karen, 1944-"	NF	2004	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Definite	Indefinite	1	Singular	Singular
+give	746593	2410	2575	SKI RESORTS AND NATIONAL FORESTS: RETHINKING FOREST SERVICE MANAGEMENT PRACTICES FOR RECREATIONAL USE	"Briggs, James"	NF	2000	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	-9	Plural	Plural
+give	747083	2539	2561	STUDENTS' PERCEPTIONS OF REFERENCE LETTERS	"Payne, Brian K.<SUP>1</SUP><BR>Appel, Jonathan<SUP>2</SUP><BR>Smith, Donald H.<SUP>1</SUP><BR>Hoofna"	NF	2006	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	4	Plural	Plural
+give	622014	1114	1130	"Dine Is a Transforming Experience;; ; Marais owners shift from tony French to hip, hearty American combinations; "	"Michael Bauer, Chronicle Food Editor"	NEWS	2000	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	7	Plural	Plural
+give	403678	467	518	The milky way: charting a course through breastfeeding problems	"Pitman, Teresa"	MAG	2000	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-1	Singular	Plural
+give	627649	16080	16102	COLLEGE BASKETBALL 2000-01 ;; THE CHRONICLE^S SWEET 16s ;; SWEET SOMETHINGS ;; BACK-TO-BACK WOMEN^S TITLES? YOU BET UCONN; 	W.H. STICKNEY. JR.	NEWS	2000	Passive	Noun	Noun	NoTo	DatAcc	Inanimate	Inanimate	Definite	Indefinite	5	Singular	Singular
+give	747097	4768	4804	Assessment and Students with Disabilities: Issues and Challenges with Educational Reform	"Bowen, Sandra K.<SUP>1</SUP><BR>Rude, Harvey A.<SUP>1</SUP>"	NF	2006	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-24	Plural	Singular
+give	29169	9078	9092	"Martin Bauman, or, A sure thing /"	"Leavitt, David, 1961- "	FIC	2000	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Definite	0	Singular	Singular
+give	384881	8961	8992	Acts of Conscience	John H Richardson	MAG	2006	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Definite	Indefinite	-7	Singular	Singular
+give	38943	417	432	The vampires who saved Christmas		FIC	2000	Passive	Noun	Noun	To	AccDat	Inanimate	Animate	Indefinite	Definite	-1	Plural	Singular
+give	28380	1961	1998	Star wars : labyrinth of evil /	"Luceno, James. "	FIC	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-3	Plural	Plural
+give	622050	453	464	An Oasis of Diversity;; ; Disadvantaged join Treasure Island transformation; 	"Tom Zoellner, Chronicle Staff Writer"	NEWS	2000	Passive	Noun	Noun	To	AccDat	Animate	Inanimate	Indefinite	Indefinite	0	Plural	Plural
+give	746404	44	68	Viability of Resting Electroencephalograph Asymmetry as a Predictor of Exercise-induced Affect: A Lack of Consistent Support		NF	2006	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Definite	Indefinite	-4	Singular	Singular
+give	377447	216	255	Style That Sells	KRISTINA ZIMBALIST	MAG	2005	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	-6	Plural	Plural
+give	775798	1111	1128	"The sorrows of empire :militarism, secrecy, and the end of the Republic"	"Johnson, Chalmers A."	NF	2004	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-8	Singular	Singular
+give	411783	1810	1868	How to Overcome Fear of Flying		MAG	2001	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Indefinite	-35	Plural	Singular
+give	391507	2298	2313	The FIRST time-but not the LAST	"Martinez, Victor"	MAG	2007	Passive	Noun	Noun	To	AccDat	Inanimate	Inanimate	Indefinite	Definite	1	Singular	Singular
+give	406413	2518	2569	Opening the way	John Cantrell	MAG	2009	Passive	Noun	Noun	NoTo	DatAcc	Animate	Inanimate	Indefinite	Indefinite	7	Plural	Singular
