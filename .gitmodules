@@ -1,6 +1,3 @@
-[submodule "analysis/Parsed Corpora/corpus-tools"]
-	path = analysis/Parsed Corpora/corpus-tools
-	url = https://github.com/bacovcin/corpus-tools
 [submodule "analysis/Parsed Corpora/parsedenglish_database"]
 	path = analysis/Parsed Corpora/parsedenglish_database
 	url = https://github.com/bacovcin/parsedenglish_database
