@@ -188,7 +188,11 @@ adit<-subset(dit,NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat!='D
 
 # Rename output variables
 adit$IO<-factor(adit$NDat)
+adit$IOSize <- adit$DatSize
+adit$IOCP <- adit$DatCP
 adit$DO<-factor(adit$NAcc)
+adit$DOSize <- adit$AccSize
+adit$DOCP <- adit$AccCP
 
 # Describe clause type
 adit$Envir<-factor(paste(adit$DatVerb,adit$AccVerb,adit$DatAcc))
@@ -209,7 +213,11 @@ levels(adit$Envir)[levels(adit$Envir)=="VDat VAcc NA"]=NA
 # Deal with OldEng related peculiarities w.r.t. passivisation (namely oblique subjects)
 oedit<-subset(dit,NVerb=='OLDENG'&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&Pas=='PAS')
 oedit$IO<-factor(oedit$NDat)
+oedit$IOSize<-oedit$DatSize
+oedit$IOCP<-oedit$DatCP
 oedit$DO<-factor(oedit$NNom)
+oedit$DOSize<-oedit$NomSize
+oedit$DO<-oedit$NomCP
 oedit$Envir<-factor(paste(oedit$DatVerb,oedit$NomVerb,oedit$NomDat))
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NA NA"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NomV DatNom"]="Theme Passive Recipient Topicalisation"
@@ -228,7 +236,11 @@ levels(oedit$Envir)[levels(oedit$Envir)=="VDat VNom NomDat"]="Theme Passive Verb
 # Deal with passive examples 
 thedit<-subset(dit,NVerb!='OLDENG'&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat!='DatNull'&NDat!='DatEmpty'&NAcc=='AccNull'&NNom!='NomNull'&Pas=='PAS')
 thedit$IO<-factor(thedit$NDat)
+thedit$IOSize<-thedit$DatSize
+thedit$IOCP<-thedit$DatCP
 thedit$DO<-factor(thedit$NNom)
+thedit$DOSize<-thedit$NomSize
+thedit$DOCP<-thedit$NomCP
 thedit$Envir<-factor(paste(thedit$DatVerb,thedit$NomVerb,thedit$NomDat))
 levels(thedit$Envir)[levels(thedit$Envir)=="DatV NA NA"]=NA
 levels(thedit$Envir)[levels(thedit$Envir)=="DatV NomV DatNom"]="Theme Passive Recipient Topicalisation"
@@ -249,7 +261,11 @@ thedit$Envir<-factor(thedit$Envir)
 
 recdit<-subset(dit,NVerb!='OLDENG'&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat=='DatNull'&NAcc!='AccCP'&NAcc!='AccNull'&NNom!='NomNull'&Pas=='PAS')
 recdit$IO<-factor(recdit$NNom)
+recdit$IOSize<-recdit$NomSize
+recdit$IOCP<-recdit$NomCP
 recdit$DO<-factor(recdit$NAcc)
+recdit$DOSize<-recdit$AccSize
+redcit$DOCP<-recdit$AccCP
 recdit$Envir<-factor(paste(recdit$NomVerb,recdit$AccVerb,recdit$NomAcc))
 levels(recdit$Envir)[levels(recdit$Envir)=="NA VAcc NA"]=NA
 levels(recdit$Envir)[levels(recdit$Envir)=="NomV AccV AccNom"]='Recipient Passive Theme Topicalisation'
@@ -346,9 +362,10 @@ britdat <- data.frame(year=nbrit$YoC,
 		      DO=nbrit$NDO,
 		      Envir=nbrit$Envir,
 		      isDatAcc=nbrit$isDatAcc,
-		      NomSize=nbrit$NomSize,
-		      DatSize=nbrit$DatSize,
-		      AccSize=nbrit$AccSize,
+		      IOSize=nbrit$IOSize,
+		      DOSize=nbrit$DOSize,
+		      IOCP=nbrit$IOCP,
+		      DOCP=nbrit$DOCP,
 		      Adj=nbrit$NAdj,
 		      Verb=nbrit$NVerb,
 		      Genre=nbrit$NGenre,

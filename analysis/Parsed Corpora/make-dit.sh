@@ -88,24 +88,29 @@ python ./corpus-tools/count-words.py NP-SBJ:NP-NOM 18 ./queries/Ditransitives/ad
 mv ./queries/Ditransitives/adj_NP-SBJ_NP-NOM.cod ./queries/Ditransitives/adj-sbj.cod
 	# Outputs to: ./queries/Ditransitives/adj-sbj.cod
 
-#17) count the indirect objects
+#17) Run the only-coding.q query (from corpus-tools repository)
+echo "Labeling dative PPs"
+$CS_COMMAND ./queries/Ditransitives/label-PPdat.q ./queries/Ditransitives/adj-sbj.cod
+	# Outputs to: /queries/Ditransitives/adj-sbj.cod.out
+
+#18) count the indirect objects
 echo "Counting IO words"
-python ./corpus-tools/count-words.py NP-DAT:NP-DTV:NP-OB2 19 ./queries/Ditransitives/adj-sbj.cod
-mv ./queries/Ditransitives/adj-sbj_NP-DAT_NP-DTV_NP-OB2.cod ./queries/Ditransitives/adj-io.cod
+python ./corpus-tools/count-words.py NP-DAT:NP-DTV:NP-OB2:PP-DAT 19 ./queries/Ditransitives/adj-sbj.cod.out
+mv ./queries/Ditransitives/adj-sbj.cod_NP-DAT_NP-DTV_NP-OB2.cod ./queries/Ditransitives/adj-io.cod
 	# Outputs to: ./queries/Ditransitives/adj-io.cod
 
-#18) count the direct objects
+#19) count the direct objects
 echo "Counting DO words"
 python ./corpus-tools/count-words.py NP-OB1:NP-ACC 20 ./queries/Ditransitives/adj-io.cod
 mv ./queries/Ditransitives/adj-io_NP-OB1_NP-ACC.cod ./queries/Ditransitives/adj-do.cod
 	# Outputs to: ./queries/Ditransitives/adj-do.cod
 
-#19) Run the only-coding.q query (from corpus-tools repository)
+#20) Run the only-coding.q query (from corpus-tools repository)
 echo "Extracting codes"
 $CS_COMMAND ./corpus-tools/only-coding.q ./queries/Ditransitives/adj-do.cod
 	# Outputs to: /queries/Ditransitives/adj-do.cod.ooo
 
-#20) Run add_metadata.py to create the final tab-separated file
+#21) Run add_metadata.py to create the final tab-separated file
 echo "Adding metadata and creating final file"
 mkdir data
 python ./parsedenglish_database/add_metadata.py ./parsedenglish_database/English_database.txt ./queries/Ditransitives/adj-do.cod.ooo ./data/dit.txt "Blank" "Verb" "Clause" "PP" "Nom" "Dat" "Acc" "NomVerb" "DatVerb" "AccVerb" "NomDat" "NomAcc" "DatAcc" "Pas" "NomCP" "DatCP" "AccCP" "NomSize" "DatSize" "AccSize" "Adj"
