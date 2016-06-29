@@ -108,7 +108,7 @@ $CS_COMMAND ./corpus-tools/only-coding.q ./queries/Ditransitives/adj-do.cod
 #20) Run add_metadata.py to create the final tab-separated file
 echo "Adding metadata and creating final file"
 mkdir data
-python ./parsedenglish_database/add_metadata.py ./parsedenglish_database/English_database.txt ./queries/Ditransitives/adj-do.cod.ooo ./data/dit.txt "Verb" "Clause" "PP" "Nom" "Dat" "Acc" "NomVerb" "DatVerb" "AccVerb" "NomDat" "NomAcc" "DatAcc" "Pas" "NomCP" "DatCP" "AccCP" "NomSize" "DatSize" "AccSize" "Adj"
+python ./parsedenglish_database/add_metadata.py ./parsedenglish_database/English_database.txt ./queries/Ditransitives/adj-do.cod.ooo ./data/dit.txt "Blank" "Verb" "Clause" "PP" "Nom" "Dat" "Acc" "NomVerb" "DatVerb" "AccVerb" "NomDat" "NomAcc" "DatAcc" "Pas" "NomCP" "DatCP" "AccCP" "NomSize" "DatSize" "AccSize" "Adj"
 	# Outputs to: ./data/dit.txt
 
 # 8) Clean up intermediate files that duplicate the corpus
