@@ -1,6 +1,8 @@
 #!/bin/bash
 #Steps to run in folder with parsed corpora
-CS_COMMAND="java -classpath ./queries/CS_2.003.04.jar csearch/CorpusSearch"
+ave(britdat,file='../Rdata/britdat.RData')
+save(britdat,file='../Rdata/britdat.RData')
+qS_COMMAND="java -classpath ./queries/CS_2.003.04.jar csearch/CorpusSearch"
 
 #0) run the Full.q query on dummy.psd
 echo "Extracting ditransitive verbs"
@@ -96,7 +98,7 @@ $CS_COMMAND ./queries/Ditransitives/label-PPdat.q ./queries/Ditransitives/adj-sb
 #18) count the indirect objects
 echo "Counting IO words"
 python ./corpus-tools/count-words.py NP-DAT:NP-DTV:NP-OB2:PP-DAT 19 ./queries/Ditransitives/adj-sbj.cod.out
-mv ./queries/Ditransitives/adj-sbj.cod_NP-DAT_NP-DTV_NP-OB2.cod ./queries/Ditransitives/adj-io.cod
+mv ./queries/Ditransitives/adj-sbj.cod_NP-DAT_NP-DTV_NP-OB2_PP-DAT.cod ./queries/Ditransitives/adj-io.cod
 	# Outputs to: ./queries/Ditransitives/adj-io.cod
 
 #19) count the direct objects
