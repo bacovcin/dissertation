@@ -1,8 +1,6 @@
 #!/bin/bash
 #Steps to run in folder with parsed corpora
-ave(britdat,file='../Rdata/britdat.RData')
-save(britdat,file='../Rdata/britdat.RData')
-qS_COMMAND="java -classpath ./queries/CS_2.003.04.jar csearch/CorpusSearch"
+CS_COMMAND="java -classpath ./queries/CS_2.003.04.jar csearch/CorpusSearch"
 
 #0) run the Full.q query on dummy.psd
 echo "Extracting ditransitive verbs"
