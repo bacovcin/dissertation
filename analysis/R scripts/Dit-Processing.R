@@ -1,7 +1,7 @@
 # Load the data
 dit <- read.delim2('../Parsed Corpora/data/dit.txt')  
-
-levels(dit$Clause)[1]<-'ABS' # Failed to correctly identify absolute clauses
+dit$YoC<-as.numeric(as.character(dit$YoC))
+levels(dit$Clause)[2]<-'ABS' # Failed to correctly identify absolute clauses
 
 # Convert Genre into Formal/Informal
 dit$NGenre<-dit$Genre
@@ -179,12 +179,23 @@ levels(dit$NAdj)[levels(dit$NAdj)=='NounIntervene']='NounIntervene'
 
 # Create response variable for presence/absence of 'to'
 dit$isTo<-factor(dit$PP)
-levels(dit$isTo)<-c(0,NA,1,1,1,1)
+levels(dit$isTo)<-c(0,NA,1,1)
 dit$isTo<-as.numeric(as.character(dit$isTo))
+
+## Examine rates of monotransitivity
+notweird<-subset(dit,NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION')
+monotrans<-data.frame(Verb=notweird$Verb[notweird$Pas=='ACT'],
+		      year=notweird$YoC[notweird$Pas=='ACT'],
+		      genre=notweird$Genre[notweird$Pas=='ACT'],
+		      ThemeMono=(notweird$NDat[notweird$Pas=='ACT']=='DatNull'),
+		      RecipientMono=(notweird$NAcc[notweird$Pas=='ACT']=='AccNull'),
+		      RecMonoThemeCP=(notweird$NAcc[notweird$Pas=='ACT']=='AccCP'))
+
+save(monotrans,file='../Rdata/monotrans.RData')
 
 ## Deal with differences between active and passive clauses (and eliminate cases from atypical text and non-ditransitive clauses)
 # Active clauses first
-adit<-subset(dit,NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat!='DatNull'&NDat!='DatEmpty'&NAcc!='AccNull'&NAcc!='AccCP'&Pas=='ACT')
+adit<-subset(notweird,NDat!='DatNull'&NDat!='DatEmpty'&NAcc!='AccNull'&NAcc!='AccCP'&Pas=='ACT')
 
 # Rename output variables
 adit$IO<-factor(adit$NDat)
@@ -204,6 +215,9 @@ levels(adit$Envir)[levels(adit$Envir)=="DatV VAcc AccDat"]=NA
 levels(adit$Envir)[levels(adit$Envir)=="DatV VAcc DatAcc"]="Active Recipient Topicalisation"
 levels(adit$Envir)[levels(adit$Envir)=="NA AccV NA"]=NA
 levels(adit$Envir)[levels(adit$Envir)=="NA VAcc NA"]=NA
+levels(adit$Envir)[levels(adit$Envir)=="NA NA AccDat"]=NA
+levels(adit$Envir)[levels(adit$Envir)=="NA NA DatAcc"]=NA
+levels(adit$Envir)[levels(adit$Envir)=="NA NA NA"]=NA
 levels(adit$Envir)[levels(adit$Envir)=="VDat AccV AccDat"]="Active Theme Topicalisation"
 levels(adit$Envir)[levels(adit$Envir)=="VDat NA NA"]=NA
 levels(adit$Envir)[levels(adit$Envir)=="VDat VAcc AccDat"]="Active Verb Theme--Recipient"
@@ -211,17 +225,18 @@ levels(adit$Envir)[levels(adit$Envir)=="VDat VAcc DatAcc"]="Active Verb Recipien
 levels(adit$Envir)[levels(adit$Envir)=="VDat VAcc NA"]=NA
 
 # Deal with OldEng related peculiarities w.r.t. passivisation (namely oblique subjects)
-oedit<-subset(dit,NVerb=='OLDENG'&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&Pas=='PAS')
+oedit<-subset(dit,YoC<=1100&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&Pas=='PAS')
 oedit$IO<-factor(oedit$NDat)
 oedit$IOSize<-oedit$DatSize
 oedit$IOCP<-oedit$DatCP
 oedit$DO<-factor(oedit$NNom)
 oedit$DOSize<-oedit$NomSize
-oedit$DO<-oedit$NomCP
+oedit$DOCP<-oedit$NomCP
 oedit$Envir<-factor(paste(oedit$DatVerb,oedit$NomVerb,oedit$NomDat))
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NA NA"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NomV DatNom"]="Theme Passive Recipient Topicalisation"
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NomV NA"]="Theme Passive Recipient Topicalisation"
+levels(oedit$Envir)[levels(oedit$Envir)=="VDat NomV NA"]="Theme Passive Theme Verb Recipient"
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NomV NomDat"]="Recipient Passive Theme Topicalisation"
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV VNom DatNom"]="Recipient Passive Recipient Verb Theme"
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV VNom NomDat"]=NA
@@ -232,9 +247,11 @@ levels(oedit$Envir)[levels(oedit$Envir)=="VDat NA NA"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="VDat NomV NomDat"]="Theme Passive Theme Verb Recipient"
 levels(oedit$Envir)[levels(oedit$Envir)=="VDat VNom DatNom"]="Recipient Passive Verb Recipient--Theme"
 levels(oedit$Envir)[levels(oedit$Envir)=="VDat VNom NomDat"]="Theme Passive Verb Theme--Recipient"
+levels(oedit$Envir)[levels(oedit$Envir)=="NA NA NomDat"]=NA
+
 
 # Deal with passive examples 
-thedit<-subset(dit,NVerb!='OLDENG'&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat!='DatNull'&NDat!='DatEmpty'&NAcc=='AccNull'&NNom!='NomNull'&Pas=='PAS')
+thedit<-subset(dit,YoC>1100&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat!='DatNull'&NDat!='DatEmpty'&NAcc=='AccNull'&NNom!='NomNull'&Pas=='PAS')
 thedit$IO<-factor(thedit$NDat)
 thedit$IOSize<-thedit$DatSize
 thedit$IOCP<-thedit$DatCP
@@ -259,21 +276,24 @@ thedit$Envir<-as.character(thedit$Envir)
 thedit$Envir[thedit$Envir=='Recipient Passive Recipient Verb Theme'&thedit$isTo==1]<-'Locative Inversion'
 thedit$Envir<-factor(thedit$Envir)
 
-recdit<-subset(dit,NVerb!='OLDENG'&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat=='DatNull'&NAcc!='AccCP'&NAcc!='AccNull'&NNom!='NomNull'&Pas=='PAS')
+recdit<-subset(dit,YoC>1100&NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NDat=='DatNull'&NAcc!='AccCP'&NAcc!='AccNull'&NNom!='NomNull'&Pas=='PAS')
 recdit$IO<-factor(recdit$NNom)
 recdit$IOSize<-recdit$NomSize
 recdit$IOCP<-recdit$NomCP
 recdit$DO<-factor(recdit$NAcc)
 recdit$DOSize<-recdit$AccSize
-redcit$DOCP<-recdit$AccCP
+recdit$DOCP<-recdit$AccCP
 recdit$Envir<-factor(paste(recdit$NomVerb,recdit$AccVerb,recdit$NomAcc))
 levels(recdit$Envir)[levels(recdit$Envir)=="NA VAcc NA"]=NA
 levels(recdit$Envir)[levels(recdit$Envir)=="NomV AccV AccNom"]='Recipient Passive Theme Topicalisation'
 levels(recdit$Envir)[levels(recdit$Envir)=="NomV NA NA"]=NA
+levels(recdit$Envir)[levels(recdit$Envir)=="NA NA NA"]=NA
 levels(recdit$Envir)[levels(recdit$Envir)=="NomV VAcc NomAcc"]="Recipient Passive Recipient Verb Theme"
+levels(recdit$Envir)[levels(recdit$Envir)=="NomV VAcc NA"]="Recipient Passive Recipient Verb Theme"
 levels(recdit$Envir)[levels(recdit$Envir)=="VNom VAcc NomAcc"]="Recipient Passive Verb Recipient--Theme"
 
 # Recombine data
+
 ndit<-as.data.frame(rbind(adit,oedit,thedit,recdit))
 
 # Relabel data for ease of use
@@ -296,13 +316,12 @@ levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Theme Topicalisa
 levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Recipient Verb Theme"]<-1
 levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Verb Recipient--Theme"]<-1
 levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Locative Inversion"]<-NA
-levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="DatV NA NA"]<-NA
 
 gdit$isDatAcc<-as.numeric(as.character(gdit$isDatAcc))
 
 # Relabel IO and DO variables
 gdit$NIO<-factor(gdit$IO)
-levels(gdit$NIO)<-c('Recipient Noun','Recipient Pronoun','Recipient Null','Recipient Empty','Recipient Noun', 'Recipient Pronoun', 'Recipient Empty')
+levels(gdit$NIO)<-c('Recipient Noun','Recipient Pronoun','Recipient Empty','Recipient Null','Recipient Noun', 'Recipient Pronoun', 'Recipient Empty')
 
 gdit$NDO<-factor(gdit$DO)
 levels(gdit$NDO)<-c('Theme Noun','Theme Empty','Theme Pronoun','Theme Noun','Theme Pronoun','Theme Empty','Theme Null')
@@ -350,9 +369,8 @@ am.joint$cond<-factor(paste(am.joint$To,am.joint$Order))
 levels(am.joint$cond)<-c('NA','gave it him','gave him it','gave it to him','gave to him it')
 
 # Save out the preped datasets
-nbrit <- subset(gdit, !(Envir %in% c('NA NA AccDat', 'NA NA DatAcc', 'NA NA NA', 'NA NA NomDat', 'VDat NomV NA', 'NomV VAcc NA') | is.na(Envir)))
+nbrit <- subset(gdit, !is.na(Envir))
 nbrit$Envir <- factor(nbrit$Envir)
-levels(nbrit$Envir)<-c('Theme-Recipient','Recipient-Theme','Recipient Topicalisation','Theme Topicalisation','Theme-Recipient','Recipient-Theme','Recipient Topicalisation','Theme Topicalisation','Recipient-Theme','Theme-Recipient','Recipient-Theme','Theme-Recipient','Locative Inversion')
 
 
 britdat <- data.frame(year=nbrit$YoC,
@@ -367,7 +385,8 @@ britdat <- data.frame(year=nbrit$YoC,
 		      IOCP=nbrit$IOCP,
 		      DOCP=nbrit$DOCP,
 		      Adj=nbrit$NAdj,
-		      Verb=nbrit$NVerb,
+		      Verb=nbrit$Verb,
+		      NVerb=nbrit$NVerb,
 		      Genre=nbrit$NGenre,
 		      Voice=nbrit$Pas)
 save(britdat,file='../Rdata/britdat.RData')

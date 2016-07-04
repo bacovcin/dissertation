@@ -66,6 +66,9 @@ Then run the script associated with the data you want, which outputs the data to
 
     ./make-DATATYPE.sh
 
+As a point of reference, here are the time results for the following scripts:
+
+    time bash make-dit.sh (41min)
 
 
 
