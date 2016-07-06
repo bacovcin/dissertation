@@ -183,7 +183,7 @@ levels(dit$isTo)<-c(0,NA,1,1)
 dit$isTo<-as.numeric(as.character(dit$isTo))
 
 ## Examine rates of monotransitivity
-notweird<-subset(dit,NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION')
+notweird<-subset(dit,NGenre!='POETRY'&NGenre!='WEIRD'&NGenre!='TRANSLATION'&NVerb!='NONREC')
 monotrans<-data.frame(Verb=notweird$Verb[notweird$Pas=='ACT'],
 		      year=notweird$YoC[notweird$Pas=='ACT'],
 		      genre=notweird$Genre[notweird$Pas=='ACT'],
