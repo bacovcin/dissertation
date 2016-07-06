@@ -23,90 +23,73 @@ levels(amdat$IO)<-c('Recipient Noun','Recipient Pronoun')
 levels(amdat$DO)<-c('Theme Noun','Theme Pronoun')
 ## Look at active changes
 # Start with British English
-brit.act <- subset(real, Voice=='ACT'&!is.na(year)&!is.na(Adj)&!is.na(isDatAcc))
 
 # isTo modelling
 
-fitUshape <- function(inits1=c(10,rep(0,dim(xs1)[2]-1)),inits2=c(10,rep(0,dim(xs2)[2]-1)), initb1=rep(0,dim(xb1)[2]), initb2=rep(0,dim(xb2)[2]), 
-		      xs1, xs2, xb1, xb2, y, lltol = .1,
+fitUshape <- function(s1=rep(1,dim(xb1)[1]),s2=rep(1,dim(xb1)[1]), initb1=rep(0,dim(xb1)[2]), initb2=rep(0,dim(xb2)[2]), 
+		      xb1, xb2, y, lltol = .1,
 		      alg = 'NLOPT_LN_COBYLA',
 		      printlevel = 0,
 		      f_tol = 1e-8,
 		      ll.only= F) {
-	s1.nums <- 1:dim(xs1)[2]
-	s2.nums <- (1+dim(xs1)[2]):(dim(xs1)[2]+dim(xs2)[2])
-	b1.nums <- (1+dim(xs1)[2]+dim(xs2)[2]):(dim(xs1)[2]+dim(xs2)[2]+dim(xb1)[2])
-	b2.nums <- (1+dim(xs1)[2]+dim(xs2)[2]+dim(xb1)[2]):(dim(xs1)[2]+dim(xs2)[2]+dim(xb1)[2]+dim(xb2)[2])
+	b1.nums <- 1:dim(xb1)[2]
+	b2.nums <- (1+dim(xb1)[2]):(dim(xb1)[2]+dim(xb2)[2])
 	ll.fun <- function(z) {
-		s1 <- z[s1.nums]
-		s2 <- z[s2.nums]
 		b1 <- z[b1.nums]
 		b2 <- z[b2.nums]
-		sp1 <- 1/(1+exp(-(as.matrix(xs1)%*%s1)))
-		sp2 <- 1/(1+exp(-(as.matrix(xs2)%*%s2)))
-		p1 <- sp1/(1+exp(-(as.matrix(xb1)%*%b1)))
-		p2 <- 1-(sp2)/(1+exp(-(as.matrix(xb2)%*%b2)))
+		p1 <- s1/(1+exp(-(as.matrix(xb1)%*%b1)))
+		p2 <- 1-(s2)/(1+exp(-(as.matrix(xb2)%*%b2)))
 		p <- p1*p2
 		return(sum(-log(y*p+abs(y-1)*(1-p))))
 	}
-	stepwise.optim <- function(prevs1,prevs2,prevb1,prevb2,curopt='b1',prevll=Inf) {
+	stepwise.optim <- function(prevb1,prevb2,curopt='b1',prevll=Inf) {
 		if (curopt == 'b1') {
 			nextopt <- 'b2'
-			fit <- nloptr(c(prevs1,prevs2,prevb1,prevb2),
+			fit <- nloptr(c(prevb1,prevb2),
 				      eval_f=ll.fun,
 				      opt=list(algorithm=alg,print_level=printlevel,ftol_rel=f_tol),
-				      lb=c(prevs1,prevs2,rep(-Inf,length(prevb1)),prevb2),
-				      ub=c(prevs1,prevs2,rep(Inf,length(prevb1)),prevb2))
+				      lb=c(rep(-Inf,length(prevb1)),prevb2),
+				      ub=c(rep(Inf,length(prevb1)),prevb2))
 		} else if (curopt == 'b2') {
-			nextopt <- 's1'
-			fit <- nloptr(c(prevs1,prevs2,prevb1,prevb2),
-				      eval_f=ll.fun,
-				      opt=list(algorithm=alg,print_level=printlevel,ftol_rel=f_tol),
-				      lb=c(prevs1,prevs2,prevb1,rep(-Inf,length(prevb2))),
-				      ub=c(prevs1,prevs2,prevb1,rep(Inf,length(prevb2))))
-		} else if (curopt == 's1') {
-			nextopt <- 's2'
-			fit <- nloptr(c(prevs1,prevs2,prevb1,prevb2),
-				      eval_f=ll.fun,
-				      opt=list(algorithm=alg,print_level=printlevel,ftol_rel=f_tol),
-				      lb=c(rep(-Inf,length(prevs1)),prevs2,prevb1,prevb2),
-				      ub=c(rep(Inf,length(prevs1)),prevs2,prevb1,prevb2))
-		} else if (curopt == 's2') {
 			nextopt <- 'b1'
-			fit <- nloptr(c(prevs1,prevs2,prevb1,prevb2),
+			fit <- nloptr(c(prevb1,prevb2),
 				      eval_f=ll.fun,
 				      opt=list(algorithm=alg,print_level=printlevel,ftol_rel=f_tol),
-				      lb=c(prevs1,rep(-Inf,length(prevs2)),prevb1,prevb2),
-				      ub=c(prevs1,rep(Inf,length(prevs2)),prevb1,prevb2))
+				      lb=c(prevb1,rep(-Inf,length(prevb2))),
+				      ub=c(prevb1,rep(Inf,length(prevb2))))
 		} else {
 			stop('Impossible optimization choice')
 		}
 		ll <- fit$objective
-		if ((abs(ll - prevll) < lltol) & curopt == 's2') {
+		if ((abs(ll - prevll) < lltol) & curopt == 'b2') {
+			r <- list()
 			if (ll < prevll) {
-				return(fit$sol)
+				r$ll <- ll
+				r$fit <- fit$sol
+				return(r)
 			} else {
-				return(c(prevs1,prevs2,prevb1,prevb2))
+				r$ll <- prevll
+				r$fit <- c(prevb1,prevb2)
+				return(r)
 			}
 		} else {
-			return(stepwise.optim(fit$sol[s1.nums],
-					      fit$sol[s2.nums],
-					      fit$sol[b1.nums],
+			return(stepwise.optim(fit$sol[b1.nums],
 					      fit$sol[b2.nums],
 					      nextopt,
 					      ll))
 		}
 	}
 	if (ll.only) {
-		return(ll.fun(c(inits1,inits2,initb1,initb2)))
+		return(ll.fun(c(initb1,initb2)))
 	} else {
-		return(stepwise.optim(inits1,inits2,initb1,initb2))
+		return(stepwise.optim(initb1,initb2))
 	}
 }
 
 which.list.min <- function(x) {
 	curmin = Inf
 	curi = NA
+	if (is.null(x)) { return(NA) }
 	if (length(x) != 0) {
 	for (i in 1:length(x)) {
 		if (!is.null(x[[i]])){
@@ -122,93 +105,32 @@ which.list.min <- function(x) {
 	}
 }
 
-stepUAIC <- function(fullsx, fullbx, y,
-		     xs1.cols = c(1), xs2.cols = c(1), 
+calcAIC <- function(mod) {
+	return(2*length(mod$fit)+2*mod$ll)
+}
+
+stepUAIC <- function(s1=rep(1,length(y)), s2=rep(1,length(y)), fullbx, y,
 		     xb1.cols = c(1), xb2.cols = c(1), curAIC, direction='forward', turns.since.change = 0) {
-	calcAIC <- function(inits1,inits2,initb1,initb2,curxs1,curxs2,curxb1,curxb2) {
-		k <- length(initb1)+length(initb2)+length(inits1)+length(inits2)
-		return(2*k+2*fitUshape(inits1,inits2,initb1,initb2,
-				       as.data.frame(curxs1),as.data.frame(curxs2),as.data.frame(curxb1),as.data.frame(curxb2),
-				       y,ll.only=T))
-	}
 
 	turns.since.change <- turns.since.change + 1
 	print(direction)
 	print(turns.since.change)
 
-	nsx <- 1:dim(fullsx)[2]
-	nbx <- 1:dim(fullbx)[2]
+	nx <- 1:dim(fullbx)[2]
 
 	if (direction == 'forward') {
-		news1<-nsx[!(nsx %in% xs1.cols)]
-		news2<-nsx[!(nsx %in% xs2.cols)]
-		newb1<-nbx[!(nbx %in% xb1.cols)]
-		newb2<-nbx[!(nbx %in% xb2.cols)]
+		newb1<-nx[!(nx %in% xb1.cols)]
+		newb2<-nx[!(nx %in% xb2.cols)]
 	} else if (direction == 'backward') {
-		news1<-nsx[nsx %in% xs1.cols]
-		news2<-nsx[nsx %in% xs2.cols]
-		news1<-news1[news1 != 1]
-		news2<-news2[news2 != 1]
-		newb1<-nbx[nbx %in% xb1.cols]
-		newb2<-nbx[nbx %in% xb2.cols]
+		newb1<-nx[nx %in% xb1.cols]
+		newb2<-nx[nx %in% xb2.cols]
 		newb1<-newb1[newb1 != 1]
 		newb2<-newb2[newb2 != 1]
 	}
 
-	xs1AIC <- list()
-	xs2AIC <- list()
 	xb1AIC <- list()
 	xb2AIC <- list()
 
-
-	if (length(news1) > 0) {
-	for (cl in news1) {
-		if (direction == 'forward') {
-			curxs1 <- c(xs1.cols,cl)
-		} else if (direction == 'backward') {
-			curxs1 <- xs1.cols[xs1.cols != cl]
-		}
-		newmod <- fitUshape(xs1=as.data.frame(fullsx[,curxs1]),
-				    xs2=as.data.frame(fullsx[,xs2.cols]),
-				    xb1=as.data.frame(fullbx[,xb1.cols]),
-				    xb2=as.data.frame(fullbx[,xb2.cols]),
-				    y=y)
-		s1.nums <- 1:length(curxs1)
-		s2.nums <- (1+length(curxs1)):(length(curxs1)+length(xs2.cols))
-		b1.nums <- (1+length(curxs1)+length(xs2.cols)):(length(curxs1)+length(xs2.cols)+length(xb1.cols))
-		b2.nums <- (1+length(curxs1)+length(xs2.cols)+length(xb1.cols)):(length(curxs1)+length(xs2.cols)+length(xb1.cols)+length(xb2.cols))
-		xs1AIC[[cl]] <- calcAIC(newmod[s1.nums],newmod[s2.nums],newmod[b1.nums],newmod[b2.nums],
-				        fullsx[,curxs1],fullsx[,xs2.cols],fullbx[,xb1.cols],fullbx[,xb2.cols])
-	}
-	bests1<-which.list.min(xs1AIC)
-	} else {
-		bests1 <- NA
-	}
-
-	if (length(news2) > 0) {
-	for (cl in news2) {
-		if (direction == 'forward') {
-			curxs2 <- c(xs2.cols,cl)
-		} else if (direction == 'backward') {
-			curxs2 <- xs2.cols[xs2.cols != cl]
-		}
-		newmod <- fitUshape(xs1=as.data.frame(fullsx[,xs1.cols]),
-				    xs2=as.data.frame(fullsx[,curxs2]),
-				    xb1=as.data.frame(fullbx[,xb1.cols]),
-				    xb2=as.data.frame(fullbx[,xb2.cols]),
-				    y=y)
-		s1.nums <- 1:length(xs1.cols)
-		s2.nums <- (1+length(xs1.cols)):(length(xs1.cols)+length(curxs2))
-		b1.nums <- (1+length(xs1.cols)+length(curxs2)):(length(xs1.cols)+length(curxs2)+length(xb1.cols))
-		b2.nums <- (1+length(xs1.cols)+length(curxs2)+length(xb1.cols)):(length(xs1.cols)+length(curxs2)+length(xb1.cols)+length(xb2.cols))
-		xs2AIC[[cl]] <- calcAIC(newmod[s1.nums],newmod[s2.nums],newmod[b1.nums],newmod[b2.nums],
-				        fullsx[,xs1.cols],fullsx[,curxs2],fullbx[,xb1.cols],fullbx[,xb2.cols])
-	}
-	bests2<-which.list.min(xs2AIC)
-	} else {
-		bests2 <- NA
-	}
-	
 	if (length(newb1) > 0) {
 	for (cl in newb1) {
 		if (direction == 'forward') {
@@ -216,17 +138,11 @@ stepUAIC <- function(fullsx, fullbx, y,
 		} else if (direction == 'backward') {
 			curxb1 <- xb1.cols[xb1.cols != cl]
 		}
-		newmod <- fitUshape(xs1=as.data.frame(fullsx[,xs1.cols]),
-				    xs2=as.data.frame(fullsx[,xs2.cols]),
+		newmod <- fitUshape(s1, s2,
 				    xb1=as.data.frame(fullbx[,curxb1]),
 				    xb2=as.data.frame(fullbx[,xb2.cols]),
 				    y=y)
-		s1.nums <- 1:length(xs1.cols)
-		s2.nums <- (1+length(xs1.cols)):(length(xs1.cols)+length(xs2.cols))
-		b1.nums <- (1+length(xs1.cols)+length(xs2.cols)):(length(xs1.cols)+length(xs2.cols)+length(curxb1))
-		b2.nums <- (1+length(xs1.cols)+length(xs2.cols)+length(curxb1)):(length(xs1.cols)+length(xs2.cols)+length(curxb1)+length(xb2.cols))
-		xb1AIC[[cl]] <- calcAIC(newmod[s1.nums],newmod[s2.nums],newmod[b1.nums],newmod[b2.nums],
-				        fullsx[,xs1.cols],fullsx[,xs2.cols],fullbx[,curxb1],fullbx[,xb2.cols])
+		xb1AIC[[cl]] <- calcAIC(newmod)
 	}
 	bestb1<-which.list.min(xb1AIC)
 	} else {
@@ -240,164 +156,83 @@ stepUAIC <- function(fullsx, fullbx, y,
 		} else if (direction == 'backward') {
 			curxb2 <- xb2.cols[xb2.cols != cl]
 		}
-		newmod <- fitUshape(xs1=as.data.frame(fullsx[,xs1.cols]),
-				    xs2=as.data.frame(fullsx[,xs2.cols]),
+		newmod <- fitUshape(s1, s2,
 				    xb1=as.data.frame(fullbx[,xb1.cols]),
 				    xb2=as.data.frame(fullbx[,curxb2]),
 				    y=y)
-		s1.nums <- 1:length(xs1.cols)
-		s2.nums <- (1+length(xs1.cols)):(length(xs1.cols)+length(xs2.cols))
-		b1.nums <- (1+length(xs1.cols)+length(xs2.cols)):(length(xs1.cols)+length(xs2.cols)+length(xb1.cols))
-		b2.nums <- (1+length(xs1.cols)+length(xs2.cols)+length(xb1.cols)):(length(xs1.cols)+length(xs2.cols)+length(xb1.cols)+length(curxb2))
-		xb2AIC[[cl]] <- calcAIC(newmod[s1.nums],newmod[s2.nums],newmod[b1.nums],newmod[b2.nums],
-				        fullsx[,xs1.cols],fullsx[,xs2.cols],fullbx[,xb1.cols],fullbx[,curxb2])
+		xb2AIC[[cl]] <- calcAIC(newmod)
 	}
 	bestb2<-which.list.min(xb2AIC)
 	} else {
 		bestb2 <- NA
 	}
 
-	b = which.min(c(bests1,bests2,bestb1,bestb2))
+	bests <- list()
+	bests[[1]] <- unlist(xb1AIC[bestb1])
+	bests[[2]] <- unlist(xb2AIC[bestb2])
+	b = which.list.min(bests)
 	if (b == 1) {
-		if (xs1AIC[[bests1]] < curAIC) {
-			print('XS1 add')
-			print(bests1)
-			if (direction == 'forward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						c(xs1.cols,bests1), 
-						xs2.cols, 
-						xb1.cols,
-						xb2.cols,
-						xs1AIC[[bests1]], 
-						direction=direction, 
-						turns.since.change=turns.since.change))
-			} else if (direction == 'backward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						xs1.cols[xs1.cols != bests1], 
-						xs2.cols, 
-						xb1.cols,
-						xb2.cols,
-						xs1AIC[[bests1]], 
-						direction=direction, 
-						turns.since.change=turns.since.change))
-			}
-		} else {
-			if (turns.since.change <= 1) {
-				return(list(list(xs1.cols),list(xs2.cols),list(xb1.cols),list(xb2.cols)))
-			} else {
-				if (direction == 'forward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
-							curAIC, direction = 'backward', turns.since.change = 0))
-				} else if (direction == 'backward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
-							curAIC, direction = 'forward', turns.since.change = 0))
-				}
-			}
-		}
-	} else if (b == 2) {
-		if (xs2AIC[[bests2]] < curAIC) {
-			print('XS2 add')
-			print(bests2)
-			if (direction == 'forward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						xs1.cols, 
-						c(xs2.cols,bests2), 
-						xb1.cols,
-						xb2.cols,
-						xs2AIC[[bests2]], 
-						direction=direction, 
-						turns.since.change=turns.since.change))
-			} else if (direction == 'backward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						xs1.cols,
-						xs2.cols[xs2.cols != bests2], 
-						xb1.cols,
-						xb2.cols,
-						xs2AIC[[bests2]], 
-						direction=direction, 
-						turns.since.change=turns.since.change))
-			}
-		} else {
-			if (turns.since.change <= 1) {
-				return(list(list(xs1.cols),list(xs2.cols),list(xb1.cols),list(xb2.cols)))
-			} else {
-				if (direction == 'forward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
-							curAIC, direction = 'backward', turns.since.change = 0))
-				} else if (direction == 'backward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
-							curAIC, direction = 'forward', turns.since.change = 0))
-				}
-			}
-		}
-	} else if (b == 3) {
 		if (xb1AIC[[bestb1]] < curAIC) {
-			print('XB1 add')
-			print(bestb1)
 			if (direction == 'forward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						xs1.cols, 
-						xs2.cols, 
+				print('XB1 add')
+				return(stepUAIC(s1, s2, fullbx, y, 
 						c(xb1.cols,bestb1),
 						xb2.cols,
 						xb1AIC[[bestb1]], 
 						direction=direction, 
 						turns.since.change=turns.since.change))
 			} else if (direction == 'backward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						xs1.cols,
-						xs2.cols, 
+				print('XB1 remove')
+				return(stepUAIC(s1, s2, fullbx, y, 
 						xb1.cols[xb1.cols != bestb1],
 						xb2.cols,
 						xb1AIC[[bestb1]], 
 						direction=direction, 
 						turns.since.change=turns.since.change))
 			}
+			print(bestb1)
 		} else {
 			if (turns.since.change <= 1) {
-				return(list(list(xs1.cols),list(xs2.cols),list(xb1.cols),list(xb2.cols)))
+				return(list(list(xb1.cols),list(xb2.cols)))
 			} else {
 				if (direction == 'forward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
+					return(stepUAIC(s1, s2, fullbx, y, xb1.cols, xb2.cols, 
 							curAIC, direction = 'backward', turns.since.change = 0))
 				} else if (direction == 'backward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
+					return(stepUAIC(s1, s2, fullbx, y, xb1.cols, xb2.cols, 
 							curAIC, direction = 'forward', turns.since.change = 0))
 				}
 			}
 		}
-	} else if (b == 4) {
+	} else if (b == 2) {
 		if (xb2AIC[[bestb2]] < curAIC) {
-			print('XB2 add')
-			print(bestb2)
 			if (direction == 'forward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						xs1.cols, 
-						xs2.cols, 
+				print('XB2 add')
+				return(stepUAIC(s1, s2, fullbx, y, 
 						xb1.cols,
 						c(xb2.cols,bestb2),
 						xb2AIC[[bestb2]], 
 						direction=direction, 
 						turns.since.change=turns.since.change))
 			} else if (direction == 'backward') {
-				return(stepUAIC(fullsx, fullbx, y, 
-						xs1.cols,
-						xs2.cols, 
+				print('XB2 remove')
+				return(stepUAIC(s1, s2, fullbx, y, 
 						xb1.cols,
 						xb2.cols[xb2.cols != bestb2], 
 						xb2AIC[[bestb2]], 
 						direction=direction, 
 						turns.since.change=turns.since.change))
 			}
+			print(bestb2)
 		} else {
 			if (turns.since.change <= 1) {
-				return(list(list(xs1.cols),list(xs2.cols),list(xb1.cols),list(xb2.cols)))
+				return(list(list(xb1.cols),list(xb2.cols)))
 			} else {
 				if (direction == 'forward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
+					return(stepUAIC(s1, s2, fullbx, y, xb1.cols, xb2.cols, 
 							curAIC, direction = 'backward', turns.since.change = 0))
 				} else if (direction == 'backward') {
-					return(stepUAIC(fullsx, fullbx, y, xs1.cols, xs2.cols, xb1.cols, xb2.cols, 
+					return(stepUAIC(s1, s2, fullbx, y, xb1.cols, xb2.cols, 
 							curAIC, direction = 'forward', turns.since.change = 0))
 				}
 			}
@@ -405,6 +240,7 @@ stepUAIC <- function(fullsx, fullbx, y,
 	}
 }
 
+brit.act <- subset(real, Voice=='ACT'&!is.na(year)&!is.na(Adj)&!is.na(isDatAcc))
 # Create numeric variables for everything (and zscore year)
 brit.act$zYear <- (brit.act$year - mean(brit.act$year))/sd(brit.act$year)
 
@@ -425,66 +261,36 @@ brit.act$isDOPro <- as.numeric(as.character(brit.act$isDOPro))
 
 brit.act<-subset(brit.act,(year<=1100&isTo==0) | year>1100)
 
-fullsx <- data.frame(rep(1,dim(brit.act)[1]),					# 1
-		    brit.act$isDatAcc,						# 2
-		    brit.act$isIOPro,						# 3
-		    brit.act$isDOPro,						# 4
-		    brit.act$isDatAcc*brit.act$isIOPro,				# 5
-		    brit.act$isIOPro*brit.act$isDOPro)				# 6
+old.brit.act <- brit.act
+# Try to just fit Theme Noun cases, since the scaling seems to cause problems
+brit.act<-subset(brit.act, DO=='Theme Noun')
 
+s1 <- rep(1,length(brit.act$isTo))
+s2 <- brit.act$isDatAcc
 
-fullbx <- data.frame(rep(1,dim(brit.act)[1]),					# 1
-		    brit.act$zYear,						# 2
-		    brit.act$isDatAcc,						# 3
+fullbx <- data.frame(rep(1,dim(brit.act)[1]),					# 1 
+		    brit.act$zYear,						# 2 
+		    brit.act$isDatAcc,						# 3 
 		    brit.act$isIOPro,						# 4
-		    brit.act$isDOPro,						# 5
-		    brit.act$zYear*brit.act$isDatAcc,				# 6
-		    brit.act$zYear*brit.act$isIOPro,				# 7
-		    brit.act$zYear*brit.act$isDOPro,				# 8
-		    brit.act$isDatAcc*brit.act$isIOPro,				# 9
-		    brit.act$isIOPro*brit.act$isDOPro,				# 10
-		    brit.act$zYear*brit.act$isDatAcc*brit.act$isIOPro,		# 11
-		    brit.act$zYear*brit.act$isIOPro*brit.act$isDOPro)		# 12
+		    brit.act$zYear*brit.act$isDatAcc,				# 5
+		    brit.act$zYear*brit.act$isIOPro,				# 6
+		    brit.act$isDatAcc*brit.act$isIOPro,				# 7
+	   	    brit.act$zYear*brit.act$isDatAcc*brit.act$isIOPro)          # 8
 
-buildup <- stepUAIC(fullsx, fullbx, brit.act$isTo, curAIC = Inf)
+buildup <- stepUAIC(s2=s2, fullbx=fullbx,y=brit.act$isTo, curAIC=Inf)
 
-buildup
-# [[1]]
-# [[1]][[1]]
-# [1] 1 2 3 6 4
-# 
-# 
-# [[2]]
-# [[2]][[1]]
-# [1] 1 2
-# 
-# 
-# [[3]]
-# [[3]][[1]]
-# [1] 1 2
-# 
-# 
-# [[4]]
-# [[4]][[1]]
-# [1] 1
-# 
-# 
+xb1 <- fullbx[,buildup[[1]][[1]]]
+xb2 <- fullbx[,buildup[[2]][[1]]]
 
-xs1 <- fullsx[,buildup[[1]][[1]]]
-xs2 <- fullsx[,buildup[[2]][[1]]]
-xb1 <- fullbx[,buildup[[3]][[1]]]
-xb2 <- fullbx[,buildup[[4]][[1]]]
+outputcoef<-fitUshape(s1=s1,s2=s2,xb1=xb1,xb2=xb2,y=brit.act$isTo,printlevel=1)
+b1.nums <- 1:(dim(xb1)[2])
+b2.nums <- (1+dim(xb1)[2]):(dim(xb1)[2]+dim(xb2)[2])
 
-outputcoef<-fitUshape(xs1=xs1,xs2=xs2,xb1=xb1,xb2=xb2,y=brit.act$isTo,printlevel=1)
-s1.nums <- 1:dim(xs1)[2]
-s2.nums <- (1+dim(xs1)[2]):(dim(xs1)[2]+dim(xs2)[2])
-b1.nums <- (1+dim(xs1)[2]+dim(xs2)[2]):(dim(xs1)[2]+dim(xs2)[2]+dim(xb1)[2])
-b2.nums <- (1+dim(xs1)[2]+dim(xs2)[2]+dim(xb1)[2]):(dim(xs1)[2]+dim(xs2)[2]+dim(xb1)[2]+dim(xb2)[2])
+outputb1<-outputcoef$fit[b1.nums]
+outputb2<-outputcoef$fit[b2.nums]
 
-outputs1<-outputcoef[s1.nums]
-outputs2<-outputcoef[s2.nums]
-outputb1<-outputcoef[b1.nums]
-outputb2<-outputcoef[b2.nums]
+outputb1
+outputb2
 
 pred<-expand.grid(year=seq(min(brit.act$year),max(brit.act$year),1),IO=c('Recipient Noun','Recipient Pronoun'),DO=c('Theme Noun','Theme Pronoun'),NAdj=c('Adjacent','Not Adjacent'),isDatAcc=c(0,1))
 pred$zYear <- (pred$year - mean(brit.act$year))/sd(brit.act$year)
@@ -501,39 +307,34 @@ pred$isAdj <- factor(pred$NAdj)
 levels(pred$isAdj)<-c(1,0)
 pred$isAdj<-as.numeric(as.character(pred$isAdj))
 
-predfullsx<-as.matrix(data.frame(rep(1,dim(pred)[1]),
-	    pred$isDatAcc,
-	    pred$isIOPro,
-	    pred$isDOPro,
-	    pred$isDatAcc*pred$isIOPro,
-	    pred$isIOPro*pred$isDOPro))
+
+preds1 <- rep(1,length(pred$isDatAcc))
+preds2 <- pred$isDatAcc
 
 predfullbx<-as.matrix(data.frame(rep(1,dim(pred)[1]),
 	    pred$zYear,
 	    pred$isDatAcc,
 	    pred$isIOPro,
-	    pred$isDOPro,
 	    pred$zYear*pred$isDatAcc,
 	    pred$zYear*pred$isIOPro,
-	    pred$zYear*pred$isDOPro,
 	    pred$isDatAcc*pred$isIOPro,
-	    pred$isIOPro*pred$isDOPro,
-	    pred$zYear*pred$isDatAcc*pred$isIOPro,
-	    pred$zYear*pred$isIOPro*pred$isDOPro))
+	    pred$zYear*pred$isDatAcc*pred$isIOPro))
 
-pred$S1<-predfullsx[,buildup[[1]][[1]]]%*%outputs1
-pred$S2<-predfullsx[,buildup[[2]][[1]]]%*%outputs2
-pred$B1<-predfullbx[,buildup[[3]][[1]]]%*%outputb1
-pred$B2<-predfullbx[,buildup[[4]][[1]]]%*%outputb2
+pred$B1<-predfullbx[,buildup[[1]][[1]]]%*%outputb1
+pred$B2<-predfullbx[,buildup[[2]][[1]]]%*%outputb2
 
-ps1 <- 1/(1+exp(-pred$S1))
-ps2 <- 1/(1+exp(-pred$S2))
-pred$isTo <- (ps1/(1+exp(-pred$B1))) * (1-(ps2/(1+exp(-pred$B2))))
+pred$isTo <- (preds1/(1+exp(-pred$B1))) * (1-(preds2/(1+exp(-pred$B2))))
 
+brit.act$era <- as.numeric(as.character(cut(brit.act$year,breaks=seq(800,1950,50),labels=seq(825,1925,50))))
 brit.act.points<-group_by(brit.act,era,IO,DO,isDatAcc)%>%summarise(isTo=mean(isTo),n=n())
 
-ggplot(brit.act.points,aes(year,isTo,color=factor(isDatAcc)))+geom_point(aes(x=era,size=n))+
-	geom_line(data=pred)+facet_grid(IO~DO)
+#pdf(file='../../images/to-marking-graph.pdf',paper='letter')
+ggplot(brit.act.points,aes(year,isTo,color=factor(isDatAcc)))+geom_point(aes(x=era,size=log(n)))+
+	geom_line(data=subset(pred,!(DO=='Theme Pronoun'&isDatAcc==1)))+facet_grid(IO~DO)+
+	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
+	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
+	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+scale_colour_discrete(name="Word Order",labels=c("Theme--recipient","Recipient--theme"))
+#dev.off()
 #
 
 ### Look at changes in recipient vs theme passivisation
