@@ -279,6 +279,18 @@ fullbx <- data.frame(rep(1,dim(brit.act)[1]),					# 1
 
 buildup <- stepUAIC(s2=s2, fullbx=fullbx,y=brit.act$isTo, curAIC=Inf)
 
+buildup
+# [[1]]
+# [[1]][[1]]
+# [1] 1 2 3 4
+# 
+# 
+# [[2]]
+# [[2]][[1]]
+# [1] 1 4 2 6
+# 
+# 
+
 xb1 <- fullbx[,buildup[[1]][[1]]]
 xb2 <- fullbx[,buildup[[2]][[1]]]
 
@@ -290,7 +302,9 @@ outputb1<-outputcoef$fit[b1.nums]
 outputb2<-outputcoef$fit[b2.nums]
 
 outputb1
+# [1]  8.318938  4.552710 -1.631080 -1.780673
 outputb2
+# [1] 0.997150 2.288093 1.073956 1.151659
 
 pred<-expand.grid(year=seq(min(brit.act$year),max(brit.act$year),1),IO=c('Recipient Noun','Recipient Pronoun'),DO=c('Theme Noun','Theme Pronoun'),NAdj=c('Adjacent','Not Adjacent'),isDatAcc=c(0,1))
 pred$zYear <- (pred$year - mean(brit.act$year))/sd(brit.act$year)
@@ -326,15 +340,15 @@ pred$B2<-predfullbx[,buildup[[2]][[1]]]%*%outputb2
 pred$isTo <- (preds1/(1+exp(-pred$B1))) * (1-(preds2/(1+exp(-pred$B2))))
 
 brit.act$era <- as.numeric(as.character(cut(brit.act$year,breaks=seq(800,1950,50),labels=seq(825,1925,50))))
-brit.act.points<-group_by(brit.act,era,IO,DO,isDatAcc)%>%summarise(isTo=mean(isTo),n=n())
+brit.act.points<-group_by(brit.act,era,IO,isDatAcc)%>%summarise(isTo=mean(isTo),n=n())
 
-#pdf(file='../../images/to-marking-graph.pdf',paper='letter')
+pdf(file='../../images/to-marking-graph.pdf',paper='letter')
 ggplot(brit.act.points,aes(year,isTo,color=factor(isDatAcc)))+geom_point(aes(x=era,size=log(n)))+
-	geom_line(data=subset(pred,!(DO=='Theme Pronoun'&isDatAcc==1)))+facet_grid(IO~DO)+
+	geom_line(data=subset(pred,DO!='Theme Pronoun'))+facet_grid(~IO)+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
 	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
 	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+scale_colour_discrete(name="Word Order",labels=c("Theme--recipient","Recipient--theme"))
-#dev.off()
+dev.off()
 #
 
 ### Look at changes in recipient vs theme passivisation
@@ -384,36 +398,34 @@ summary(memod)
 verbEffects<-data.frame(verb=rownames(coef(memod)$Verb),effect=coef(memod)$Verb[,1])
 verbEffects[order(verbEffects$effect),]
 #         verb     effect
-# 18   RESTORE -3.8932238
-# 19    RETURN -3.7784439
-# 21      SEND -3.7340981
-# 7      CARRY -3.6919758
-# 8    DELIVER -3.3485412
-# 25     YIELD -3.2799180
-# 20      SELL -3.1863969
-# 9       GIVE -2.8672341
-# 6     BETAKE -2.7641492
-# 5   BEQUEATH -2.7142928
-# 11      LEND -2.7116147
-# 24 VOUCHSAFE -2.6376989
-# 23      SHOW -2.5654924
-# 16   PROFFER -2.5547006
-# 13    OLDENG -2.4446025
-# 10     GRANT -2.2222248
-# 3     ASSIGN -2.0693256
-# 2    APPOINT -2.0111849
-# 1      ALLOT -1.9369407
-# 4   BEHIEGHT -1.8228613
-# 14       OWE -1.7694200
-# 22     SERVE -1.3043791
-# 15       PAY -1.0997287
-# 12     OFFER -0.8607762
-# 17   PROMISE -0.3900631
-
-bmpas<-merge(verbEffects,monorats,by.x='verb',by.y='Verb')
-ggplot(bmpas,aes(monoRec,effect))+geom_point()+stat_smooth()+coord_cartesian(xlim=c(0,1))
-ggplot(bmpas,aes(monoThe,effect))+geom_point()+stat_smooth()
-ggplot(bmpas,aes(monoCP,effect))+geom_point()+stat_smooth()
+# 20   RESTORE -3.7364004
+# 23      SEND -3.7128370
+# 21    RETURN -3.6277010
+# 8      CARRY -3.5441218
+# 10   DELIVER -3.3202945
+# 27     YIELD -3.1080294
+# 11      GIVE -2.8874046
+# 7     BETAKE -2.5950156
+# 14    NONREC -2.5681676
+# 6   BEQUEATH -2.5605177
+# 13      LEND -2.5587658
+# 25      SHOW -2.4953222
+# 26 VOUCHSAFE -2.4794327
+# 18   PROFFER -2.3921918
+# 12     GRANT -2.2143534
+# 22      SELL -2.1468512
+# 3     ASSIGN -2.0514768
+# 9     DAELAN -2.0479328
+# 2    APPOINT -1.9796844
+# 1      ALLOT -1.9148999
+# 5   BEHIEGHT -1.7509843
+# 16       OWE -1.7332061
+# 4     AYEVEN -1.5523257
+# 24     SERVE -1.3400098
+# 17       PAY -1.1277741
+# 15     OFFER -0.8430387
+# 19   PROMISE -0.4399314
+oldeng<-subset(real,year<=1050)
 
 brit.pas<-subset(real,Voice=='PAS')
 full<-glm(isDatAcc~year*IO*DO,brit.pas,family='binomial')
