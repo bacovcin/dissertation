@@ -16,6 +16,6 @@ coding_query:
 	AccEmpty: (IP*  iDoms acc) AND (acc iDoms \**)
 	AccIndefinite: (IP*  iDoms acc)
 	AccCP: (IP* iDoms CP-THT*)
-	AccINF: (IP* iDoms IP-INF*)
+	AccINF: (IP* iDomsMod CP IP-INF*)
 	AccNull: ELSE
 }
