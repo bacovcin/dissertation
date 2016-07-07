@@ -8,6 +8,17 @@ library(nloptr)
 # Prepare British data (for looking at impact of NP weight)
 load('../Rdata/britdat.RData')
 britdat$era2 <- cut(britdat$year,breaks=c(700,1100,1450,1750,2000),labels=c('Old English','Middle English','Early Modern English','Late Modern English'))
+
+britdat$isIOPro <- factor(britdat$IO)
+levels(britdat$isIOPro)<-c(0,1)
+britdat$isIOPro <- as.numeric(as.character(britdat$isIOPro))
+
+britdat$isDOPro <- factor(britdat$DO)
+levels(britdat$isDOPro)<-c(0,1)
+britdat$isDOPro <- as.numeric(as.character(britdat$isDOPro))
+
+
+
 real <- subset(britdat, NVerb!='SEND'&!is.na(isTo))
 real$IOSize[real$isTo==1] <- real$IOSize[real$isTo==1] - 1
 real$sizeratio<-log(real$IOSize)-log(real$DOSize)
@@ -251,17 +262,57 @@ brit.act$isAdj<-as.numeric(as.character(brit.act$isAdj))
 brit.act$NAdj <- factor(brit.act$isAdj)
 levels(brit.act$NAdj)<-c('Not Adjacent','Adjacent')
 
-brit.act$isIOPro <- factor(brit.act$IO)
-levels(brit.act$isIOPro)<-c(0,1)
-brit.act$isIOPro <- as.numeric(as.character(brit.act$isIOPro))
-
-brit.act$isDOPro <- factor(brit.act$DO)
-levels(brit.act$isDOPro)<-c(0,1)
-brit.act$isDOPro <- as.numeric(as.character(brit.act$isDOPro))
-
 brit.act<-subset(brit.act,(year<=1100&isTo==0) | year>1100)
 
 old.brit.act <- brit.act
+# Look at the Theme Pronoun cases
+brit.tp<-subset(old.brit.act, DO=='Theme Pronoun' & isDatAcc == 0 & year>1500)
+
+full <- glm(isTo~year*IO,brit.tp,family='binomial')
+noint <- glm(isTo~year+IO,brit.tp,family='binomial')
+noyear <- glm(isTo~IO,brit.tp,family='binomial')
+null <- glm(isTo~1,brit.tp,family='binomial')
+
+anova(null,noyear,noint,full,test='Chisq')
+# Analysis of Deviance Table
+# 
+# Model 1: isTo ~ 1
+# Model 2: isTo ~ IO
+# Model 3: isTo ~ year + IO
+# Model 4: isTo ~ year * IO
+#   Resid. Df Resid. Dev Df Deviance Pr(>Chi)    
+# 1       412     406.02                         
+# 2       411     293.65  1  112.366  < 2e-16 ***
+# 3       410     288.60  1    5.053  0.02458 *  
+# 4       409     288.42  1    0.185  0.66679    
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+AIC(null,noyear,noint,full)
+#        df      AIC
+# null    1 408.0206
+# noyear  2 297.6543
+# noint   3 294.6013
+# full    4 296.4159
+
+brit.tp<-subset(old.brit.act, DO=='Theme Pronoun' & isDatAcc == 0)
+
+brit.tp$IO<-factor(brit.tp$IO)
+
+xtabs(brit.tp$isTo~brit.tp$era2+brit.tp$IO)/table(brit.tp$era2,brit.tp$IO)
+#                       brit.tp$IO
+# brit.tp$era2           Recipient Noun Recipient Pronoun
+#   Old English               0.0000000         0.0000000
+#   Middle English            0.9333333         0.2857143
+#   Early Modern English      0.9319149         0.4836066
+#   Late Modern English       1.0000000         0.6315789
+table(brit.tp$era2,brit.tp$IO)
+#                       
+#                        Recipient Noun Recipient Pronoun
+#   Old English                      43                20
+#   Middle English                  105                42
+#   Early Modern English            235               122
+#   Late Modern English              76                38
+
 # Try to just fit Theme Noun cases, since the scaling seems to cause problems
 brit.act<-subset(brit.act, DO=='Theme Noun')
 
@@ -426,25 +477,81 @@ verbEffects[order(verbEffects$effect),]
 # 15     OFFER -0.8430387
 # 19   PROMISE -0.4399314
 oldeng<-subset(real,year<=1050)
+oldeng$IO<-factor(oldeng$IO)
+oldeng$DO<-factor(oldeng$DO)
+ftable(xtabs(oldeng$isDatAcc~oldeng$Voice+oldeng$IO+oldeng$DO)/table(oldeng$Voice,oldeng$IO,oldeng$DO))
 
-brit.pas<-subset(real,Voice=='PAS')
+brit.pas<-subset(britdat,Voice=='PAS'&NVerb!='SEND'&NVerb!='NONREC'&!is.na(isDatAcc))
+
+pas.tn<-subset(brit.pas,DO=='Theme Noun')
+pas.tn$IO<-factor(pas.tn$IO)
+pas.tn$era<-cut(pas.tn$year,breaks=seq(899,2099,200),labels=seq(1000,2000,200))
+
+xtabs(pas.tn$isDatAcc~pas.tn$era+pas.tn$IO)/table(pas.tn$era,pas.tn$IO)
+#           pas.tn$IO
+# pas.tn$era Recipient Noun Recipient Pronoun
+#       1000     0.15789474        1.00000000
+#       1200     0.16666667        0.83333333
+#       1400     0.17948718        0.42424242
+#       1600     0.10483871        0.36470588
+#       1800     0.05172414        0.11864407
+#       2000     0.33333333        0.60000000
+table(pas.tn$era,pas.tn$IO)
+#       
+#        Recipient Noun Recipient Pronoun
+#   1000             19                12
+#   1200              6                 6
+#   1400             39                33
+#   1600            124                85
+#   1800            116                59
+#   2000             12                 5
+
 full<-glm(isDatAcc~year*IO*DO,brit.pas,family='binomial')
 no4way<-glm(isDatAcc~year+IO*DO+year*(IO+DO),brit.pas,family='binomial')
 noIODO<-glm(isDatAcc~year*(IO+DO),brit.pas,family='binomial')
 noyearDO<-glm(isDatAcc~year*(IO)+DO,brit.pas,family='binomial')
-noDO<-glm(isDatAcc~year*IO,brit.pas,family='binomial')
-noInt<-glm(isDatAcc~year+IO,brit.pas,family='binomial')
+noInt<-glm(isDatAcc~year+IO+DO,brit.pas,family='binomial')
+noDO<-glm(isDatAcc~year+IO,brit.pas,family='binomial')
 noYear<-glm(isDatAcc~year,brit.pas,family='binomial')
 null<-glm(isDatAcc~1,brit.pas,family='binomial')
 
 # Compare models (noyearDO) wins
-anova(null,noYear,noInt,noDO,noyearDO,noIODO,no4way,full,test='Chisq')
-AIC(null,noYear,noInt,noDO,noyearDO,noIODO,no4way,full)
+anova(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full,test='Chisq')
+# Analysis of Deviance Table
+# 
+# Model 1: isDatAcc ~ 1
+# Model 2: isDatAcc ~ year
+# Model 3: isDatAcc ~ year + IO
+# Model 4: isDatAcc ~ year + IO + DO
+# Model 5: isDatAcc ~ year * (IO) + DO
+# Model 6: isDatAcc ~ year * (IO + DO)
+# Model 7: isDatAcc ~ year + IO * DO + year * (IO + DO)
+# Model 8: isDatAcc ~ year * IO * DO
+#   Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
+# 1      1638     942.25                          
+# 2      1637     933.56  1    8.686  0.003206 ** 
+# 3      1636     870.77  1   62.788 2.303e-15 ***
+# 4      1635     786.55  1   84.225 < 2.2e-16 ***
+# 5      1634     786.44  1    0.109  0.741829    
+# 6      1633     786.33  1    0.111  0.739096    
+# 7      1632     785.01  1    1.319  0.250794    
+# 8      1631     785.01  1    0.000  0.999903    
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+AIC(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full)
+#          df      AIC
+# null      1 944.2452
+# noYear    2 937.5589
+# noDO      3 876.7714
+# noInt     4 794.5463
+# noyearDO  5 796.4378
+# noIODO    6 798.3269
+# no4way    7 799.0080
+# full      8 801.0080
 
 brit.pred.pas<-expand.grid(IO=levels(factor(brit.pas$IO)),DO=levels(factor(brit.pas$DO)),year=seq(min(brit.pas$year),max(brit.pas$year),1),Dialect='British')
-brit.pred.pas$isDatAcc<-predict(noyearDO,newdata=brit.pred.pas,type='response')
+brit.pred.pas$isDatAcc<-predict(noInt,newdata=brit.pred.pas,type='response')
 
-britpas.points <- group_by(brit.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='British',n=n())
 
 am.pas<-subset(amdat,Voice=='Passive'&!is.na(Order)&!is.na(DO))
 full<-glm(isDatAcc~year*IO*DO,am.pas,family='binomial')
@@ -458,19 +565,61 @@ null<-glm(isDatAcc~1,am.pas,family='binomial')
 
 # Compare models (Interaction between IO and DO significant here)
 anova(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full,test='Chisq')
+# Analysis of Deviance Table
+# 
+# Model 1: isDatAcc ~ 1
+# Model 2: isDatAcc ~ IO
+# Model 3: isDatAcc ~ year + IO
+# Model 4: isDatAcc ~ year * IO
+# Model 5: isDatAcc ~ year * IO + DO
+# Model 6: isDatAcc ~ year * (IO + DO)
+# Model 7: isDatAcc ~ year + IO * DO + year * (IO + DO)
+# Model 8: isDatAcc ~ year * IO * DO
+#   Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
+# 1     10580    11266.2                          
+# 2     10579    11109.1  1   157.06 < 2.2e-16 ***
+# 3     10578     9581.0  1  1528.14 < 2.2e-16 ***
+# 4     10577     9558.6  1    22.36 2.255e-06 ***
+# 5     10576     9352.6  1   205.99 < 2.2e-16 ***
+# 6     10575     9347.0  1     5.57   0.01828 *  
+# 7     10574     9344.7  1     2.32   0.12741    
+# 8     10573     9344.6  1     0.09   0.76840    
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 AIC(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full)
-
-am.pred.pas<-expand.grid(IO=levels(factor(am.pas$IO)),DO=levels(factor(am.pas$DO)),year=seq(min(am.pas$year),max(am.pas$year),1),Dialect='American')
-am.pred.pas$isDatAcc<-predict(noIODO,newdata=am.pred.pas,type='response')
+#          df       AIC
+# null      1 11268.154
+# noYear    2 11113.098
+# noInt     3  9586.953
+# noDO      4  9566.589
+# noDOyear  5  9362.604
+# noIODO    6  9359.035
+# no4way    7  9358.711
+# full      8  9360.624
 
 am.pas$era<-as.numeric(as.character(cut(am.pas$year,breaks=seq(1750,2050,100),labels=seq(1800,2000,100))))
-ampas.points <- group_by(am.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='American',n=n())
 
-pred.pas<-as.data.frame(rbind(brit.pred.pas,am.pred.pas))
+brit.pas.dat<-data.frame(year=brit.pas$year,isDatAcc=brit.pas$isDatAcc,Dialect='British',IO=brit.pas$IO,DO=brit.pas$DO)
+am.pas.dat<-data.frame(year=am.pas$year,isDatAcc=am.pas$isDatAcc,Dialect='American',IO=am.pas$IO,DO=am.pas$DO)
+
+ampas.points <- group_by(am.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='American',n=n())
+britpas.points <- group_by(brit.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='British',n=n())
+
 pas.points<-as.data.frame(rbind(britpas.points,ampas.points))
+joint.dat<-as.data.frame(rbind(brit.pas.dat,am.pas.dat))
+
+pas.points$Dialect<-factor(pas.points$Dialect,levels=c('British','American'))
+joint.dat$Dialect<-factor(joint.dat$Dialect,levels=c('British','American'))
 
 # Graph both British and American changes together
-ggplot(pred.pas,aes(year,isDatAcc,color=IO,linetype=Dialect))+stat_smooth()+geom_point(data=pas.points,aes(x=era,pch=Dialect,size=log(n)))+facet_wrap(~DO) 
+pdf(file='../../images/rec-pas-graph.pdf')
+ggplot(joint.dat,aes(year,isDatAcc,color=Dialect))+stat_smooth()+geom_point(data=pas.points,aes(x=era,size=log(n)))+facet_grid(IO~DO)+
+	scale_x_continuous(name='Year of Composition',breaks=seq(800,2000,100),labels=seq(800,2000,100))+
+	scale_y_continuous(name='% Recipient Passivisation',breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%')) +
+	scale_size_continuous(name='Log(Number of Tokens/century)')+scale_linetype_discrete(name='')
+dev.off()
+
+alate20a<-subset(amdat,!is.na(Order)&!is.na(DO)&year>1950)
 
 
 ### Look for changes in object ordering
