@@ -619,8 +619,27 @@ ggplot(joint.dat,aes(year,isDatAcc,color=Dialect))+stat_smooth()+geom_point(data
 	scale_size_continuous(name='Log(Number of Tokens/century)')+scale_linetype_discrete(name='')
 dev.off()
 
-alate20a<-subset(amdat,!is.na(Order)&!is.na(DO)&year>1950)
+am.pas$era<-cut(am.pas$year,breaks=c(1799,1899,1999,2099),labels=c('19th Century','20th Century', '21st Century'))
 
+ftable(xtabs(am.pas$isDatAcc~am.pas$era+am.pas$IO+am.pas$DO)/table(am.pas$era,am.pas$IO,am.pas$DO))
+#                                am.pas$DO Theme Noun Theme Pronoun
+# am.pas$era   am.pas$IO                                           
+# 19th Century Recipient Noun              0.05317248    0.03773585
+#              Recipient Pronoun           0.11282844    0.01785714
+# 20th Century Recipient Noun              0.26698541    0.07534247
+#              Recipient Pronoun           0.46153846    0.16181230
+# 21st Century Recipient Noun              0.42857143    0.18181818
+#              Recipient Pronoun           0.81981982    0.15384615
+
+ftable(am.pas$era,am.pas$IO,am.pas$DO)
+#                                 Theme Noun Theme Pronoun
+#                                                         
+# 19th Century Recipient Noun           2238           212
+#              Recipient Pronoun        1294           224
+# 20th Century Recipient Noun           3974           292
+#              Recipient Pronoun        1703           309
+# 21st Century Recipient Noun            189            22
+#              Recipient Pronoun         111            13
 
 ### Look for changes in object ordering
 full<-glm(data=brit.act, isDatAcc ~ year * (IO * DO + IOCP * DOCP) * sizeratio, family=binomial)
