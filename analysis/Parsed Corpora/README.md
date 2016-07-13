@@ -13,6 +13,8 @@ The queries and the code were constructed by [Hezekiah Akiva Bacovcin](http://ww
 
 ## Data
 
+psuedopassives.csv in the data subfolder comes from Einar Siggursson's work on pseudopassives.
+
 Three different types of constructions are investigated:
 
 ### Ditransitive Constructions
