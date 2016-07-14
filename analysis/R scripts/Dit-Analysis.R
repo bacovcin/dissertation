@@ -393,6 +393,31 @@ pred$isTo <- (preds1/(1+exp(-pred$B1))) * (1-(preds2/(1+exp(-pred$B2))))
 brit.act$era <- as.numeric(as.character(cut(brit.act$year,breaks=seq(800,1950,50),labels=seq(825,1925,50))))
 brit.act.points<-group_by(brit.act,era,IO,isDatAcc)%>%summarise(isTo=mean(isTo),n=n())
 
+pdf(file='../../images/brit-tr.pdf',paper='letter')
+brit.tr <- subset(old.brit.act,isDatAcc==0)
+bpoints<-group_by(brit.tr,era,IO,DO)%>%summarise(isTo=mean(isTo),n=n())
+ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(DO)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=brit.tr,aes(x=year))+
+	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
+	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
+	scale_size_continuous(name="Log(Number of Tokens/50yrs)")
+dev.off()
+
+pdf(file='../../images/brit-tn.pdf',paper='letter')
+brit.act$Order<-factor(brit.act$isDatAcc)
+levels(brit.act$Order)<-c('Theme-recipient','Recipient-theme')
+
+pred$Order<-factor(pred$isDatAcc)
+levels(pred$Order)<-c('Theme-recipient','Recipient-theme')
+
+bpoints<-group_by(brit.act,era,IO,Order)%>%summarise(isTo=mean(isTo),n=n())
+ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(Order)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=pred,aes(x=year))+
+	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
+	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
+	scale_size_continuous(name="Log(Number of Tokens/50yrs)")
+dev.off()
+
+
+#
 pdf(file='../../images/to-marking-graph.pdf',paper='letter')
 ggplot(brit.act.points,aes(year,isTo,color=factor(isDatAcc)))+geom_point(aes(x=era,size=log(n)))+
 	geom_line(data=subset(pred,DO!='Theme Pronoun'))+facet_grid(~IO)+
@@ -408,10 +433,264 @@ load('../Rdata/monotrans.RData')
 monorats<-group_by(monotrans,Verb)%>%summarise(monoRec=mean(RecipientMono&!ThemeMono),monoThe=mean(ThemeMono&!RecipientMono),monoCP=mean(RecMonoThemeCP&!ThemeMono),monoN=n())
 
 ## Loss of recipient passivisation moving from Old to Modern British English
-brit.jpas<-subset(britdat,Voice=='PAS')
-brit.jpas$zYear<-(brit.jpas$year-mean(brit.jpas$year))/sd(brit.jpas$year)
-memod<-glmer(data=brit.jpas,isDatAcc~zYear*IO+DO+(1|Verb),family='binomial')
-summary(memod)
+britdat2<-subset(britdat,!is.na(isDatAcc)&NVerb!='NONREC'&NVerb!='SEND'&era>=1200)
+
+britdat2$isPas<-factor(britdat2$Voice)
+levels(britdat2$isPas)<-c(0,1)
+britdat2$isPas<-as.numeric(as.character(britdat2$isPas))
+
+britdat2$Order<-factor(britdat2$isDatAcc)
+levels(britdat2$Order)<-c('Theme-Recipient','Recipient-Theme')
+
+summary(stepAIC(glm(isPas~year,subset(britdat2,Order=='Recipient-Theme'),family='binomial')))
+# Start:  AIC=964.01
+# isPas ~ year
+# 
+#        Df Deviance    AIC
+# - year  1   961.36 963.36
+# <none>      960.01 964.01
+# 
+# Step:  AIC=963.36
+# isPas ~ 1
+# 
+# 
+# Call:
+# glm(formula = isPas ~ 1, family = "binomial", data = subset(britdat2, 
+#     Order == "Recipient-Theme"))
+# 
+# Deviance Residuals: 
+#     Min       1Q   Median       3Q      Max  
+# -0.1614  -0.1614  -0.1614  -0.1614   2.9487  
+# 
+# Coefficients:
+#             Estimate Std. Error z value Pr(>|z|)    
+# (Intercept)  -4.3344     0.1061  -40.85   <2e-16 ***
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# 
+# (Dispersion parameter for binomial family taken to be 1)
+# 
+#     Null deviance: 961.36  on 6954  degrees of freedom
+# Residual deviance: 961.36  on 6954  degrees of freedom
+# AIC: 963.36
+# 
+# Number of Fisher Scoring iterations: 7
+# 
+summary(stepAIC(glm(isPas~year,subset(britdat2,Order=='Theme-Recipient'),family='binomial')))
+# Start:  AIC=2687.39
+# isPas ~ year
+# 
+#        Df Deviance    AIC
+# <none>      2683.4 2687.4
+# - year  1   2693.1 2695.1
+# 
+# Call:
+# glm(formula = isPas ~ year, family = "binomial", data = subset(britdat2, 
+#     Order == "Theme-Recipient"))
+# 
+# Deviance Residuals: 
+#     Min       1Q   Median       3Q      Max  
+# -0.6337  -0.5852  -0.5487  -0.5012   2.1400  
+# 
+# Coefficients:
+#               Estimate Std. Error z value Pr(>|z|)    
+# (Intercept) -3.3019122  0.4979008  -6.632 3.32e-11 ***
+# year         0.0009285  0.0003003   3.092  0.00199 ** 
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# 
+# (Dispersion parameter for binomial family taken to be 1)
+# 
+#     Null deviance: 2693.1  on 3260  degrees of freedom
+# Residual deviance: 2683.4  on 3259  degrees of freedom
+# AIC: 2687.4
+# 
+# Number of Fisher Scoring iterations: 4
+# 
+summary(stepAIC(glm(isPas~year,subset(britdat2,Order=='Theme-Recipient'&year<1500),family='binomial')))
+# Start:  AIC=499.18
+# isPas ~ year
+# 
+#        Df Deviance    AIC
+# <none>      495.18 499.18
+# - year  1   500.18 502.18
+# 
+# Call:
+# glm(formula = isPas ~ year, family = "binomial", data = subset(britdat2, 
+#     Order == "Theme-Recipient" & year < 1500))
+# 
+# Deviance Residuals: 
+#     Min       1Q   Median       3Q      Max  
+# -0.5806  -0.5275  -0.4843  -0.4242   2.3616  
+# 
+# Coefficients:
+#              Estimate Std. Error z value Pr(>|z|)   
+# (Intercept) -6.946491   2.305881  -3.013  0.00259 **
+# year         0.003503   0.001643   2.132  0.03300 * 
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# 
+# (Dispersion parameter for binomial family taken to be 1)
+# 
+#     Null deviance: 500.18  on 710  degrees of freedom
+# Residual deviance: 495.18  on 709  degrees of freedom
+# AIC: 499.18
+# 
+# Number of Fisher Scoring iterations: 5
+# 
+summary(stepAIC(glm(isPas~year,subset(britdat2,Order=='Theme-Recipient'&year>=1500),family='binomial')))
+# Start:  AIC=2188.24
+# isPas ~ year
+# 
+#        Df Deviance    AIC
+# - year  1   2185.1 2187.1
+# <none>      2184.2 2188.2
+# 
+# Step:  AIC=2187.08
+# isPas ~ 1
+# 
+# 
+# Call:
+# glm(formula = isPas ~ 1, family = "binomial", data = subset(britdat2, 
+#     Order == "Theme-Recipient" & year >= 1500))
+# 
+# Deviance Residuals: 
+#    Min      1Q  Median      3Q     Max  
+# -0.577  -0.577  -0.577  -0.577   1.937  
+# 
+# Coefficients:
+#             Estimate Std. Error z value Pr(>|z|)    
+# (Intercept) -1.70869    0.05496  -31.09   <2e-16 ***
+# ---
+# Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+# 
+# (Dispersion parameter for binomial family taken to be 1)
+# 
+#     Null deviance: 2185.1  on 2549  degrees of freedom
+# Residual deviance: 2185.1  on 2549  degrees of freedom
+# AIC: 2187.1
+# 
+# Number of Fisher Scoring iterations: 3
+# 
+pas <- read.csv('../Parsed Corpora/data/pas.txt',sep='\t')
+
+pas$isPas<-factor(pas$Voice)
+levels(pas$isPas)<-c(0,NA,1,NA)
+pas$isPas<-as.numeric(as.character(pas$isPas))
+
+pas<-subset(pas,!is.na(isPas))
+
+bdat <- data.frame(year=britdat2$year,Order=britdat2$Order,isPas=britdat2$isPas)
+pasdat <- data.frame(year=as.numeric(as.character(pas$YoC)),Order='General',isPas=pas$isPas)
+joint<-subset(as.data.frame(rbind(bdat,pasdat)),year>=1200)
+
+joint$era<-as.numeric(as.character(cut(joint$year,breaks=seq(1199,1999,100),labels=seq(1250,1950,100))))
+
+brit.points<-group_by(joint,era,Order)%>%summarise(isPas=mean(isPas),tokens=n())
+pdf(file='../../images/brit-pas.pdf',paper='letter')
+ggplot(joint,aes(year,isPas,colour=Order))+stat_smooth()+geom_point(data=brit.points,aes(x=era,size=log(tokens)))+coord_cartesian(ylim=c(0,1))+
+	scale_x_continuous(name='Year of Composition',breaks=seq(1200,1900,100),labels=seq(1200,1900,100))+
+	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
+	scale_size_continuous(name="Log(Number of Tokens/100yrs)")
+dev.off()
+
+# American English
+givepr<-read.csv('../COHA Data/give_pasrate_final.txt',sep='\t',quote='')
+offerpr<-read.csv('../COHA Data/offer_pasrate_final.txt',sep='\t',quote='')
+ampr<-as.data.frame(rbind(givepr,offerpr))
+
+amdat$isTo<-factor(amdat$To)
+levels(amdat$isTo)<-c(0,1)
+amdat$isTo<-as.numeric(as.character(amdat$isTo))
+
+amdat$counter <- 1
+
+amprgb<-group_by(ampr,year,Verb,Voice)%>%summarise(pasCount=n())
+amda<-filter(amdat,!is.na(To))%>%filter(!is.na(isDatAcc))%>%group_by(year,Voice,Verb)%>%summarise(isDatAccTo=sum(counter[isDatAcc==1&isTo==1])/n(),isDatAccNoTo=sum(counter[isDatAcc==1&isTo==0])/n(),isAccDatTo=sum(counter[isDatAcc==0&isTo==1])/n())
+
+newam<-merge(amda,amprgb)
+newam$DatAccToCount<-round(newam$pasCount*newam$isDatAccTo)
+newam$DatAccNoToCount<-round(newam$pasCount*newam$isDatAccNoTo)
+newam$AccDatToCount<-round(newam$pasCount*newam$isAccDatTo)
+newam$AccDatNoToCount<-newam$pasCount-(newam$DatAccToCount+newam$DatAccNoToCount+newam$AccDatToCount)
+
+newam2<-subset(newam,!is.nan(DatAccToCount)&!is.nan(DatAccNoToCount)&!is.nan(AccDatToCount)&!is.nan(AccDatNoToCount))
+
+amtabdat<-subset(newam2,year>=1950)
+
+amtabdat2<-group_by(amtabdat,Voice)%>%summarise(DatAcc=sum(DatAccNoToCount),AccDat=sum(AccDatToCount))
+
+ammat <- matrix(c(amtabdat2$DatAcc,amtabdat2$AccDat),nrow=2)
+
+prop.table(as.table(ammat),2)
+#            A          B
+# A 0.94077443 0.94582516
+# B 0.05922557 0.05417484
+
+chisq.test(as.table(ammat))
+
+newam3<-group_by(newam2,year,Verb)%>%summarise(DatAccToTotal=sum(DatAccToCount),DatAccToAct=DatAccToCount[Voice=='Active'],DatAccToRate=1.0-(DatAccToAct/DatAccToTotal),
+					       DatAccNoToTotal=sum(DatAccNoToCount),DatAccNoToAct=DatAccNoToCount[Voice=='Active'],DatAccNoToRate=1.0-(DatAccNoToAct/DatAccNoToTotal),
+					       AccDatToTotal=sum(AccDatToCount),AccDatToAct=AccDatToCount[Voice=='Active'],AccDatToRate=1.0-(AccDatToAct/AccDatToTotal),
+					       AccDatNoToTotal=sum(AccDatNoToCount),AccDatNoToAct=AccDatNoToCount[Voice=='Active'],AccDatNoToRate=1.0-(AccDatNoToAct/AccDatNoToTotal))
+
+
+
+pdf(file='../../images/am-change-pass.pdf')
+ggplot(newam3,aes(year,AccDatToRate,colour='Theme-Recipient To',linetype=Verb,weight=AccDatToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme NoTo'))+coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))
+dev.off()
+
+ggplot(newam3,aes(year,AccDatToRate,colour='Theme-Recipient To',weight=AccDatToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme NoTo'))+coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))
+
+ggplot(newam3,aes(year,AccDatNoToRate,colour='Theme-Recipient NoTo',linetype=Verb,weight=DatAccToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme NoTo'))+stat_smooth(aes(y=AccDatToRate,weight=AccDatToTotal,colour='Theme-Recipient To'))+coord_cartesian(ylim=c(0.5,1))
+
+# Study oblique vs nominative recipient passivisation
+ brit.pas<-subset(britdat,Voice=='PAS'&NVerb!='SEND'&NVerb!='NONREC'&!is.na(isDatAcc))
+recpas<-subset(brit.pas,isDatAcc==1&Envir!='Recipient Passive Verb Recipient--Theme (Oblique)' & Envir != 'Recipient Passive Verb Recipient--Theme')
+
+recpas$isNom<-factor(recpas$Envir)
+levels(recpas$isNom)<-c(0,1)
+recpas$isNom<-as.numeric(as.character(recpas$isNom))
+
+pseu <- read.csv('../Parsed Corpora/data/pseudopassives.csv')
+pseu2 <- subset(pseu, selected != 'selnot' & Genre != 'X' & Genre != 'Y' & Genre != 'Z')
+
+pseu2$isPas <- factor(pseu2$selected)
+levels(pseu2$isPas)<-c(0,1)
+pseu2$isPas <- as.numeric(as.character(pseu2$isPas))
+
+
+pdf(file='../../images/recpas-pseudo.pdf')
+ggplot(recpas,aes(year,isNom,colour='Nominative Recipient Passive'))+stat_smooth(method='loess')+stat_smooth(method='loess',data=pseu2,aes(x=YoC,y=isPas,colour='Pseudo-passive'))+scale_x_continuous(breaks=seq(1000,1900,100),labels=seq(1000,1900,100))+scale_colour_discrete(name='Construction')+
+	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
+	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))
+dev.off()
+
+
+#Old Stuff
+# sxc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# brit.jpas<-subset(britdat,Voice=='PAS'&year>=1375)
+# brit.jpas$Verb<-factor(brit.jpas$Verb)
+# brit.jpas$IO<-factor(brit.jpas$IO)
+# brit.jpas$DO<-factor(brit.jpas$DO)
+# brit.jpas$zYear<-(brit.jpas$year-mean(brit.jpas$year))/sd(brit.jpas$year)
+# memod<-glmer(data=brit.jpas,isDatAcc~zYear*IO+DO+(1|Verb),family='binomial')
+# summary(memod)
 # Generalized linear mixed model fit by maximum likelihood (Laplace
 #   Approximation) [glmerMod]
 #  Family: binomial  ( logit )
@@ -446,8 +725,8 @@ summary(memod)
 # IORcpntPrnn -0.244  0.082              
 # DOThemPronn -0.025  0.009 -0.013       
 # zYr:IORcpnP  0.064 -0.628 -0.055  0.002
-verbEffects<-data.frame(verb=rownames(coef(memod)$Verb),effect=coef(memod)$Verb[,1])
-verbEffects[order(verbEffects$effect),]
+# verbEffects<-data.frame(verb=rownames(coef(memod)$Verb),effect=coef(memod)$Verb[,1])
+# verbEffects[order(verbEffects$effect),]
 #         verb     effect
 # 20   RESTORE -3.7364004
 # 23      SEND -3.7128370
@@ -476,18 +755,140 @@ verbEffects[order(verbEffects$effect),]
 # 17       PAY -1.1277741
 # 15     OFFER -0.8430387
 # 19   PROMISE -0.4399314
-oldeng<-subset(real,year<=1050)
-oldeng$IO<-factor(oldeng$IO)
-oldeng$DO<-factor(oldeng$DO)
-ftable(xtabs(oldeng$isDatAcc~oldeng$Voice+oldeng$IO+oldeng$DO)/table(oldeng$Voice,oldeng$IO,oldeng$DO))
 
-brit.pas<-subset(britdat,Voice=='PAS'&NVerb!='SEND'&NVerb!='NONREC'&!is.na(isDatAcc))
+# Early Modern
+# brit.jpas<-subset(britdat,Voice=='PAS'&year>=1375&year<1600&Verb!='NONREC')
+# brit.jpas$Verb<-factor(brit.jpas$Verb)
+# brit.jpas$IO<-factor(brit.jpas$IO)
+# brit.jpas$DO<-factor(brit.jpas$DO)
+# brit.jpas$zYear<-(brit.jpas$year-mean(brit.jpas$year))/sd(brit.jpas$year)
+# memod<-glmer(data=brit.jpas,isDatAcc~IO+DO+(1|Verb),family='binomial')
+# verbEffects<-data.frame(verb=rownames(coef(memod)$Verb),effect=coef(memod)$Verb[,1])
+# verbEffects[order(verbEffects$effect),]
+#       verb      effect
+# 14 RESTORE -3.35535507
+# 5  DELIVER -3.31276143
+# 15  RETURN -3.15525397
+# 4    CARRY -3.10288914
+# 20   YIELD -3.00900217
+# 6     GIVE -2.96616707
+# 17    SEND -2.94986666
+# 19    SHOW -2.72806858
+# 16    SELL -2.62116979
+# 3   BETAKE -2.50873670
+# 12 PROFFER -2.18868704
+# 7    GRANT -1.64449121
+# 1  APPOINT -1.55064216
+# 9    OFFER -1.22318013
+# 10     OWE -1.01224497
+# 2   ASSIGN -0.74612157
+# 11     PAY -0.68355533
+# 13 PROMISE -0.33609862
+# 18   SERVE -0.08750492
 
-pas.tn<-subset(brit.pas,DO=='Theme Noun')
-pas.tn$IO<-factor(pas.tn$IO)
-pas.tn$era<-cut(pas.tn$year,breaks=seq(899,2099,200),labels=seq(1000,2000,200))
+# Late Modern
+# brit.jpas.lm<-subset(britdat,Voice=='PAS'&year>=1600&Verb!='NONREC')
+# brit.jpas.lm$zYear<-(brit.jpas.lm$year-mean(brit.jpas.lm$year))/sd(brit.jpas.lm$year)
+# memod<-glmer(data=brit.jpas.lm,isDatAcc~IO+(1|Verb),family='binomial')
+# verbEffects<-data.frame(verb=rownames(coef(memod)$Verb),effect=coef(memod)$Verb[,1])
+# verbEffects[order(verbEffects$effect),]
+#         verb     effect
+# 17      SEND -4.5748012
+# 15    RETURN -4.1551450
+# 14   RESTORE -4.1533747
+# 5      CARRY -4.0402335
+# 18     SERVE -3.7098562
+# 3     ASSIGN -3.6586512
+# 16      SELL -3.5643428
+# 2    APPOINT -3.3544570
+# 4   BEQUEATH -3.3352414
+# 9       LEND -3.3352414
+# 20 VOUCHSAFE -3.2615645
+# 7       GIVE -3.1475111
+# 6    DELIVER -3.1404883
+# 8      GRANT -3.0710505
+# 19      SHOW -2.3722668
+# 1      ALLOT -2.1945216
+# 12       PAY -1.5528601
+# 11     OFFER -0.7816823
+# 13   PROMISE -0.5116641
 
-xtabs(pas.tn$isDatAcc~pas.tn$era+pas.tn$IO)/table(pas.tn$era,pas.tn$IO)
+# brit.jpas<-subset(britdat,Voice=='PAS'&year>=1375&Verb!='NONREC')
+# brit.jpas$after1600<-as.numeric(as.character(cut(brit.jpas$year,breaks=c(1000,1600,2000),labels=c('0','1'))))
+# brit.jpas$zYear<-(brit.jpas$year-mean(brit.jpas$year))/sd(brit.jpas$year)
+# memod<-glmer(data=brit.jpas,isDatAcc~zYear*IO+(after1600||Verb),family='binomial')
+# verbEffects<-data.frame(verb=rownames(coef(memod)$Verb),effect=coef(memod)$Verb[,1],yearEffect=coef(memod)$Verb[,2])
+# verbEffects[order(verbEffects$effect),]
+#         verb      effect yearEffect
+# 19      SEND -0.45139572 -3.7956881
+# 20     SERVE -0.28848735 -1.0888050
+# 3     ASSIGN -0.14063467 -2.5765851
+# 13       PAY -0.14053602 -0.9866547
+# 1      ALLOT -0.13883163 -1.8581311
+# 17    RETURN -0.13109292 -4.2983085
+# 2    APPOINT -0.12483879 -2.4565602
+# 6      CARRY -0.11799480 -4.2110768
+# 16   RESTORE -0.09048701 -4.3543178
+# 9      GRANT -0.08123876 -2.3641253
+# 18      SELL -0.04845462 -3.6924900
+# 4   BEQUEATH -0.02080903 -3.0615019
+# 10      LEND -0.01998323 -3.0561289
+# 22 VOUCHSAFE -0.01173429 -3.0024581
+# 5     BETAKE  0.00000000 -3.3917646
+# 12       OWE  0.00000000 -1.5280226
+# 14   PROFFER  0.00000000 -3.1590776
+# 23     YIELD  0.00000000 -3.5889577
+# 21      SHOW  0.21563843 -2.6586233
+# 7    DELIVER  0.22644397 -3.6588364
+# 15   PROMISE  0.30291922 -0.6043801
+# 8       GIVE  0.37555799 -3.2895328
+# 11     OFFER  0.62651199 -1.1927854
+
+# verbEffects[order(verbEffects$effect+verbEffects$yearEffect),]
+#         verb      effect yearEffect
+# 16   RESTORE -0.09048701 -4.3543178
+# 17    RETURN -0.13109292 -4.2983085
+# 6      CARRY -0.11799480 -4.2110768
+# 19      SEND -0.45139572 -3.7956881
+# 18      SELL -0.04845462 -3.6924900
+# 23     YIELD  0.00000000 -3.5889577
+# 7    DELIVER  0.22644397 -3.6588364
+# 5     BETAKE  0.00000000 -3.3917646
+# 14   PROFFER  0.00000000 -3.1590776
+# 4   BEQUEATH -0.02080903 -3.0615019
+# 10      LEND -0.01998323 -3.0561289
+# 22 VOUCHSAFE -0.01173429 -3.0024581
+# 8       GIVE  0.37555799 -3.2895328
+# 3     ASSIGN -0.14063467 -2.5765851
+# 2    APPOINT -0.12483879 -2.4565602
+# 9      GRANT -0.08123876 -2.3641253
+# 21      SHOW  0.21563843 -2.6586233
+# 1      ALLOT -0.13883163 -1.8581311
+# 12       OWE  0.00000000 -1.5280226
+# 20     SERVE -0.28848735 -1.0888050
+# 13       PAY -0.14053602 -0.9866547
+# 11     OFFER  0.62651199 -1.1927854
+# 15   PROMISE  0.30291922 -0.6043801
+
+# oldeng<-subset(real,year<=1050)
+# oldeng$IO<-factor(oldeng$IO)
+# oldeng$DO<-factor(oldeng$DO)
+# ftable(xtabs(oldeng$isDatAcc~oldeng$Voice+oldeng$IO+oldeng$DO)/table(oldeng$Voice,oldeng$IO,oldeng$DO))
+# 
+# brit.pas<-subset(britdat,Voice=='PAS'&NVerb!='SEND'&NVerb!='NONREC'&!is.na(isDatAcc))
+
+# Try relabeling passive types (to count direct theme passives as dat-acc orders)
+# brit.pas2<-brit.pas
+
+# brit.pas2$isDatAcc[brit.pas2$isTo==0]<-1
+
+# Other stuff
+
+# pas.tn<-subset(brit.pas,DO=='Theme Noun')
+# pas.tn$IO<-factor(pas.tn$IO)
+# pas.tn$era<-cut(pas.tn$year,breaks=seq(899,2099,200),labels=seq(1000,2000,200))
+
+# xtabs(pas.tn$isDatAcc~pas.tn$era+pas.tn$IO)/table(pas.tn$era,pas.tn$IO)
 #           pas.tn$IO
 # pas.tn$era Recipient Noun Recipient Pronoun
 #       1000     0.15789474        1.00000000
@@ -496,7 +897,7 @@ xtabs(pas.tn$isDatAcc~pas.tn$era+pas.tn$IO)/table(pas.tn$era,pas.tn$IO)
 #       1600     0.10483871        0.36470588
 #       1800     0.05172414        0.11864407
 #       2000     0.33333333        0.60000000
-table(pas.tn$era,pas.tn$IO)
+# table(pas.tn$era,pas.tn$IO)
 #       
 #        Recipient Noun Recipient Pronoun
 #   1000             19                12
@@ -506,17 +907,17 @@ table(pas.tn$era,pas.tn$IO)
 #   1800            116                59
 #   2000             12                 5
 
-full<-glm(isDatAcc~year*IO*DO,brit.pas,family='binomial')
-no4way<-glm(isDatAcc~year+IO*DO+year*(IO+DO),brit.pas,family='binomial')
-noIODO<-glm(isDatAcc~year*(IO+DO),brit.pas,family='binomial')
-noyearDO<-glm(isDatAcc~year*(IO)+DO,brit.pas,family='binomial')
-noInt<-glm(isDatAcc~year+IO+DO,brit.pas,family='binomial')
-noDO<-glm(isDatAcc~year+IO,brit.pas,family='binomial')
-noYear<-glm(isDatAcc~year,brit.pas,family='binomial')
-null<-glm(isDatAcc~1,brit.pas,family='binomial')
+# full<-glm(isDatAcc~year*IO*DO,brit.pas,family='binomial')
+# no4way<-glm(isDatAcc~year+IO*DO+year*(IO+DO),brit.pas,family='binomial')
+# noIODO<-glm(isDatAcc~year*(IO+DO),brit.pas,family='binomial')
+# noyearDO<-glm(isDatAcc~year*(IO)+DO,brit.pas,family='binomial')
+# noInt<-glm(isDatAcc~year+IO+DO,brit.pas,family='binomial')
+# noDO<-glm(isDatAcc~year+IO,brit.pas,family='binomial')
+# noYear<-glm(isDatAcc~year,brit.pas,family='binomial')
+# null<-glm(isDatAcc~1,brit.pas,family='binomial')
 
 # Compare models (noyearDO) wins
-anova(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full,test='Chisq')
+# anova(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full,test='Chisq')
 # Analysis of Deviance Table
 # 
 # Model 1: isDatAcc ~ 1
@@ -538,7 +939,7 @@ anova(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full,test='Chisq')
 # 8      1631     785.01  1    0.000  0.999903    
 # ---
 # Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-AIC(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full)
+# AIC(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full)
 #          df      AIC
 # null      1 944.2452
 # noYear    2 937.5589
@@ -549,22 +950,28 @@ AIC(null,noYear,noDO,noInt,noyearDO,noIODO,no4way,full)
 # no4way    7 799.0080
 # full      8 801.0080
 
-brit.pred.pas<-expand.grid(IO=levels(factor(brit.pas$IO)),DO=levels(factor(brit.pas$DO)),year=seq(min(brit.pas$year),max(brit.pas$year),1),Dialect='British')
-brit.pred.pas$isDatAcc<-predict(noInt,newdata=brit.pred.pas,type='response')
+# brit.pred.pas<-expand.grid(IO=levels(factor(brit.pas$IO)),DO=levels(factor(brit.pas$DO)),year=seq(min(brit.pas$year),max(brit.pas$year),1),Dialect='British')
+# brit.pred.pas$isDatAcc<-predict(noInt,newdata=brit.pred.pas,type='response')
 
 
-am.pas<-subset(amdat,Voice=='Passive'&!is.na(Order)&!is.na(DO))
-full<-glm(isDatAcc~year*IO*DO,am.pas,family='binomial')
-no4way<-glm(isDatAcc~year+IO*DO+year*(IO+DO),am.pas,family='binomial')
-noIODO<-glm(isDatAcc~year*(IO+DO),am.pas,family='binomial')
-noDOyear<-glm(isDatAcc~year*IO+DO,am.pas,family='binomial')
-noDO<-glm(isDatAcc~year*IO,am.pas,family='binomial')
-noInt<-glm(isDatAcc~year+IO,am.pas,family='binomial')
-noYear<-glm(isDatAcc~IO,am.pas,family='binomial')
-null<-glm(isDatAcc~1,am.pas,family='binomial')
+# am.pas<-subset(amdat,Voice=='Passive'&!is.na(Order)&!is.na(DO))
+# full<-glm(isDatAcc~year*IO*DO*Verb,am.pas,family='binomial')
+# sub1<-glm(isDatAcc~year+IO+DO+Verb+year:IO+year:DO+year:Verb,am.pas,family='binomial')
+
+# noVerbInt<-glm(isDatAcc~year*IO*DO+Verb,am.pas,family='binomial')
+
+
+# no4way<-glm(isDatAcc~year+IO*DO+year*(IO+DO),am.pas,family='binomial')
+# noIODO<-glm(isDatAcc~year*(IO+DO),am.pas,family='binomial')
+# noDOyear<-glm(isDatAcc~year*IO+DO,am.pas,family='binomial')
+# noDO<-glm(isDatAcc~year*IO,am.pas,family='binomial')
+# noInt<-glm(isDatAcc~year+IO,am.pas,family='binomial')
+# noYear<-glm(isDatAcc~IO,am.pas,family='binomial')
+# null<-glm(isDatAcc~1,am.pas,family='binomial')
 
 # Compare models (Interaction between IO and DO significant here)
-anova(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full,test='Chisq')
+# anova(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full,test='Chisq')
+
 # Analysis of Deviance Table
 # 
 # Model 1: isDatAcc ~ 1
@@ -586,7 +993,7 @@ anova(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full,test='Chisq')
 # 8     10573     9344.6  1     0.09   0.76840    
 # ---
 # Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-AIC(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full)
+# AIC(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full)
 #          df       AIC
 # null      1 11268.154
 # noYear    2 11113.098
@@ -597,31 +1004,31 @@ AIC(null,noYear,noInt,noDO,noDOyear,noIODO,no4way,full)
 # no4way    7  9358.711
 # full      8  9360.624
 
-am.pas$era<-as.numeric(as.character(cut(am.pas$year,breaks=seq(1750,2050,100),labels=seq(1800,2000,100))))
+# am.pas$era<-as.numeric(as.character(cut(am.pas$year,breaks=seq(1750,2050,100),labels=seq(1800,2000,100))))
 
-brit.pas.dat<-data.frame(year=brit.pas$year,isDatAcc=brit.pas$isDatAcc,Dialect='British',IO=brit.pas$IO,DO=brit.pas$DO)
-am.pas.dat<-data.frame(year=am.pas$year,isDatAcc=am.pas$isDatAcc,Dialect='American',IO=am.pas$IO,DO=am.pas$DO)
+# brit.pas.dat<-data.frame(year=brit.pas$year,isDatAcc=brit.pas$isDatAcc,Dialect='British',IO=brit.pas$IO,DO=brit.pas$DO)
+# am.pas.dat<-data.frame(year=am.pas$year,isDatAcc=am.pas$isDatAcc,Dialect='American',IO=am.pas$IO,DO=am.pas$DO)
 
-ampas.points <- group_by(am.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='American',n=n())
-britpas.points <- group_by(brit.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='British',n=n())
+# ampas.points <- group_by(am.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='American',n=n())
+# britpas.points <- group_by(brit.pas,era,IO,DO) %>% summarise(isDatAcc=mean(isDatAcc,na.rm=T),Dialect='British',n=n())
 
-pas.points<-as.data.frame(rbind(britpas.points,ampas.points))
-joint.dat<-as.data.frame(rbind(brit.pas.dat,am.pas.dat))
+# pas.points<-as.data.frame(rbind(britpas.points,ampas.points))
+# joint.dat<-as.data.frame(rbind(brit.pas.dat,am.pas.dat))
 
-pas.points$Dialect<-factor(pas.points$Dialect,levels=c('British','American'))
-joint.dat$Dialect<-factor(joint.dat$Dialect,levels=c('British','American'))
+# pas.points$Dialect<-factor(pas.points$Dialect,levels=c('British','American'))
+# joint.dat$Dialect<-factor(joint.dat$Dialect,levels=c('British','American'))
 
 # Graph both British and American changes together
-pdf(file='../../images/rec-pas-graph.pdf')
-ggplot(joint.dat,aes(year,isDatAcc,color=Dialect))+stat_smooth()+geom_point(data=pas.points,aes(x=era,size=log(n)))+facet_grid(IO~DO)+
-	scale_x_continuous(name='Year of Composition',breaks=seq(800,2000,100),labels=seq(800,2000,100))+
-	scale_y_continuous(name='% Recipient Passivisation',breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%')) +
-	scale_size_continuous(name='Log(Number of Tokens/century)')+scale_linetype_discrete(name='')
-dev.off()
+# pdf(file='../../images/rec-pas-graph.pdf')
+# ggplot(joint.dat,aes(year,isDatAcc,color=Dialect))+stat_smooth()+geom_point(data=pas.points,aes(x=era,size=log(n)))+facet_grid(IO~DO)+
+#         scale_x_continuous(name='Year of Composition',breaks=seq(800,2000,100),labels=seq(800,2000,100))+
+#         scale_y_continuous(name='% Recipient Passivisation',breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%')) +
+#         scale_size_continuous(name='Log(Number of Tokens/century)')+scale_linetype_discrete(name='')
+# dev.off()
 
-am.pas$era<-cut(am.pas$year,breaks=c(1799,1899,1999,2099),labels=c('19th Century','20th Century', '21st Century'))
+# am.pas$era<-cut(am.pas$year,breaks=c(1799,1899,1999,2099),labels=c('19th Century','20th Century', '21st Century'))
 
-ftable(xtabs(am.pas$isDatAcc~am.pas$era+am.pas$IO+am.pas$DO)/table(am.pas$era,am.pas$IO,am.pas$DO))
+# ftable(xtabs(am.pas$isDatAcc~am.pas$era+am.pas$IO+am.pas$DO)/table(am.pas$era,am.pas$IO,am.pas$DO))
 #                                am.pas$DO Theme Noun Theme Pronoun
 # am.pas$era   am.pas$IO                                           
 # 19th Century Recipient Noun              0.05317248    0.03773585
@@ -631,7 +1038,7 @@ ftable(xtabs(am.pas$isDatAcc~am.pas$era+am.pas$IO+am.pas$DO)/table(am.pas$era,am
 # 21st Century Recipient Noun              0.42857143    0.18181818
 #              Recipient Pronoun           0.81981982    0.15384615
 
-ftable(am.pas$era,am.pas$IO,am.pas$DO)
+# ftable(am.pas$era,am.pas$IO,am.pas$DO)
 #                                 Theme Noun Theme Pronoun
 #                                                         
 # 19th Century Recipient Noun           2238           212
@@ -642,15 +1049,15 @@ ftable(am.pas$era,am.pas$IO,am.pas$DO)
 #              Recipient Pronoun         111            13
 
 ### Look for changes in object ordering
-full<-glm(data=brit.act, isDatAcc ~ year * (IO * DO + IOCP * DOCP) * sizeratio, family=binomial)
-builddown<-stepAIC(full)
-null<-glm(data=brit.act, isDatAcc ~ 1, family=binomial)
-buildup<-stepAIC(glm(data=brit.act, isDatAcc ~ 1, family = binomial), ~ year * bs(year) * IO * DO * IOCP * DOCP * sizeratio)
+# full<-glm(data=brit.act, isDatAcc ~ year * (IO * DO + IOCP * DOCP) * sizeratio, family=binomial)
+# builddown<-stepAIC(full)
+# null<-glm(data=brit.act, isDatAcc ~ 1, family=binomial)
+# buildup<-stepAIC(glm(data=brit.act, isDatAcc ~ 1, family = binomial), ~ year * bs(year) * IO * DO * IOCP * DOCP * sizeratio)
 
 # Build up model wins!
-anova(null,buildup,builddown,full,test='Chisq')
+# anova(null,buildup,builddown,full,test='Chisq')
 
-summary(buildup)
+# summary(buildup)
 # 
 # Call:
 # glm(formula = isDatAcc ~ sizeratio + IO + DO + DOCP + IOCP + 

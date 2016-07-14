@@ -74,6 +74,7 @@ levels(dit$NAcc)[levels(dit$NAcc)=='AccDPronoun']=c('AccNoun')
 levels(dit$NAcc)[levels(dit$NAcc)=='AccPronoun']=c('AccPronoun')
 levels(dit$NAcc)[levels(dit$NAcc)=='AccEmpty']=c('AccEmpty')
 levels(dit$NAcc)[levels(dit$NAcc)=='AccCP']=c('AccCP')
+levels(dit$NAcc)[levels(dit$NAcc)=='AccINF']=c('AccCP')
 levels(dit$NAcc)[levels(dit$NAcc)=='AccWHEmpty']=c('AccEmpty')
 levels(dit$NAcc)[levels(dit$NAcc)=='AccWHIndefinite']=c('AccNoun')
 levels(dit$NAcc)[levels(dit$NAcc)=='AccWHPronoun']=c('AccPronoun')
@@ -148,6 +149,7 @@ levels(dit$NVerb)[levels(dit$NVerb)=='SERVE']<-c('GIVE')
 levels(dit$NVerb)[levels(dit$NVerb)=='SHOW']<-c('GIVE')
 levels(dit$NVerb)[levels(dit$NVerb)=='VOUCHSAFE']<-c('PROMISE')
 levels(dit$NVerb)[levels(dit$NVerb)=='YIELD']<-c('GIVE')
+levels(dit$NVerb)[levels(dit$NVerb)=='DAELAN']<-c('GIVE')
 
 # Identify whether the recipient is adjacent to the verb
 dit$NAdj<-factor(dit$Adj)
@@ -238,14 +240,14 @@ levels(oedit$Envir)[levels(oedit$Envir)=="DatV NomV DatNom"]="Theme Passive Reci
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NomV NA"]="Theme Passive Recipient Topicalisation"
 levels(oedit$Envir)[levels(oedit$Envir)=="VDat NomV NA"]="Theme Passive Theme Verb Recipient"
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV NomV NomDat"]="Recipient Passive Theme Topicalisation"
-levels(oedit$Envir)[levels(oedit$Envir)=="DatV VNom DatNom"]="Recipient Passive Recipient Verb Theme"
+levels(oedit$Envir)[levels(oedit$Envir)=="DatV VNom DatNom"]="Recipient Passive Recipient Verb Theme (Oblique)"
 levels(oedit$Envir)[levels(oedit$Envir)=="DatV VNom NomDat"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="NA NA NA"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="NA NomV NA"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="NA VNom NA"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="VDat NA NA"]=NA
 levels(oedit$Envir)[levels(oedit$Envir)=="VDat NomV NomDat"]="Theme Passive Theme Verb Recipient"
-levels(oedit$Envir)[levels(oedit$Envir)=="VDat VNom DatNom"]="Recipient Passive Verb Recipient--Theme"
+levels(oedit$Envir)[levels(oedit$Envir)=="VDat VNom DatNom"]="Recipient Passive Verb Recipient--Theme (Oblique)"
 levels(oedit$Envir)[levels(oedit$Envir)=="VDat VNom NomDat"]="Theme Passive Verb Theme--Recipient"
 levels(oedit$Envir)[levels(oedit$Envir)=="NA NA NomDat"]=NA
 
@@ -263,14 +265,14 @@ levels(thedit$Envir)[levels(thedit$Envir)=="DatV NA NA"]=NA
 levels(thedit$Envir)[levels(thedit$Envir)=="DatV NomV DatNom"]="Theme Passive Recipient Topicalisation"
 levels(thedit$Envir)[levels(thedit$Envir)=="DatV NomV NA"]="Theme Passive Recipient Topicalisation"
 levels(thedit$Envir)[levels(thedit$Envir)=="DatV NomV NomDat"]="Recipient Passive Theme Topicalisation"
-levels(thedit$Envir)[levels(thedit$Envir)=="DatV VNom DatNom"]="Recipient Passive Recipient Verb Theme"
+levels(thedit$Envir)[levels(thedit$Envir)=="DatV VNom DatNom"]="Recipient Passive Recipient Verb Theme (Oblique)"
 levels(thedit$Envir)[levels(thedit$Envir)=="DatV VNom NomDat"]=NA
 levels(thedit$Envir)[levels(thedit$Envir)=="NA NA NA"]=NA
 levels(thedit$Envir)[levels(thedit$Envir)=="NA NomV NA"]=NA
 levels(thedit$Envir)[levels(thedit$Envir)=="NA VNom NA"]=NA
 levels(thedit$Envir)[levels(thedit$Envir)=="VDat NA NA"]=NA
 levels(thedit$Envir)[levels(thedit$Envir)=="VDat NomV NomDat"]="Theme Passive Theme Verb Recipient"
-levels(thedit$Envir)[levels(thedit$Envir)=="VDat VNom DatNom"]="Recipient Passive Verb Recipient--Theme"
+levels(thedit$Envir)[levels(thedit$Envir)=="VDat VNom DatNom"]="Recipient Passive Verb Recipient--Theme (Oblique)"
 levels(thedit$Envir)[levels(thedit$Envir)=="VDat VNom NomDat"]="Theme Passive Verb Theme--Recipient"
 thedit$Envir<-as.character(thedit$Envir)
 thedit$Envir[thedit$Envir=='Recipient Passive Recipient Verb Theme'&thedit$isTo==1]<-'Locative Inversion'
@@ -315,6 +317,8 @@ levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Theme Passive Verb Theme--Recipien
 levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Theme Topicalisation"]<-NA
 levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Recipient Verb Theme"]<-1
 levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Verb Recipient--Theme"]<-1
+levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Recipient Verb Theme (Oblique)"]<-1
+levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Recipient Passive Verb Recipient--Theme (Oblique)"]<-1
 levels(gdit$isDatAcc)[levels(gdit$isDatAcc)=="Locative Inversion"]<-NA
 
 gdit$isDatAcc<-as.numeric(as.character(gdit$isDatAcc))
