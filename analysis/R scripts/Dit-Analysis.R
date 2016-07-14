@@ -399,7 +399,10 @@ bpoints<-group_by(brit.tr,era,IO,DO)%>%summarise(isTo=mean(isTo),n=n())
 ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(DO)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=brit.tr,aes(x=year))+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
 	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
-	scale_size_continuous(name="Log(Number of Tokens/50yrs)")
+	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+
+	scale_colour_discrete(name="Theme Status")+
+	scale_linetype_discrete(name="Recipient Status")+
+	scale_shape_discrete(name="Recipient Status")
 dev.off()
 
 pdf(file='../../images/brit-tn.pdf',paper='letter')
@@ -413,7 +416,10 @@ bpoints<-group_by(brit.act,era,IO,Order)%>%summarise(isTo=mean(isTo),n=n())
 ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(Order)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=pred,aes(x=year))+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
 	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
-	scale_size_continuous(name="Log(Number of Tokens/50yrs)")
+	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+
+	scale_colour_discrete(name="Word Order")+
+	scale_linetype_discrete(name="Recipient Status")+
+	scale_shape_discrete(name="Recipient Status")
 dev.off()
 
 
@@ -637,7 +643,7 @@ newam3<-group_by(newam2,year,Verb)%>%summarise(DatAccToTotal=sum(DatAccToCount),
 
 
 pdf(file='../../images/am-change-pass.pdf')
-ggplot(newam3,aes(year,AccDatToRate,colour='Theme-Recipient To',linetype=Verb,weight=AccDatToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme NoTo'))+coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))
+ggplot(newam3,aes(year,AccDatToRate,colour='Theme-Recipient',linetype=Verb,weight=AccDatToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme'))+coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))+scale_colour_discrete(name="Word Order")
 dev.off()
 
 ggplot(newam3,aes(year,AccDatToRate,colour='Theme-Recipient To',weight=AccDatToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme NoTo'))+coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))
@@ -663,12 +669,26 @@ pseu2$isPas <- as.numeric(as.character(pseu2$isPas))
 pdf(file='../../images/recpas-pseudo.pdf')
 ggplot(recpas,aes(year,isNom,colour='Nominative Recipient Passive'))+stat_smooth(method='loess')+stat_smooth(method='loess',data=pseu2,aes(x=YoC,y=isPas,colour='Pseudo-passive'))+scale_x_continuous(breaks=seq(1000,1900,100),labels=seq(1000,1900,100))+scale_colour_discrete(name='Construction')+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
-	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))
+	scale_y_continuous(name="% New Variant",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))
 dev.off()
 
+# Generate graph of American English direct theme passive rates
+am.pas<-subset(amdat,Voice=='Passive'&!is.na(Order)&!is.na(DO))
+am.the<-subset(am.pas,isDatAcc==0)
 
+am.the$isTo<-factor(am.the$To)
+levels(am.the$isTo)<-c(0,1)
+am.the$isTo<-as.numeric(as.character(am.the$isTo))
+
+pdf(file='../../images/directtheme-am.pdf')
+ggplot(am.the,aes(year,isTo,colour=IO))+stat_smooth()+coord_cartesian(ylim=c(0,1))+
+	scale_x_continuous(name='Year of Composition',breaks=seq(1800,2020,20),labels=seq(1800,2020,20))+
+	scale_y_continuous(name="% To",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
+	scale_colour_discrete(name="Recipient Status")
+
+dev.off()
 #Old Stuff
-# sxc
+#sxc
 
 
 
