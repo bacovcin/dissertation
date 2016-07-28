@@ -658,6 +658,33 @@ recpas$isNom<-factor(recpas$Envir)
 levels(recpas$isNom)<-c(0,1)
 recpas$isNom<-as.numeric(as.character(recpas$isNom))
 
+fitScaledLogit <- function(s=rep(1,dim(x)[1]),
+		      x, y, lltol = .1,
+		      initb=rep(0,dim(x)[2]), 
+		      alg = 'NLOPT_LN_COBYLA',
+		      printlevel = 0,
+		      f_tol = 1e-8,
+		      ll.only= F) {
+	ll.fun <- function(z) {
+		p <- s/(1+exp(-(as.matrix(x)%*%z)))
+		return(sum(-log(y*p+abs(y-1)*(1-p))))
+	}
+	fit <- nloptr(initb,
+		eval_f=ll.fun,
+		opt=list(algorithm=alg,print_level=printlevel,ftol_rel=f_tol),
+		lb=c(rep(-Inf,length(initb))),
+		ub=c(rep(Inf,length(initb))))
+	
+	ll <- fit$objective
+	r <- list()
+	r$ll <- ll
+	r$fit <- fit$sol
+	return(r)
+}
+
+
+
+
 pseu <- read.csv('../Parsed Corpora/data/pseudopassives.csv')
 pseu2 <- subset(pseu, selected != 'selnot' & Genre != 'X' & Genre != 'Y' & Genre != 'Z')
 
@@ -665,12 +692,75 @@ pseu2$isPas <- factor(pseu2$selected)
 levels(pseu2$isPas)<-c(0,1)
 pseu2$isPas <- as.numeric(as.character(pseu2$isPas))
 
+pdat <- data.frame(Value = pseu2$isPas, year=pseu2$YoC, type='Pseudopassive')
+bdat <- data.frame(Value = recpas$isNom, year=recpas$year, type='Recipient Passive')
+
+joint.rp <- as.data.frame(rbind(pdat, bdat))
+
+joint.rp$isPseudo <- factor(joint.rp$type)
+levels(joint.rp$isPseudo)<-c(1,0)
+joint.rp$isPseudo<-as.numeric(as.character(joint.rp$isPseudo))
+
+pseuscale <- mean(joint.rp$Value[joint.rp$year >=1700 & joint.rp$type=='Pseudopassive'],na.rm=T)
+recscale <- mean(joint.rp$Value[joint.rp$year >=1700 & joint.rp$type!='Pseudopassive'],na.rm=T)
+
+joint.rp$scale<-NA
+joint.rp$scale[joint.rp$type=='Pseudopassive']<-pseuscale
+joint.rp$scale[joint.rp$type!='Pseudopassive']<-recscale
+
+joint.rp$zYear<-(joint.rp$year-mean(joint.rp$year))/sd(joint.rp$year)
+
+fullx<-data.frame(rep(1,dim(joint.rp)[1]),
+		  joint.rp$zYear,
+		  joint.rp$isPseudo,
+		  joint.rp$zYear*joint.rp$isPseudo)
+	      
+
+joint.fit.full<-fitScaledLogit(s=joint.rp$scale, x=fullx, y=joint.rp$Value,printlevel=1)
+joint.fit.noint<-fitScaledLogit(s=joint.rp$scale, x=fullx[,c(1,2,3)], y=joint.rp$Value,printlevel=1)
+joint.fit.nocond<-fitScaledLogit(s=joint.rp$scale, x=fullx[,c(1,2)], y=joint.rp$Value,printlevel=1)
+joint.fit.null<-fitScaledLogit(s=joint.rp$scale, x=as.data.frame(fullx[,c(1)]), y=joint.rp$Value,printlevel=1)
+
+c(calcAIC(joint.fit.null),calcAIC(joint.fit.nocond),calcAIC(joint.fit.noint),calcAIC(joint.fit.full))
+# [1] 1994.194 1884.509 1886.457 1888.775 Year only mod is best
+
+pred <- expand.grid(year=seq(min(joint.rp$year),max(joint.rp$year),1),type=c('Pseudopassive','Recipient Passive'))
+
+pred$zYear<-(pred$year-mean(joint.rp$year))/sd(joint.rp$year)
+
+pred$isPseudo<-factor(pred$type)
+levels(pred$isPseudo)<-c(1,0)
+pred$isPseudo<-as.numeric(as.character(pred$isPseudo))
+
+pred$scale<-NA
+pred$scale[pred$type=='Pseudopassive']<-pseuscale
+pred$scale[pred$type!='Pseudopassive']<-recscale
+
+pfullx<-data.frame(rep(1,dim(pred)[1]),
+		  pred$zYear,
+		  pred$isPseudo,
+		  pred$zYear*pred$isPseudo)
+	
+pred$p<-pred$scale/(1+exp(-(as.matrix(pfullx[,c(1,2)])%*%joint.fit.nocond$fit)))
+pred$p2<-pred$scale/(1+exp(-(as.matrix(pfullx)%*%joint.fit.full$fit)))
+
+joint.rp$era<-as.numeric(as.character(cut(joint.rp$year,breaks=seq(800,2000,100),labels=seq(850,1950,100))))
+joint.points<-group_by(joint.rp,era,type)%>%summarise(p=mean(Value),size=n())
 
 pdf(file='../../images/recpas-pseudo.pdf')
-ggplot(recpas,aes(year,isNom,colour='Nominative Recipient Passive'))+stat_smooth(method='loess')+stat_smooth(method='loess',data=pseu2,aes(x=YoC,y=isPas,colour='Pseudo-passive'))+scale_x_continuous(breaks=seq(1000,1900,100),labels=seq(1000,1900,100))+scale_colour_discrete(name='Construction')+
+ggplot(pred,aes(year,p,colour=type,linetype='0'))+stat_smooth(method=loess,data=joint.rp,aes(y=Value,linetype='1'))+geom_line()+#geom_point(data=joint.points,aes(x=era,size=log(size)))+
+	coord_cartesian(ylim=c(0,1))+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
-	scale_y_continuous(name="% New Variant",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))
+	scale_y_continuous(name="% New Variant",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
+	scale_linetype_discrete(name="Modelling Method",labels=c('Logistic Regression','LOESS'))+
+	scale_colour_discrete(name="Construction")
 dev.off()
+
+# pdf(file='../../images/recpas-pseudo.pdf')
+# ggplot(recpas,aes(year,isNom,colour='Nominative Recipient Passive'))+stat_smooth(method='loess')+stat_smooth(method='loess',data=pseu2,aes(x=YoC,y=isPas,colour='Pseudo-passive'))+scale_x_continuous(breaks=seq(1000,1900,100),labels=seq(1000,1900,100))+scale_colour_discrete(name='Construction')+
+#         scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
+#         scale_y_continuous(name="% New Variant",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))
+# dev.off()
 
 # Generate graph of American English direct theme passive rates
 am.pas<-subset(amdat,Voice=='Passive'&!is.na(Order)&!is.na(DO))
