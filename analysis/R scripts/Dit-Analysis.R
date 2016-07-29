@@ -265,6 +265,20 @@ levels(brit.act$NAdj)<-c('Not Adjacent','Adjacent')
 brit.act<-subset(brit.act,(year<=1100&isTo==0) | year>1100)
 
 old.brit.act <- brit.act
+pdf(file='../../images/brit-tp.pdf',paper='USr')
+gdat<-subset(old.brit.act,DO=='Theme Pronoun'&isDatAcc==0)
+
+gpoints<-group_by(gdat,era,IO)%>%summarise(isTo=mean(isTo),n=n())
+ggplot(gpoints,aes(era,isTo,linetype=factor(IO)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=gdat,aes(x=year))+
+	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
+	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
+	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+
+	scale_colour_discrete(name="Word Order")+
+	scale_linetype_discrete(name="Recipient Status")+
+	scale_shape_discrete(name="Recipient Status")
+dev.off()
+
+
 # Look at the Theme Pronoun cases
 brit.tp<-subset(old.brit.act, DO=='Theme Pronoun' & isDatAcc == 0 & year>1500)
 
@@ -393,19 +407,7 @@ pred$isTo <- (preds1/(1+exp(-pred$B1))) * (1-(preds2/(1+exp(-pred$B2))))
 brit.act$era <- as.numeric(as.character(cut(brit.act$year,breaks=seq(800,1950,50),labels=seq(825,1925,50))))
 brit.act.points<-group_by(brit.act,era,IO,isDatAcc)%>%summarise(isTo=mean(isTo),n=n())
 
-pdf(file='../../images/brit-tr.pdf',paper='letter')
-brit.tr <- subset(old.brit.act,isDatAcc==0)
-bpoints<-group_by(brit.tr,era,IO,DO)%>%summarise(isTo=mean(isTo),n=n())
-ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(DO)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=brit.tr,aes(x=year))+
-	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
-	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
-	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+
-	scale_colour_discrete(name="Theme Status")+
-	scale_linetype_discrete(name="Recipient Status")+
-	scale_shape_discrete(name="Recipient Status")
-dev.off()
-
-pdf(file='../../images/brit-tn.pdf',paper='letter')
+pdf(file='../../images/brit-tn.pdf',paper='USr')
 brit.act$Order<-factor(brit.act$isDatAcc)
 levels(brit.act$Order)<-c('Theme-recipient','Recipient-theme')
 
@@ -413,7 +415,7 @@ pred$Order<-factor(pred$isDatAcc)
 levels(pred$Order)<-c('Theme-recipient','Recipient-theme')
 
 bpoints<-group_by(brit.act,era,IO,Order)%>%summarise(isTo=mean(isTo),n=n())
-ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(Order)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=pred,aes(x=year))+
+ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(Order)))+geom_point(aes(size=log(n),pch=IO))+geom_line(data=pred,aes(x=year))+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
 	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
 	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+
@@ -422,16 +424,21 @@ ggplot(bpoints,aes(era,isTo,linetype=factor(IO),colour=factor(Order)))+geom_poin
 	scale_shape_discrete(name="Recipient Status")
 dev.off()
 
+pdf(file='../../images/to-use-bf-1400.pdf',paper='USr')
+nbp<-subset(bpoints,Order=='Theme-recipient')
+np<-subset(pred,Order=='Theme-recipient')
 
-#
-pdf(file='../../images/to-marking-graph.pdf',paper='letter')
-ggplot(brit.act.points,aes(year,isTo,color=factor(isDatAcc)))+geom_point(aes(x=era,size=log(n)))+
-	geom_line(data=subset(pred,DO!='Theme Pronoun'))+facet_grid(~IO)+
+ggplot(nbp,aes(era,isTo,linetype=factor(IO),colour=factor(Order)))+geom_point(aes(size=log(n),pch=IO))+geom_line(data=np,aes(x=year))+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
 	scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
-	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+scale_colour_discrete(name="Word Order",labels=c("Theme--recipient","Recipient--theme"))
+	scale_size_continuous(name="Log(Number of Tokens/50yrs)")+
+	scale_colour_discrete(name="Word Order")+
+	scale_linetype_discrete(name="Recipient Status")+
+	scale_shape_discrete(name="Recipient Status")+
+	coord_cartesian(xlim=c(min(np$year),1400))
 dev.off()
-#
+
+
 
 ### Look at changes in recipient vs theme passivisation
 ## Examine by verb rates of monotransitivity and see if those correlate with recipient passivisation
