@@ -82,38 +82,53 @@ echo "Coding adj"
 $CS_COMMAND ./queries/Ditransitives/adj.c ./queries/Ditransitives/hascp.cod
 	# Outputs to: ./queries/Ditransitives/adj.cod
 
-#16) count the subjects
+#16) run the NomPartOrd.c query on adj.cod
+echo "Coding NomPartOrd"
+$CS_COMMAND ./queries/Ditransitives/NomPartOrd.c ./queries/Ditransitives/adj.cod
+	# Outputs to: ./queries/Ditransitives/NomPartOrd.cod
+
+#17) run the DatPartOrd.c query on NomPartOrd.cod
+echo "Coding DatPartOrd"
+$CS_COMMAND ./queries/Ditransitives/DatPartOrd.c ./queries/Ditransitives/NomPartOrd.cod
+	# Outputs to: ./queries/Ditransitives/DatPartOrd.cod
+
+#18) run the AccPartOrd.c query on DatPartOrd.cod
+echo "Coding AccPartOrd"
+$CS_COMMAND ./queries/Ditransitives/AccPartOrd.c ./queries/Ditransitives/DatPartOrd.cod
+	# Outputs to: ./queries/Ditransitives/AccPartOrd.cod
+
+#19) count the subjects
 echo "Counting subject words"
-python ./corpus-tools/count-words.py NP-SBJ:NP-NOM 18 ./queries/Ditransitives/adj.cod
-mv ./queries/Ditransitives/adj_NP-SBJ_NP-NOM.cod ./queries/Ditransitives/adj-sbj.cod
+python ./corpus-tools/count-words.py NP-SBJ:NP-NOM 18 ./queries/Ditransitives/AccPartOrd.cod
+mv ./queries/Ditransitives/AccPartOrd_NP-SBJ_NP-NOM.cod ./queries/Ditransitives/adj-sbj.cod
 	# Outputs to: ./queries/Ditransitives/adj-sbj.cod
 
-#17) Run the only-coding.q query (from corpus-tools repository)
+#20) Run the only-coding.q query (from corpus-tools repository)
 echo "Labeling dative PPs"
 $CS_COMMAND ./queries/Ditransitives/label-PPdat.q ./queries/Ditransitives/adj-sbj.cod
 	# Outputs to: /queries/Ditransitives/adj-sbj.cod.out
 
-#18) count the indirect objects
+#21) count the indirect objects
 echo "Counting IO words"
 python ./corpus-tools/count-words.py NP-DAT:NP-DTV:NP-OB2:PP-DAT 19 ./queries/Ditransitives/adj-sbj.cod.out
 mv ./queries/Ditransitives/adj-sbj.cod_NP-DAT_NP-DTV_NP-OB2_PP-DAT.cod ./queries/Ditransitives/adj-io.cod
 	# Outputs to: ./queries/Ditransitives/adj-io.cod
 
-#19) count the direct objects
+#22) count the direct objects
 echo "Counting DO words"
 python ./corpus-tools/count-words.py NP-OB1:NP-ACC 20 ./queries/Ditransitives/adj-io.cod
 mv ./queries/Ditransitives/adj-io_NP-OB1_NP-ACC.cod ./queries/Ditransitives/adj-do.cod
 	# Outputs to: ./queries/Ditransitives/adj-do.cod
 
-#20) Run the only-coding.q query (from corpus-tools repository)
+#23) Run the only-coding.q query (from corpus-tools repository)
 echo "Extracting codes"
 $CS_COMMAND ./corpus-tools/only-coding.q ./queries/Ditransitives/adj-do.cod
 	# Outputs to: /queries/Ditransitives/adj-do.cod.ooo
 
-#21) Run add_metadata.py to create the final tab-separated file
+#24) Run add_metadata.py to create the final tab-separated file
 echo "Adding metadata and creating final file"
 mkdir data
-python ./parsedenglish_database/add_metadata.py ./parsedenglish_database/English_database.txt ./queries/Ditransitives/adj-do.cod.ooo ./data/dit.txt "Blank" "Verb" "Clause" "PP" "Nom" "Dat" "Acc" "NomVerb" "DatVerb" "AccVerb" "NomDat" "NomAcc" "DatAcc" "Pas" "NomCP" "DatCP" "AccCP" "NomSize" "DatSize" "AccSize" "Adj"
+python ./parsedenglish_database/add_metadata.py ./parsedenglish_database/English_database.txt ./queries/Ditransitives/adj-do.cod.ooo ./data/dit.txt "Blank" "Verb" "Clause" "PP" "Nom" "Dat" "Acc" "NomVerb" "DatVerb" "AccVerb" "NomDat" "NomAcc" "DatAcc" "Pas" "NomCP" "DatCP" "AccCP" "NomSize" "DatSize" "AccSize" "Adj" "NomPart" "DatPart" "AccPart"
 	# Outputs to: ./data/dit.txt
 
 # 8) Clean up intermediate files that duplicate the corpus
