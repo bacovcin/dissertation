@@ -5,9 +5,9 @@ define: Ditrans.def
 coding_query:
 
 12: {
-   NA: (IP* iDoms nom) AND (nom iDoms \**)
-   NA: (IP* iDoms acc) AND (acc iDoms \**)
-   AccNom: (IP* iDoms acc) AND (IP* iDoms nom) AND (acc Pres nom)   
-   NomAcc: (IP* iDoms acc) AND (IP* iDoms nom) AND (nom Pres acc)
+   NA: (CP* iDoms IP*) AND (IP* iDoms nom) AND (nom iDoms \**)
+   NA: (CP* iDoms IP*) AND (IP* iDoms acc) AND (acc iDoms \**)
+   AccNom: (CP* iDoms IP*) AND (IP* iDoms acc) AND (IP* iDoms nom) AND (acc Pres nom)   
+   NomAcc: (CP* iDoms IP*) AND (IP* iDoms acc) AND (IP* iDoms nom) AND (nom Pres acc)
    NA: ELSE
 }
