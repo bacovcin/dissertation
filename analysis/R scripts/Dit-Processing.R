@@ -284,10 +284,10 @@ gdit$isDatAcc<-as.numeric(as.character(gdit$isDatAcc))
 
 # Relabel IO and DO variables
 gdit$NIO<-factor(gdit$IO)
-levels(gdit$NIO)<-c('Recipient Noun','Recipient Pronoun','Recipient Empty','Recipient Null','Recipient Noun', 'Recipient Pronoun', 'Recipient Empty')
+levels(gdit$NIO)<-c('Recipient Noun','Recipient Pronoun','Recipient Noun', 'Recipient Pronoun', 'Recipient Empty')
 
 gdit$NDO<-factor(gdit$DO)
-levels(gdit$NDO)<-c('Theme Noun','Theme Empty','Theme Pronoun','Theme Noun','Theme Pronoun','Theme Empty','Theme Null')
+levels(gdit$NDO)<-c('Theme Noun','Theme Empty','Theme Pronoun','Theme Noun','Theme Pronoun','Theme Empty')
 
 # Create bins for graphing
 gdit$YoC<-as.numeric(as.character(gdit$YoC))
