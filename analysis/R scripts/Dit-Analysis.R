@@ -661,11 +661,11 @@ ggplot(newam3,aes(year,AccDatToRate,colour='Theme-Recipient To',weight=AccDatToT
 ggplot(newam3,aes(year,AccDatNoToRate,colour='Theme-Recipient NoTo',linetype=Verb,weight=DatAccToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme NoTo'))+stat_smooth(aes(y=AccDatToRate,weight=AccDatToTotal,colour='Theme-Recipient To'))+coord_cartesian(ylim=c(0.5,1))
 
 # Study oblique vs nominative recipient passivisation
- brit.pas<-subset(britdat,Voice=='PAS'&NVerb!='SEND'&NVerb!='NONREC'&!is.na(isDatAcc))
-recpas<-subset(brit.pas,isDatAcc==1&Envir!='Recipient Passive Verb Recipient--Theme (Oblique)' & Envir != 'Recipient Passive Verb Recipient--Theme')
+ brit.pas<-subset(britdat,Voice=='PAS'&NVerb!='SEND'&NVerb!='NONREC')
+recpas<-subset(brit.pas,Envir%in%c('Recipient Passive (oblique)','Recipient Passive Theme Topicalisation (oblique)','Recipient Passive','Recipient Passive Theme Topicalisation'))
 
 recpas$isNom<-factor(recpas$Envir)
-levels(recpas$isNom)<-c(0,1)
+levels(recpas$isNom)<-c(0,0,1,1)
 recpas$isNom<-as.numeric(as.character(recpas$isNom))
 
 fitScaledLogit <- function(s=rep(1,dim(x)[1]),
@@ -732,7 +732,7 @@ joint.fit.nocond<-fitScaledLogit(s=joint.rp$scale, x=fullx[,c(1,2)], y=joint.rp$
 joint.fit.null<-fitScaledLogit(s=joint.rp$scale, x=as.data.frame(fullx[,c(1)]), y=joint.rp$Value,printlevel=1)
 
 c(calcAIC(joint.fit.null),calcAIC(joint.fit.nocond),calcAIC(joint.fit.noint),calcAIC(joint.fit.full))
-# [1] 1994.194 1884.509 1886.457 1888.775 Year only mod is best
+# [1] 2017.479 1833.093 1834.120 1836.633 Year only best
 
 pred <- expand.grid(year=seq(min(joint.rp$year),max(joint.rp$year),1),type=c('Pseudopassive','Recipient Passive'))
 
@@ -751,14 +751,14 @@ pfullx<-data.frame(rep(1,dim(pred)[1]),
 		  pred$isPseudo,
 		  pred$zYear*pred$isPseudo)
 	
-pred$p<-pred$scale/(1+exp(-(as.matrix(pfullx[,c(1,2)])%*%joint.fit.nocond$fit)))
+pred$p<-pred$scale/(1+exp(-(as.matrix(pfullx[,c(1,2,
 pred$p2<-pred$scale/(1+exp(-(as.matrix(pfullx)%*%joint.fit.full$fit)))
 
-joint.rp$era<-as.numeric(as.character(cut(joint.rp$year,breaks=seq(800,2000,100),labels=seq(850,1950,100))))
+joint.rp$era<-as.numeric(as.character(cut(joint.rp$year,breaks=seq(800,1950,50),labels=seq(825,1925,50))))
 joint.points<-group_by(joint.rp,era,type)%>%summarise(p=mean(Value),size=n())
 
 pdf(file='../../images/recpas-pseudo.pdf')
-ggplot(pred,aes(year,p,colour=type,linetype='0'))+stat_smooth(method=loess,data=joint.rp,aes(y=Value,linetype='1'))+geom_line()+#geom_point(data=joint.points,aes(x=era,size=log(size)))+
+ggplot(pred,aes(year,p,colour=type))+geom_line()+geom_point(data=joint.points,aes(x=era,size=log(size)))+
 	coord_cartesian(ylim=c(0,1))+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
 	scale_y_continuous(name="% New Variant",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
