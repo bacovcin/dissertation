@@ -45,6 +45,7 @@
 \noautomath
 
 \begin{document}
+\maketitle
 \section{Outline}
 \begin{enumerate}
 	\item Background and Theory
@@ -61,7 +62,8 @@ Main claim of dissertation: \textbf{All recipients are base generated as preposi
 			& ApplP\ar@{-}[dl]\ar@{-}[dr]\\
 			PP_{\text{Recipient}} & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
 			& Appl & & VP\ar@{-}[dl]\ar@{-}[dr]\\
-			& & V & & DP_{\text{Theme}}}
+			& & DP_{\text{Theme}} & & \bar{V}\ar@{-}[d]\\
+			& & & & V}
 \end{exe}
 
 Theme--recipient orders (e.g., ``I gave the books to John'') are created by scrambling the theme into a higher specifier of the applicative \citep{McGinnis.1998}
@@ -73,9 +75,8 @@ DP\ar@{-}[d] & & \bar{v}\ar@{-}[dl]\ar@{-}[dr]\\
  & & DP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
  & & \text{the book$_{i}$}\ar@{<-}@(dl,dl)[ddrrr] & DP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
  & & & \text{to John} & Appl & & VP\ar@{-}[dl]\ar@{-}[dr]\\
- & & & & & DP_{i} & & \bar{V}\ar@{-}[dl]\ar@{-}[dr]\\
- & & & & & & V\ar@{-}[d] & & CP\\
- & & & & & & \text{give}& & \text{Op$_{k}$ PRO$_{i}$ to play with t$_{k}$}}
+ & & & & & DP_{i} & & \bar{V}\ar@{-}[d]\\
+ & & & & & & & V}
  
 
 Following \cite{Bayer.2001} and \cite{Asbury.2005,Asbury.2007}, inherent case is represented syntactically as a preposition heading a prepositional phrase (dative PP). Other prepositional phrases (e.g., goals) are distinguished by both featural content in the head of the preposition and position within the clause (applicative vs. object of the verb).
@@ -106,14 +107,13 @@ Structural case (e.g., nominative and accusative) are properties of DPs and cruc
 		\ex Evidence of nominative passivisation in Dutch and German
 		\ex Pseudopassivisation and nominative recipient passivisation in history of English
 		\ex Swedish prefix verbs
-	\end{exe}
+	\end{xlist}
 \end{exe}
 \section{Evidence from German and Dutch}
 
 \cite{Alexiadou.2014} motivate their P-incorporation analysis with data from German and Dutch.
 
 With the normal passive auxiliary (\textit{werden} `become') only theme passives are possible:
-
 \begin{exe}
 	\ex High German:\label{ex:hg-normal-pass}
 \begin{xlist}
@@ -155,22 +155,20 @@ However, when a different auxiliary is used, (the equivalent of the GET-passive)
 
 According to \cite{Alexiadou.2014}, the different auxiliary reflects contextual allomorphy in the passive auxiliary based on the presence or absence of the dative P.
 
-\begin{exe}
-	\ex [PASS] $\rightleftarrow$ kreig / \_$\smallfrown$[P_{dative}]
-	\ex [PASS] $\rightleftarrow$ werd
-\end{exe}
-
+\newpage
 \section{Evidence from History of English}
 
-Pseudopassivisation (e.g., ``The bed was slept in'') has also been proposed to be derived via P-incorporation \citep{Herslund.1984}
-
-In English, pseudopassivisation and nominative recipient passivisation enter the language at the same time and show a Constant Rate Effect (only suggestive due to small data on recipient passivisation).
-
-	\begin{figure}[ht!]
+	\begin{figure}[t!]
 		\includegraphics[width=\linewidth]{../images/recpas-pseudo}
 		\caption{Logistic regression curves showing rates of nominative recipient passivisation and pseudopassivisation in English}
 		\label{fig:recpas-pseudo}
 	\end{figure}
+
+
+Pseudopassivisation (e.g., ``The bed was slept in'') has also been proposed to be derived via P-incorporation \citep{Herslund.1984}
+
+In English, pseudopassivisation and nominative recipient passivisation enter the language at the same time and show a Constant Rate Effect (only suggestive due to small data on recipient passivisation). See Figure \ref{fig:recpas-pseudo}.
+
 
 \section{Evidence from Swedish}
 Swedish has two different classes of ditransitive verbs that behave differently in both active and passive contexts. The prefixed verbs can be derived via P-incorporation of the dative P into the verbal stem. Thus, these ``words'' always require P-incorporation to occur \citep{Holmberg.1995}.
@@ -182,7 +180,6 @@ Swedish has two different classes of ditransitive verbs that behave differently 
 		\ex Only prefixed verbs can have recipient passives, which are nominative recipient passives
 	\end{xlist}
 \end{exe}
-
 \begin{exe}
 	\ex Theoretical Conclusions:
 	\begin{xlist}
@@ -194,7 +191,7 @@ Swedish has two different classes of ditransitive verbs that behave differently 
 \textbf{Structural definition of P-incorporation:} P-incorporation moves the P-head from the specifier of the recipient -- itself in the specifier of the applicative phrase -- and adjoins it to the head of the nearest C-commanding phrase.
 
 Here is an example tree:
-
+\begin{exe}
 \ex P-incorporation (VO Word Order)\label{ex:VO-Pincorp}\\
 			\xymatrix@=2pt{
 			& VoiceP\ar@{-}[dl]\ar@{-}[dr]\\
@@ -210,16 +207,16 @@ The relevant Swedish data for discussion:
 \cite{Haugen.1982,Falk.1990,Falk.1993,Holmberg.1995,Falk.1997,Anward.1989,Holmberg.2002,Lundquist.2004,Platzack.2005,Lundquist.2006,Bardal.2007,Lundquist.2013,Lundquist.2013b,Haddican.2014,Haddican.2015}
 \subsubsection{Active Data}
 \begin{exe}
-	\exr{ex:sw-rt} Swedish:
+	\ex Swedish:
 		\gll Jag gav Johan en bok.\\
 		I gave John a book.\\
 		\trans `I gave John a book \citep{Holmberg.1995}.'
-	\exr{ex:sw-tr} Swedish:
+	\ex Swedish:
 		\gll Jag gav en bok *(til) Johan.\\
 		I gave a book to John.\\
 		\trans `I gave a book to John \citep{Holmberg.1995}.'
 
-	\exr{ex:sw-act-simple} Swedish:
+	\ex Swedish:
 			\begin{xlist}
 				\ex \gll Han gav Jan bollen\\
 				he.NOM gave John ball.the\\
@@ -228,7 +225,7 @@ The relevant Swedish data for discussion:
 				he.NOM gave ball.the to John\\
 				\trans `He gave the ball to John'
 			\end{xlist}
-	\exr{ex:Swedish-complex-act} Swedish:
+	\ex Swedish:
 			\begin{xlist}
 				\ex[ ]{\gll Han erbjöd Jan ett nytt jobb\\
 				he.NOM offered John a new job\\
@@ -244,7 +241,7 @@ The relevant Swedish data for discussion:
 \end{exe}
 \subsubsection{Passive Data}
 \begin{exe}
-	\exr{ex:swe-part} Swedish:
+	\ex Swedish:
 	\begin{xlist}
 		\ex[ ]{Particle Verb:
 		\gll Han erbjöds ett nytt jobb\\
@@ -255,24 +252,24 @@ The relevant Swedish data for discussion:
 			Pelle gave.PASS a apple\\
 			\trans `Pelle was given an apple (\citealt{Anward.1989}, \citealt{Lundquist.2006}).'}
 	\end{xlist}	
-	\exr{ex:swe-nopart-pass} Swedish (verbs without particles):
+	\ex Swedish (verbs without particles):
 		\sn[*]{
 			\gll Ett äpple gavs Pelle.\\
 			 An apple gave.PASS Pelle.\\
 			 \trans `An apple was given to Pelle (\citealt{Anward.1989},\citealt{Lundquist.2006}).'}
-	\exr{ex:sw-offer-pass} Swedish:
+	\ex Swedish:
 		\gll Ett nytt jobb erbjöds=honom.\\
 		A new job offered.PASS=him.OBL.\\
 		\trans `A new job was offered to him (\citealt{Anward.1989},\citealt{Falk.1990},\citealt{Lundquist.2006}).'
-	\exr{ex:sw-give-pass} Swedish:
+	\ex Swedish:
 		\gll *Ett äpple gavs honom.\\
 		 An apple gave.PASS him.\\
 		 \trans `An apple was given to him (\citealt{Anward.1989},\citealt{Lundquist.2006}).'
-	 \exr{ex:sw-offer-thepas} Swedish:
+	 \ex Swedish:
 		\gll Jobbet erbjöds mannen med den långa svarta kappan.\\
 		job.DEF offered.PASS man.DEF with the long black coat\\
 		'The job was offered to the man with the long black coat \citep[ex 26]{Lundquist.2004}.'
-	\exr{ex:sw-relpass} Swedish:
+	\ex Swedish:
 		\begin{xlist}
 			\ex[ ]{\gll Mannen som erbjöds \textbf{jobbet} hade redan tackat ja till ett annat jobb.\\
 			man.DEF who offered.PASS \textbf{job.DEF} had already thanked yes to a other job\\
@@ -281,7 +278,7 @@ The relevant Swedish data for discussion:
 			man.DEF who \textbf{job.DEF} offered.PASS had already thanked yes to a other job\\
 			\trans `The man, to whom the job was offered, had already accepted another job \citep[ex. 52]{Lundquist.2004}.'}
 		\end{xlist}
-	\exr{ex:sw-relpass2} Swedish:
+	\ex Swedish:
 		\begin{xlist}
 			\ex[ ]{\gll Jobbet som erbjöds \textbf{mannen} var mycket slitsamt.\\
 			job.DEF which offered.PASS \textbf{man.DEF} was very tiring\\
