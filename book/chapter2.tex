@@ -51,10 +51,10 @@ In English, there is a distinction between \textit{in} and \textit{into} that re
 	\ex High German:\label{ex:hg-Pcomp}
 	\begin{xlist}
 		\ex \gll in + P$_{goal}$ den Baum\\
-			 in + P$_{goal}$ the.ACC tree\\
+			 in + P$_{goal}$ the.GOAL=ACC tree\\
 			 \trans `into the tree'
 		\ex \gll in + P$_{location}$ dem Baum\\
-			 in + P$_{location}$ the.DAT tree\\
+			 in + P$_{location}$ the.LOC=DAT tree\\
 			 \trans `in the tree'
 	\end{xlist}
 
@@ -156,11 +156,11 @@ DP\ar@{-}[d] & & \bar{v}\ar@{-}[dl]\ar@{-}[dr]\\
  & & \text{the book$_{i}$}\ar@{<-}@(dl,dl)[ddrrr] & DP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
  & & & \text{to John} & Appl & & VP\ar@{-}[dl]\ar@{-}[dr]\\
  & & & & & DP_{i} & & \bar{V}\ar@{-}[d]\\
- & & & & & & & V\ar@{-}[d] & & CP\\
+ & & & & & & & V\ar@{-}[d] \\
  & & & & & & & \text{give}}
  \end{exe} 
 
- The third operation is P-incorporation provides a method for rendering dative PPs available for nominative case assignment. This argument assumes that nominative (as a structural case) is only available for DPs, and thus that the PP layer needs to be removed in order for the recipient to be visible for nominative case assignment. \cite{Alexiadou.2014} suggest that P-incorporation as a mechanism for removing the PP layer, but do not give an explicit account of P-incorporation.
+ The third operation, P-incorporation, provides a method for rendering dative PPs available for nominative case assignment. This argument assumes that nominative (as a structural case) is only available for DPs, and thus that the PP layer needs to be removed in order for the recipient to be visible for nominative case assignment. \cite{Alexiadou.2014} suggest that P-incorporation as a mechanism for removing the PP layer, but do not give an explicit account of P-incorporation.
 
  P-incorporation can be thought of as an exceptional instance of head movement (building on some of the original suggestions of head movement in \citealt{Baker.1988}). Head movement seems to be driven by properties of the mover rather than the landing site. An example of this principle can be seen in English V to T movement (as seen by do-support). Most English verbs do not move to T (\ref{ex:main-verb-do}), but there are a class of auxiliary verbs that do (\ref{ex:aux-verb-do}). Crucially, it is the class of verb (i.e., the type of head) that determines whether or not head movement occurs, not the tense of the clause.
 
@@ -174,18 +174,42 @@ DP\ar@{-}[d] & & \bar{v}\ar@{-}[dl]\ar@{-}[dr]\\
 	\begin{xlist}
 		\ex[*]{John did not have eaten the apple.}
 		\ex[ ]{John has not eaten the apple.}
-	\end{xlist}
+	\end{xlist})
  \end{exe}
 
- In this case, P-heads in languages can vary as to whether or not the P-head undergoes head movement or not. An exceptional aspect of the head movement of P-heads is that it can be triggered from a specifier. Since head movement has been previously defined in terms of head-comp relationships, I provide a more general definition of head movement in (\ref{ex:headmovement}), which covers movement of heads out of phrases in both complement and specifier positions.
+ In this case, P-heads in languages can vary as to whether or not the P-head undergoes head movement or not. An exceptional aspect of the head movement of P-heads as proposed here is that head movement can be triggered from a specifier. Since head movement has been previously defined in terms of head-comp relationships, I provide a more general definition of head movement in (\ref{ex:headmovement}), which covers movement of heads out of phrases in both complement and specifier positions.
 
  \begin{exe}
 	 \ex Head Movement Targeting Condition: When head movement is triggered, the head triggering the movement adjoins to the nearest head that asymmetrically c-commands the highest position of the triggering head. \label{ex:headmovement}
  \end{exe}
 
- The condition in (\ref{ex:headmovement}) assumes Bare Phrase Structure \citep{Chomsky.1993}, where Phrases are labelled with their heads. Bare Phrase Structure has two consequences. The first is that entire phrases can satisfy the ``nearest head'' sub-condition. Therefore, the theme after VP-internal scrambling would be the target of P-incorporation from the recipient, since the D-head of the theme is the nearest head that asymmetrically c-commands the recipient (\ref{ex:doubspec-tree}). Without Bare Phrase Structure, the theme D-head would not c-command the dative P head, since it would be embedded inside the theme DP. The second consequence of Bare Phrase Structure is that the highest position of the triggering head is the phrase level, which insures that heads will not head move into their own specifiers. Without Bare Phrase Structure, the specifier would asymmetrically c-command the head of the phrase it is contained in and thus would be a valid target for head movement. Instead, the specifier is a daughter of the highest position of the head and thus does not meet the requirements for c-command.
+ The condition in (\ref{ex:headmovement}) assumes Bare Phrase Structure \citep{Chomsky.1993}, where Phrases are labelled with their heads. Bare Phrase Structure has two consequences. The first is that entire phrases can satisfy the ``nearest head'' sub-condition. Therefore, the theme after VP-internal scrambling would be the target of P-incorporation from the recipient, since the D-head of the theme is the nearest head that asymmetrically c-commands the recipient (\ref{ex:doubspec-tree}). Without Bare Phrase Structure, the theme D-head would not c-command the dative P head, since it would be embedded inside the theme DP. Also, the theme is only a target, because it is in a higher specifier of the applicative phrase. If the theme were moved into a different functional projects (e.g., ScramP) attached above the applicative, then the Scram head, rather than the theme would be the target. 
  
- When considering P-incorporation, there are three relevant configurations. For non-recipient PPs, which are merged as complements of V, V is the target of P-incorporation. For the recipient, there are two logically possible targets. If the theme has scrambled, then it would be the target, if P-incorporation into D was a valid operation. If the theme does not scramble, then the dative P adjoins to v, since v is the nearest head that asymmetrically c-commands the recipient.
+\begin{exe}
+	\ex Alternate Scrambling Analysis:\label{ex:doubspec-tree}
+\xymatrix@=2pt{
+ & vP\ar@{-}[dl]\ar@{-}[dr]\\
+DP\ar@{-}[d] & & \bar{v}\ar@{-}[dl]\ar@{-}[dr]\\
+\text{Mary} & \text{v} & & ScramP\ar@{-}[dl]\ar@{-}[dr]\\
+ & & DP\ar@{-}[d] & & \bar{Scram}\ar@{-}[dl]\ar@{-}[dr]\\
+ & & \text{the book$_{i}$}\ar@{<-}@(dl,dl)[ddrrr] & Scram & & ApplP\ar@{-}[dl]\ar@{-}[dr]\\
+ & & & & DP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
+ & & & & \text{to John} & Appl & & VP\ar@{-}[dl]\ar@{-}[dr]\\
+ & & & & & & DP_{i} & & \bar{V}\ar@{-}[d]\\
+ & & & & & & & & V\ar@{-}[d] \\
+ & & & & & & & & \text{give}}
+ \end{exe} 
+
+ The second consequence of Bare Phrase Structure is that the highest position of the triggering head is the phrase level, which insures that heads will not head move into their own specifiers. Without Bare Phrase Structure, the specifier would asymmetrically c-command the head of the phrase it is contained in and thus would be a valid target for head movement (\ref{ex:specifierBPS}). Instead, the specifier is a daughter of the highest position of the head and thus does not meet the requirements for c-command.
+
+ \begin{exe}
+	\ex \xymatrix@=2pt{
+ & XP vs X\ar@{-}[dl]\ar@{-}[dr]\\
+ZP & & \bar{X} vs X\ar@{-}[dl]\ar@{-}[dr]\\
+& X & & YP} \label{ex:specifierBPS}
+ \end{exe}
+ 
+ When considering P-incorporation, there are three relevant configurations. For non-recipient PPs, which are merged as complements of V, V is the target of P-incorporation. For the recipient, there are two logically possible targets. If the theme has scrambled, then it would be the target, if P-incorporation into D was a valid operation. If the theme does not scramble, then the dative P adjoins to v, since v is the nearest head that asymmetrically c-commands the recipient. These targets hold for VO languages. As will be argued in Chapter \ref{ch:passive}, OV languages have a different target for P-incorporation, namely auxiliaries in T.
 
  The fourth operation is cliticisation, which involves some combination of head movement and/or scrambling of weak pronouns. For this dissertation, the crucial elements of cliticisation are: (a) that the clitic is in an A-bar and not an A position and thus does not intervene for syntactic locality and (b) that the clitic ends up being incorporated into an adjacent word and thus does not intervene for linear locality, which is used in contextual allomorphy.
 
@@ -195,11 +219,41 @@ Similar to \cite{Platzack.2005}, I propose a theory that unites the two main the
 
 Locality-based theories state that only the structurally highest DP is available to receive subject properties. The applicative analysis claims that recipients are base generated higher than the theme, which means that the locality approach predicts that, baring intervening factors, the recipient should always become the subject (recipient passivisation). However, among Germanic languages, theme passivisation (where the theme becomes the subject) is available indicating mechanisms for obviating the locality violation. One mechanism is to move either the recipient or the theme (i.e., recipient cliticisation or VP-internal scrambling), after which movements the theme is the highest DP in an A-position.
 
-In addition to movement effects, which were already discussed above, I also propose variation in the treatment of interveners in the search for an argument to raise to subject position. Assuming that there is no P-incorporation, VP-internal scrambling or cliticisation, the recipient will intervene between T and the theme when T is looking for an argument to move to subject position. Three possible intervention effects are seen: (a) the PP recipient is a valid target of subject movement (oblique subjects), (b) the PP recipient is invisible for subject movement and the theme raises past the recipient (relativised minimality), or (c) passivisation is impossible without P-incorporation, VP-internal scrambling or cliticisation (defective intervention). In all cases, it seems that these differences reflect different properties in the search mechanism of T as it looks down the tree for a possible argument to raise to subject position. I thus assume that different types of locality are stored as featural properties of T heads, which denote what sorts of phrases are examined and the possibility of defective intervention when looking for potential subjects.
+In addition to movement effects, which were already discussed above, I also propose variation in the treatment of interveners in the search for an argument to raise to subject position. Assuming that there is no P-incorporation, VP-internal scrambling or cliticisation, the recipient will intervene between T and the theme when T is looking for an argument to move to subject position. Three possible intervention effects are seen: (a) the PP recipient is a valid target of subject movement (oblique subjects), (b) the PP recipient is invisible for subject movement and the theme raises past the recipient (relativised minimality), or (c) passivisation is impossible without P-incorporation, VP-internal scrambling or cliticisation (defective intervention). 
+
+Two of these effects were already identified in \cite{McGinnis.1998b}, which she attributes to variation in the type of case assigned to the arguments. She introduced the distinction between quirky case, which could move under passivisation and blocked other arguments from moving past it, and inert case, which could not move under passivisation and did not block other arguments from moving pass. She does not address cases where the argument cannot move, but blocks movement, although her analysis would allow for positing a third kind of case, which has these properties. For McGinnis, the distinct blocking and movement properties of the arguments are attributed to the different kinds of case that inherent case marked objects can receive. Since I am assuming that all inherent case marked arguments are actually PPs, McGinnis's argument would translate to claiming that there are three types of PPs, each of which has the blocking/movement properties described.
+
+While most of the data in this dissertation is compatible with such an analysis (variation in P-heads), I find the idea of positing different cases as primiative objects as an unsatisfying soluition to the problem. In this dissertation, I propose a different analysis to account for these three conditions. Instead of variation in P-heads, I propose variation in T-heads, namely variation in the search domain for subject movement. As described above, T has two distinct roles that it can assign to arguments: (i) movement to subject position and (ii) assignment of nominative case. I propose that there are two binary parameters on T, which constrain its search and generate the three surface patterns discussed above.
+
+The two parameters constrain the domain of the search for a subject and the nature of valid subjects. The first parameter constrains the possible phrases that can satisfy T's requirement to have its specifier filled. In particular, are PPs valid subjects or not? The second parameter constrains how many arguments T evaluates when attempting to assign nominative case and trigger subject raising. In particular, can T check the \textbf{two} most local arguments, or is it restricted to checking only the highest argument? \cite{Nevins.2011} argues that T can at least sometimes check multiple arguments in order to account for cases where verbal agreement relies on properties of two of the arguments in the clause. Even in cases where multiple arguments are checked, I assume that each property of T (subject raising and case assignment) is still attributed to the highest valid argument. Example (\ref{ex:Tvariation}) shows the outcome of each combination of the two parameters.
+
+\begin{exe}
+	\ex \label{ex:Tvariation}
+	\begin{tabular}{ccc}
+		&	PP Subjects & No PP Subjects \\
+Two Arguments	& DAT recipient subject and NOM theme object & NOM theme subject and DAT recipient object\\
+One Argument    & ?DAT recipient subject and ACC theme object & Ungrammaticality\\
+	\end{tabular}
+\end{exe}
+
+If T is able to look at multiple arguments, then the theme will receive nominative case in the passive, since the theme is the only phrase capable of receiving nominative case and T is allowed to look deep enough into the clause in order to find the theme and assign nominative case. For cases where T can see two arguments, the difference is only in which arguent raises to subject position. If PPs are valid subjects, then the PP recipient raises, since it is more local, and the result is an oblique subject and a nominative object. If PPs are not valid subjects, then the theme raises directly to subject position.
+
+However, if T only looks at the higher argument, the theme must receive accusative case, since T is unable to see deep enough to assign nominative case. The inability to assign nominative case does not seem to be sufficient to lead to ungrammaticality, since many languages allow nominativeless clauses in the passive (\ref{ex:german-help-pass}). For languages with obligatory subject positions, however, if the PP is not a valid subject, the inability of T to raise anything to subject position does lead to ungrammaticality. T cannot raise the recipient to subject position, since it is not a valid subject and T cannot look further in the clause to find the theme.
+
+\begin{exe}
+	\ex High German, Passive without nominative:\\
+	\gll Ihm wird geholfen\label{ex:german-help-pass}\\
+	him.DAT was helped\\
+	\trans `He was helped.'
+\end{exe}
+
+The final case occurs when PPs are valid subjects. In this case, the recipient raises to subject position, but cannot receive nominative case, since it is not a bare DP and thus not a vaild recipient of structural case. Since T cannot look further into the clause, the theme is also not able to recieve nominative case and remains accusative. As discussed above, T does not need to assign nominative case, so the result is a grammatical clause with an oblique subject and an accusative object. Unlike the other three situations, it seems difficult to be able to capture these types of sentences with a case driven proposal like that found in \citet{McGinnis.1998b}.
+
+This section reviewed the morphosyntactic mechanisms that I need to derive the surface forms found in Germanic languages from the universal dative PP + applicative base generated construction. Contextual allomorphy accounts for differences in the realisation of the dative P head. VP-internal scrambling generates theme--recipient word orders. P-incorporation converts the base generated non-structural PP into a DP capable of receiving structural case. Cliticisation moves pronominal elements out of the way for locality calculations, both for contexual allomorphy and passivisation. Finally, I argue for a novel approach to the way T assigns nominative case and triggers subject raising based on a parameterisation of valid subjects and the domain of the subject search.
 
 \section{Conclusions}
 This chapter gave further specification about the main claim of this dissertation. Recipients are defined as the proto-role, which is prototypically introduced by the verb GIVE (or its counterpart in other languages). Focusing on a thematic role eases cross-linguistic comparison, since all languages have some means of conveying a concept and those means can then be directly compared. One of the assumptions of this dissertation, however, is that the linguistic association of a particular verbal argument with the recipient theta role is culturally/linguistically determined. Thus, while the object of GIVE and its counterparts are always going to be recipients, that is not always the case for other verbs. At certain points in the following chapters, I mention possible counterexamples to my generalisations and claim that there are good reasons to think that these cases involve theta roles other than recipients, in particular I focus on the common confusion between Recipient and Goal arguments.
 
-As mentioned in the previous two sections, most analyses of recipients claim that there is a diversity of constructions needed to analyse recipients, even across the closely related Germanic languages. This dissertation makes the strong (and more parsimonious claim) that only one analysis is needed for the syntax of all recipients. The complexity of surface forms comes from the interaction of the universal base order and \textbf{independently necessary} syntactic (scrambling, passivisation, and P-incorporation) and morphological (allomorphy) operations. The next two chapters shows how this analysis is able to capture the range of data from Germanic languages and explicates the syntactic and morphological operations alluded to in the previous sentence.
+As mentioned in the previous two sections, most analyses of recipients claim that there is a diversity of constructions needed to analyse recipients, even across the closely related Germanic languages. This dissertation makes the strong (and more parsimonious claim) that only one analysis is needed for the syntax of all recipients. The complexity of surface forms comes from the interaction of the universal base order and \textbf{independently necessary} syntactic (scrambling, passivisation, cliticisation and P-incorporation) and morphological (allomorphy) operations. The next two chapters shows how this analysis is able to capture the range of data from Germanic languages and explicates the syntactic and morphological operations alluded to in the previous sentence.
 
 %\bibliography{../diss}
