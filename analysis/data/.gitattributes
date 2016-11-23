@@ -5,3 +5,6 @@ give_pasrate_final.dat filter=lfs diff=lfs merge=lfs -text
 offer_act_coded_final.dat filter=lfs diff=lfs merge=lfs -text
 offer_pas_coded_final.dat filter=lfs diff=lfs merge=lfs -text
 offer_pasrate_finat.dat filter=lfs diff=lfs merge=lfs -text
+dit.dat filter=lfs diff=lfs merge=lfs -text
+Heavy.dat filter=lfs diff=lfs merge=lfs -text
+PosOrder.dat filter=lfs diff=lfs merge=lfs -text
