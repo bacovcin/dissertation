@@ -1,0 +1,6 @@
+[submodule "analysis/src-collection/corpus-tools"]
+	path = analysis/src-collection/corpus-tools
+	url = https://github.com/bacovcin/corpus-tools
+[submodule "analysis/src-collection/parsedenglish_database"]
+	path = analysis/src-collection/parsedenglish_database
+	url = https://github.com/bacovcin/parsedenglish_database
