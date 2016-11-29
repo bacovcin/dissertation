@@ -17,14 +17,12 @@ This creates the following structure:
   /src-analysis (scripts for analysing the data files)
 
 # Required Input
-In order to run this material you need access to downloaded copies of the following corpora. These downloads need to be placed (or symbolically linked) into the corpora sub-directory with the following structure:
+In order to run this material you need access to *lemmatised* copies of the following corpora. In order to produce lemmatised corpora, use the scripts found in [this GitHub repository](https://github.com/bacovcin/lemmatised-parsed-corpora-historical-english). These downloads need to be placed (or symbolically linked) into the corpora sub-directory with the following structure:
 
-PCEEC/corpus/psd-cs1/*.psd
-PCEEC/corpus/psd-cs2/*.psd
-PPCEME/psd/helsinki/*.psd
-PPCEME/psd/penn1/*.psd
-PPCEME/psd/penn2/*.psd
-PPCMBE/psd/*.psd
-PPCME2/psd/*.psd
-ycoe/psd/*.psd
+PCEEC/*.psd
+PCEEC/*.psd
+PPCEME/*.psd
+PPCMBE/*.psd
+PPCME2/*.psd
+ycoe/*.psd
 
