@@ -12,9 +12,9 @@ coding_query:
 
 16: {
 	DatHasCP: (CP* iDoms IP*) AND (IP* iDoms dat) AND (dat Doms [2]CP*) AND ([2]CP* iDoms !\**)
-	DatHasCP: (CP* iDoms IP*) AND (IP* iDoms PP*) AND (PP* iDomsMod PP|CONJ* P) AND (P iDoms ditp) AND (P HasSister NP*|QP*) AND (NP*|QP* Doms [2]CP*) AND ([2]CP* iDoms !\**)
+	DatHasCP: (CP* iDoms IP*) AND (IP* iDoms PP*) AND (PP* iDomsMod PP|CONJ* P) AND (P iDomsMod META|LEMMA ditp) AND (P HasSister NP*|QP*) AND (NP*|QP* Doms [2]CP*) AND ([2]CP* iDoms !\**)
 	DatNoCP: (CP* iDoms IP*) AND (IP* iDoms dat)
-	DatNoCP: (CP* iDoms IP*) AND (IP* iDoms PP*) AND (PP* iDomsMod PP|CONJ* P) AND (P iDoms ditp)
+	DatNoCP: (CP* iDoms IP*) AND (IP* iDoms PP*) AND (PP* iDomsMod PP|CONJ* P) AND (P iDomsMod META|LEMMA ditp)
 	NODat: ELSE
 }
 
