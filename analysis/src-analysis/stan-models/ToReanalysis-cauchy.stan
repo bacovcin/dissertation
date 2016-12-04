@@ -1,4 +1,7 @@
 data {
+  // prior SD
+  real priorSD;
+
   // priors for reanalysis point
   real ryMean;
   real ryProMean;
@@ -53,19 +56,17 @@ model {
   rypro ~ normal(ryProMean,rySD);
 
   // Intercept has larger SD
-  Int1 ~ cauchy(0,10);
-  
-  // Non-intercept have half the SD of intercepts
-  Slope1 ~ cauchy(0,2.5);
-  Slope2 ~ cauchy(0,2.5);
-  ProInt1 ~ cauchy(0,2.5);
-  ProSlope1 ~ cauchy(0,2.5);
-  RTInt1 ~ cauchy(0,2.5);
-  RTSlope1 ~ cauchy(0,2.5);
-  ProRTInt1 ~ cauchy(0,2.5);
-  ProRTSlope1 ~ cauchy(0,2.5);
-  Slope2 ~ cauchy(0,2.5);
-  ProSlope2 ~ cauchy(0,2.5);
+  Int1 ~ cauchy(0,priorSD);
+  Slope1 ~ cauchy(0,priorSD);
+  Slope2 ~ cauchy(0,priorSD);
+  ProInt1 ~ cauchy(0,priorSD);
+  ProSlope1 ~ cauchy(0,priorSD);
+  RTInt1 ~ cauchy(0,priorSD);
+  RTSlope1 ~ cauchy(0,priorSD);
+  ProRTInt1 ~ cauchy(0,priorSD);
+  ProRTSlope1 ~ cauchy(0,priorSD);
+  Slope2 ~ cauchy(0,priorSD);
+  ProSlope2 ~ cauchy(0,priorSD);
 
   // Calculate the log-odds
   for (j in 1:N1) {logit1[j] = Int1 + Slope1 * x1[j];}

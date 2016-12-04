@@ -1,4 +1,4 @@
-\documentclass[11pt]{upenndiss}
+\documentclass[11pt]{tex/book/upenndiss}
 
 %bibliography
 \usepackage{natbib}
@@ -46,9 +46,9 @@
 \department{Linguistics}
 
 % Abstract
-\abstractfile{Abstract} 
+\abstractfile{tex/book/Abstract} 
 % Acknowledgement
-\acknowledgementsfile{Acknowledgements}
+\acknowledgementsfile{tex/book/Acknowledgements}
 
 % Dedication
 %\dedication{
@@ -110,22 +110,22 @@ Fulfillment of the Requirements for the Degree of Doctor of Philosophy
 
 %%%%%%%%%
 %\chapter{Introduction}
-\input{chintro}
+\input{tex/book/chintro}
 %\chapter{Methodology}
 %\input{chmethod}
 %\chapter{Theoretical Background}
-\input{chbackground}
+\input{tex/book/chbackground}
 %\chapter{Active Ditransitives}\label{part:act}
-\input{chactive}
+\input{tex/book/chactive}
 %\part{Passive Ditransitives}\label{part:pas}
-\input{chpassive}
+\input{tex/book/chpassive}
 %historical case study
-\input{chhist}
+\input{tex/book/chhist}
 %\part{Conclusions and Further Implications}\label{part:form}
-\input{chconc}
+\input{tex/book/chconc}
 \appendix
-\input{appendixA}
-\input{appendixB}
-\bibliographystyle{mcbride}
-\bibliography{../diss}
+\input{tex/book/appendixA}
+\input{tex/book/appendixB}
+\bibliographystyle{tex/book/mcbride}
+\bibliography{tex/diss}
 \end{document}

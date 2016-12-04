@@ -6,8 +6,7 @@ library(rstanarm)
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
-# Prepare British data (for looking at impact of NP weight)
-load('../rdata-tmp/britdat.RData')
+load('analysis/rdata-tmp/britdat.RData')
 britdat$era2 <- cut(britdat$year,breaks=c(700,1100,1450,1750,2000),labels=c('Old English','Middle English','Early Modern English','Late Modern English'))
 
 britdat$isIOPro <- factor(britdat$IO)
@@ -85,7 +84,10 @@ rySD <- abs(ryGuess-ryProGuess)
 
 ryMeans <- mean(c(ryGuess, ryProGuess))
 
-stan.dat <- list(ryMean = ryMeans,
+parameters <- read.csv('analysis/parameters/parameters.csv')
+
+stan.dat <- list(priorSD = parameters$prior_sd,
+		 ryMean = ryMeans,
 		 ryProMean = ryMeans,
 		 rySD = rySD,
 		 N1 = length(x1),
@@ -123,10 +125,29 @@ stan.init <- list(ry=ryGuess,
 stan.init$ProRTInt1 <- coef(glm4a)[1]-(stan.init$Int1+stan.init$ProInt1+stan.init$RTInt1)
 stan.init$ProRTSlope1 <- coef(glm4a)[2]-(stan.init$Slope1+stan.init$ProSlope1+stan.init$RTSlope1)
 
-fit <- stan(file = 'ToReanalysis.stan', data=stan.dat,
-	    iter = 8000, chains = 4, warmup = 5000,
-	    init=list('a'=stan.init,'b'=stan.init,'c'=stan.init,'d'=stan.init),
-	    seed=12304,
-	    verbose = T)
+total_iters <- parameters$init_iters*parameters$big_iter_mult
 
-saveRDS(fit,file='../mcmc-runs/ToRaising-Stan-Fit.RDS')
+inits <- list()
+for (i in 1:parameters$nchains) {
+	inits[[letters[i]]] <- stan.init
+}
+
+if (parameters$prior_dist == 'cauchy') {
+	fit <- stan(file = 'analysis/src-analysis/stan-models/ToReanalysis-cauchy.stan', data=stan.dat,
+	    iter = total_iters,
+		chains = parameters$nchains, 
+		warmup = total_iters - parameters$init_iters,
+	    init=inits,
+	    seed=parameters$seed,
+	    verbose = T)
+} else if (parameters$prior_dist == 'normal') {
+	fit <- stan(file = 'analysis/src-analysis/stan-models/ToReanalysis-cauchy.stan', data=stan.dat,
+	    iter = total_iters,
+		chains = parameters$nchains, 
+		warmup = total_iters - parameters$init_iters,
+	    init=inits,
+	    seed=parameters$seed,
+	    verbose = T)
+}
+
+saveRDS(fit,file='analysis/mcmc-runs/ToRaising-Stan-Fit.RDS')

@@ -259,11 +259,11 @@ analysis/data/pseudopassives.dat : $(col-tmp)/Pseudopassives/Pseudo.cod.ooo $(co
 collection : analysis/data/pseudopassives.dat analysis/data/dit.dat analysis/data/Heavy.dat
 endif
 
-.PHONY : pdf
-pdf : tex/book/Bacovcin-Dissertation.pdf 
+.PHONY : dissertation
+dissertation : tex/book/Bacovcin-Dissertation.pdf 
 
 ## Create intermediate Rdata files by post-processing the raw data
-analysis/rdata-tmp/*.RData : analysis/src-analysis/Dit-Processing.R analysis/data/*.dat
+analysis/rdata-tmp/britdat.RData analysis/rdata-tmp/amdat.RData analysis/rdata-tmp/monotrans.RData: analysis/src-analysis/Dit-Processing.R analysis/data/offer_act_coded_final.dat analysis/data/give_old_coded_final.dat analysis/data/give_act_coded_final.dat analysis/data/offer_pas_coded_final.dat analysis/data/dit.dat
 	@echo --- Post-processing Raw Data ---
 	@mkdir -p $(@D)
 	./$<
@@ -271,8 +271,56 @@ analysis/rdata-tmp/*.RData : analysis/src-analysis/Dit-Processing.R analysis/dat
 ## Run To-Rates stan model
 : analysis/rdata-tmp/britdat.RData analysis/src-analysis/Dit-Processing.R analysis/src-analysis/stan-models/ToReanalysis.stan
 
+chactive : tex/book/chactive.tex output/tables/To-Prop.tex output/images/shifting.pdf output/tables/heavy-mcmc.tex output/tables/weight-mcmc.tex
+
+## Heavy Data for Active Chapter
+output/tables/To-Prop.tex : analysis/src-analysis/Dit-Table.R analysis/rdata-tmp/britdat.RData
+	@mkdir -p $(@D)
+	./$<
+
+output/images/shifting.pdf : analysis/src-analysis/Dit-Heavy-Graph.R analysis/rdata-tmp/britdat.RData analysis/data/Heavy.dat
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/heavy.RDS : analysis/src-analysis/Dit-Heavy-MCMC.R analysis/rdata-tmp/britdat.RData analysis/data/Heavy.dat
+	@mkdir -p $(@D)
+	./$<
+
+output/tables/heavy-mcmc.tex : analysis/src-analysis/Dit-Heavy-Table.R analysis/mcmc-runs/heavy.RDS
+	@mkdir -p $(@D)
+	./$<
+
+
+analysis/mcmc-runs/weight.RDS : analysis/src-analysis/Dit-Weight-MCMC.R analysis/rdata-tmp/britdat.RData
+	@mkdir -p $(@D)
+	./$<
+
+output/tables/weight-mcmc.tex : analysis/src-analysis/Dit-Weight-Table.R analysis/mcmc-runs/weight.RDS
+	@mkdir -p $(@D)
+	./$<
+
+chpassive : tex/book/chpassive.tex output/images/recpro-to-am.pdf
+
+output/images/recpro-to-am.pdf : analysis/src-analysis/Am-RecPro-Graph.R analysis/rdata-tmp/amdat.RData
+	@mkdir -p $(@D)
+	./$<
+
+chhist : tex/book/chhist.tex output/images/kroch-graph.png output/images/to-use.pdf output/tables/to-mcmc.tex
+
+output/images/to-use.pdf : analysis/src-analysis/Dit-RiseofTo-Graph.R analysis/mcmc-runs/ToRaising-Stan-Fit.RDS analysis/rdata-tmp/britdat.RData
+	@mkdir -p $(@D)
+	./$<
+
+output/tables/to-mcmc.tex : analysis/src-analysis/Dit-RiseofTo-Table.R analysis/mcmc-runs/ToRaising-Stan-Fit.RDS analysis/rdata-tmp/britdat.RData
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/ToRaising-Stan-Fit.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC.R analysis/rdata-tmp/britdat.RData
+	@mkdir -p $(@D)
+	./$<
+
 ## Compile the dissertation
-tex/book/Bacovcin-Dissertation.pdf : tex/book/*.tex output/images/*.pdf output/tables/*.tex
+tex/book/Bacovcin-Dissertation.pdf : tex/book/Bacovcin-Dissertation.tex tex/book/chintro.tex tex/book/chbackground.tex tex/book/Abstract.tex tex/book/Acknowledgements.tex tex/book/appendixA.tex tex/book/appendixB.tex tex/book/chconc.tex tex/book/mcbride.bst tex/book/upenndiss.cls tex/diss.bib chactive chpassive chhist
 	xelatex tex/book/Bacovcin-Dissertation
 	biblatex tex/book/Bacovcin-Dissertation
 	xelatex tex/book/Bacovcin-Dissertation

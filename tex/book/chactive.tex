@@ -347,47 +347,25 @@ Hallman argues that this control asymmetry can be captured by having the recipie
 
 		McFadden adopted an analysis of Icelandic (and Old English), in which the theme--recipient order with a dative recipient was base generated as a prepositional object construction with a null PP. He argued that the rise of dative shift in English was the introduction of \textit{to} as the realisation of this previously null preposition. The facts from German VP-fronting and Hallman's purpose clause facts discussed above argue against any such proposal that unifies prepositional objects and theme--recipient word orders.
 
-		Also, McFadden was only able to look at the data from Middle English (because parsed corpora of later stages of the language were not yet available). When we include data from Modern English \citep{Kroch.2004,Kroch.2010,Taylor.2006}, a different pattern emerges. When both the recipient and theme are full noun phrases, recipient \textit{to} rises in use in all contexts in the Middle English period, and then around 1400 \textit{to} begins to decline in use in the recipient--theme context. Table \ref{tab:britto} shows the rates of \textit{to}-marking in various syntactic contexts.
+		Also, McFadden was only able to look at the data from Middle English (because parsed corpora of later stages of the language were not yet available). When data from Modern English \citep{Kroch.2004,Kroch.2010,Taylor.2006} is included, a different pattern emerges.\footnote{See Chapter \ref{ch:diachron} for details about the data set and statistical methods.} When both the recipient and theme are full noun phrases, recipient \textit{to} rises in use in all contexts in the Middle English period, and then around 1400 \textit{to} begins to decline in use in the recipient--theme context. Table \ref{tab:britto} shows the rates of \textit{to}-marking in various syntactic contexts.
+
+\input{output/tables/To-Prop.tex}
+
+McFadden noticed the rise at the end of the Middle English period, i.e. that \textit{to}-marking was common even in the recipient--theme order. He suggested that this was caused by a larger number of heavy themes in later texts. However, when further statistics are run on the data, that hypothesis becomes untenable. Table \ref{tab:model-comp-weight} shows the results of a model that uses year of composition and properties of the object size to predict \textit{to}-marking after 1425 (when the rate of \textit{to}-marking begins to fall) in recipient--theme ditransitive sentences with full noun phrase recipients and full noun phrase themes (e.g., ``John gave Mary the books.'' vs ``John gave to Mary the books''). As is disscussed in greater detail in Chapter \ref{ch:diachron}, the model results are from a Bayesian logistic regression model and show the 95\% uncertainty interval (i.e., the true parameter value has a 95\% chance of being within the stated range). Crucially, here the value for Year of Composition is reliably negative, which means that even accounting for variation in the size of NPs, there is a decrease in the use of \textit{to} with recipients in recipient--theme contexts after 1425. If the high rates around 1425 were the product of Heavy NP Shift, it is unexpected that the rate should change independently of changes in NP weight.
 
 \begin{table}[ht!]
-\centering
-\begin{tabular}{rllll}
-  \hline
- & 1200--1300 & 1300--1400 & 1400--1500 & 1500--1600 \\ 
-  \hline
-I gave theme (to) recipient & 76\% (80) & 99\% (233) & 100\% (280) & 100\% (614) \\ 
-  (To) recipient, I gave theme & 55\% (20) & 92\% (12) & 97\% (34) & 100\% (50) \\ 
-  I gave (to) recipient theme & 21\% (56) & 53\% (95) & 45\% (261) & 36\% (430) \\ 
-  Theme, I gave (to) recipient & 66\% (38) & 100\% (13) & 83\% (12) & 68\% (22) \\ 
-   \hline
-\end{tabular}
-\caption{\% of Middle and Early Modern English \textit{give} and \textit{promise} type ditransitives with `to'-marking (number of tokens in parentheses)} 
-\label{tab:britto}
-\end{table}
-
-McFadden noticed the rise at the end of the Middle English period, i.e. that \textit{to}-marking was common even in the recipient--theme order. He suggested that this was caused by a larger number of heavy themes in later texts. However, when further statistics are run on the data, that hypothesis becomes untenable. Table \ref{tab:model-comp} explicitly compares models for predicting the rate of \textit{to}-marking after 1425 (when the rate of \textit{to}-marking begins to fall) in recipient--theme ditransitive sentences with full noun phrase recipients and full noun phrase themes (e.g., ``John gave Mary the books.'' vs ``John gave to Mary the books''). One model included the year of composition as well as variables related to the heaviness of the theme (number of words and whether the theme included an embedded clause). The next model used only the heaviness measures as predictors. The final model assumed a constant rate independent of heaviness and year of composition. According to the Log-likelihood Ratio Test (Pr(>Chi)), the AIC, and the BIC, the model including both year of composition and heaviness measures is the best fit, i.e., even there was a significant decrease in the use of \textit{to} from 1425 onwards, even when holding the heaviness of the theme constant.
-
-\begin{table}[ht!]
-	\begin{tabular}{cccccc}
-	\hline
-	Model	& Df & Deviance & Pr(>Chi) & AIC & BIC\\
-	\hline
-	Both	& 1  & 68       & <0.001   & 1405 & 1431\\
-	No Year & 3  & 48       & <0.001   & 1471 & 1492\\
-	Null    & -  &          &          & 1513 & 1519\\
-	\hline
-	\end{tabular}
-	\caption{Model comparison statistics for predicting \textit{to} use in recipient--theme contexts after 1425}
-	\label{tab:model-comp}
+	\input{output/tables/weight-mcmc.tex}
+	\input{output/tables/heavy-mcmc.tex}
+	\caption{Model summaries for testing Heavy NP explanation of \textit{to} in recipient--theme contexts}
 \end{table}
 
 \begin{figure}[t!]
-	\includegraphics[width=\linewidth]{../images/shifting}
+	\includegraphics[width=\linewidth]{output/images/shifting}
 	\caption{GAM smooth over weights of `to' use in recipient--theme ditransitives and heavy NP shift over adverbs and PPs with noun phrase objects}
 	\label{fig:shifting}
 \end{figure}
 
-Also, Figure \ref{fig:shifting} shows the rates of \textit{to} with recipient--theme ditransitives as well as the rates of heavy NP shift as estimated by the proportion of objects post-posed after adverbs and PPs with full noun phrase objects. Between 1450 and 1650, the rate of \textit{to} use is significantly different from the rate of heavy NP-shift ($\chi^2$ =  2365, df = 2, p < 0.001). The significant difference in rates between `to' in recipient--theme ditransitives and other post-posing operations in this time period indicates that these constructions are almost certainly \textbf{not} derived via post-posing the theme from a theme--recipient construction.
+Also, Figure \ref{fig:shifting} shows the rates of \textit{to} with recipient--theme ditransitives as well as the rates of heavy NP shift as estimated by the proportion of objects post-posed after adverbs and PPs with full noun phrase objects. Between 1450 and 1650, the rate of \textit{to} use is significantly different from the rate of heavy NP-shift (see Table \ref{tab:model-comp-heavy}). The significant difference in rates between `to' in recipient--theme ditransitives and other post-posing operations in this time period indicates that these constructions are almost certainly \textbf{not} derived via post-posing the theme from a theme--recipient construction.
 
 In other words, up until about 1400, \textit{to} was being used to mark recipients in all syntactic positions, which supports the notion that recipients are base generated as PPs independently of the surface word order. In chapter \ref{ch:diachron}, I show how quantitative tools from the study of diachronic syntax are able to tease apart the initial spread of \textit{to} from the subsequent development of the allomorphy grammar. The details of the statistics can be found there, but the conclusion is that there is evidence that \textit{to} initially spread through all environments at the same rate and that a subsequent change affected the recipient--theme orders (the development of the dative shift grammar).
 

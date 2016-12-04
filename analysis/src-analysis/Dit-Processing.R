@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # Load the data
-dit <- read.delim2('../data/dit.dat')  
+dit <- read.delim2('analysis/data/dit.dat')  
 dit$YoC<-as.numeric(as.character(dit$YoC))
 levels(dit$Clause)[2]<-'ABS' # Failed to correctly identify absolute clauses
 
@@ -128,7 +128,7 @@ levels(dit$NVerb)[levels(dit$NVerb)=='ALLOT']<-c('PROMISE')
 levels(dit$NVerb)[levels(dit$NVerb)=='APPOINT']<-c('PROMISE')
 levels(dit$NVerb)[levels(dit$NVerb)=='ASSIGN']<-c('PROMISE')
 levels(dit$NVerb)[levels(dit$NVerb)=='AYEVEN']<-c('GIVE')
-levels(dit$NVerb)[levels(dit$NVerb)=='BEHIEGHT']<-c('PROMISE')
+levels(dit$NVerb)[levels(dit$NVerb)=='BEHIGHT']<-c('PROMISE')
 levels(dit$NVerb)[levels(dit$NVerb)=='BEQUEATH']<-c('PROMISE')
 levels(dit$NVerb)[levels(dit$NVerb)=='BETAKE']<-c('GIVE')
 levels(dit$NVerb)[levels(dit$NVerb)=='CARRY']<-c('SEND')
@@ -194,7 +194,7 @@ monotrans<-data.frame(Verb=notweird$Verb[notweird$Pas=='ACT'],
 		      RecipientMono=(notweird$NAcc[notweird$Pas=='ACT']=='AccNull'),
 		      RecMonoThemeCP=(notweird$NAcc[notweird$Pas=='ACT']=='AccCP'))
 
-save(monotrans,file='../Rdata/monotrans.RData')
+save(monotrans,file='analysis/rdata-tmp/monotrans.RData')
 
 ## Deal with differences between active and passive clauses (and eliminate cases from atypical text and non-ditransitive clauses)
 # Active clauses first
@@ -298,9 +298,9 @@ gdit$eras<-as.numeric(as.character(cut(gdit$YoC,breaks=seq(750,1950,100),labels=
 gdit<-subset(gdit,NIO!='Recipient Null'&NDO!='Theme Null'&NDO!='Theme Empty'&NIO!='Recipient Empty')
 
 #Load American data
-data <- read.csv('../data/give_act_coded_final.dat',sep='\t',quote="")
-oadata <- read.csv('../data/offer_act_coded_final.dat',sep='\t',quote="")
-opdata <- read.csv('../data/offer_pas_coded_final.dat',sep='\t',quote="")
+data <- read.csv('analysis/data/give_act_coded_final.dat',sep='\t',quote="")
+oadata <- read.csv('analysis/data/offer_act_coded_final.dat',sep='\t',quote="")
+opdata <- read.csv('analysis/data/offer_pas_coded_final.dat',sep='\t',quote="")
 
 # Code for source
 oadata$Verb<-'offer'
@@ -319,7 +319,7 @@ rdata<-as.data.frame(rbind(data,oadata,opdata))
 rdata$Verb<-factor(rdata$Verb)
 
 # Load give passive and active it data
-data <- read.csv('../data/give_old_coded_final.txt',sep='\t', quote = "")
+data <- read.csv('analysis/data/give_old_coded_final.dat',sep='\t', quote = "")
 
 # Make variables match with previous material
 rdata$old_id <- NA
@@ -354,7 +354,7 @@ britdat <- data.frame(token=paste0(nbrit$TextName,',',nbrit$token.id),
 		      NVerb=nbrit$NVerb,
 		      Genre=nbrit$NGenre,
 		      Voice=nbrit$Pas)
-save(britdat,file='../rdata-tmp/britdat.RData')
+save(britdat,file='analysis/rdata-tmp/britdat.RData')
 
 amdat <- data.frame(genre=am.joint$genre,
 		    year=am.joint$year,
@@ -365,4 +365,4 @@ amdat <- data.frame(genre=am.joint$genre,
 		    Verb=am.joint$Verb,
 		    Voice=am.joint$Voice,
 		    cond=am.joint$cond)
-save(amdat,file='../rdata-tmp/amdat.RData')
+save(amdat,file='analysis/rdata-tmp/amdat.RData')
