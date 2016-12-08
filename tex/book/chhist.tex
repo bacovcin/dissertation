@@ -233,10 +233,10 @@ This section shows how data from the history of English supports the allomorphy 
 		\end{xlist}
 	\end{exe}
 
-	Under the analysis described in Chapter \ref{ch:passive}, the nature of this grammar change reflects the availability of P-incorporation. Without P-incorporation, the only possible form of recipient passivisation is to have oblique subjects. Given that P-incorporation also generates pseudopassives, the simple prediction would be that pseudopassives would enter the language at the same time as nominative recipient passives. \cite{Sigursson.2014} showed that pseudopassivisation comes into the language in the beginning of the Middle English period. Indeed, as seen in Figure \ref{fig:recpas-pseudo}, pseudopassivisation and nominative recipient passivisation increase in use from about 1200 until 1650, when they both level off.
+	Under the analysis described in Chapter \ref{ch:passive}, the nature of this grammar change reflects the availability of P-incorporation. Without P-incorporation, the only possible form of recipient passivisation is to have oblique subjects. Given that P-incorporation also generates pseudopassives, the simple prediction would be that pseudopassives would enter the language at the same time as nominative recipient passives. \cite{Sigursson.2014} showed that pseudopassivisation comes into the language in the beginning of the Middle English period. Indeed, as seen in Figure \ref{fig:recpas-pseudo}, pseudopassivisation and nominative recipient passivisation increase in use from about 1200 until 1650, when they both level off.\footnote{The pseudopassive data here is taken from a hand corrected dataset produced by Sigursson from the Parsed Corpora of Historical English. Using automatic queries, roughly the same number of pseudopassive examples are found, but the number of corresponding actives are much higher. This discrepancy probably derives from a failure to identify a number of criteria that would prevent a possible active from being a potential pseudopassiviser. Since Sigursson curated his dataset for the study of pseudopassivisation, it provides a more reliable dataset and therefore his values are reported here.}
 
 	\begin{figure}[ht!]
-		\includegraphics[width=\linewidth]{output/images/recpas-pseudo}
+		\includegraphics[width=\linewidth]{output/images/recpas-old-pseudo}
 		\caption{Logistic regression curves showing rates of nominative recipient passivisation and pseudopassivisation in English}
 		\label{fig:recpas-pseudo}
 	\end{figure}
@@ -255,17 +255,7 @@ This section shows how data from the history of English supports the allomorphy 
 
 	In this case, a Constant Rate Effect was found. Indeed, Table \ref{tab:pas-change-tab} shows that the optimal model selected by AIC (smaller is better) contained only year. This effect is even stronger than the Constant Rate Effect, since it suggests that there is no evidence of any difference between the two conditions. Since the data from recipient passives is tentative, the result is only suggestive, but it is most consistent with the notion that the rise of nominative recipient passivisation and pseudopassivisation are derived from the same underlying change, namely the adoption of P-incorporation.
 
-	\begin{table}[h!]
-		\begin{tabular}{cc}
-		Model Specification & AIC\\
-		\hline
-		Year and Condition Interaction & 1836.6 \\
-		Year and Condition No Interaction & 1834.1 \\
-		\textbf{Year Only} & \textbf{1833.1} \\
-		Null Model & 2017.5 \\
-		\end{tabular}
-		\caption{\label{tab:pas-change-tab}Model comparison results for comparing recipient passivisation and pseudopassivisation}
-	\end{table}
+\input{output/tables/recpas-old-mcmc.tex}
 
 	In summary, the rise of nominative recipient passives in English provides tentative additional evidence for the P-incorporation analysis. Nominative recipient passivisation and pseudopassivisation enter the language in the same way, providing another example of the Constant Rate Effect. Since P-incorporation is a standard analysis of pseudopassivisation, the Constant Rate Effect finding supports the notion that nominative recipient passivisation is also derived via P-incorporation when the operation entered the language during the Middle English period. One caveat about the Constant Rate Effect finding was that it was based on only a small amount of data from recipient passives. The next subsection discusses why there are so few recipient passive examples.
 

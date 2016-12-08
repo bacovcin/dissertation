@@ -7,7 +7,7 @@ brit.act <- subset(real, Voice=='ACT'&NVerb!='NONREC'&!is.na(year)&!is.na(Adj)&!
 
 brit.act<-subset(brit.act,(year<=1100&isTo==0) | year>1100)
 parameters <- as.data.frame(cbind(read.csv('analysis/parameters/parameters.csv'),
-								  read.csv('analysis/parameters/rise_parameters.csv'))
+								  read.csv('analysis/parameters/rise_parameters.csv')))
 
 brit.act <- subset(brit.act,year<=parameters$end_data)
 

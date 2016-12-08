@@ -16,7 +16,7 @@ levels(brit.act$NAdj)<-c('Not Adjacent','Adjacent')
 brit.act<-subset(brit.act,(year<=1100&isTo==0) | year>1100)
 
 parameters <- as.data.frame(cbind(read.csv('analysis/parameters/parameters.csv'),
-								  read.csv('analysis/parameters/rise_parameters.csv'))
+								  read.csv('analysis/parameters/rise_parameters.csv')))
 
 brit.act <- subset(brit.act,year<=parameters$end_data)
 

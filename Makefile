@@ -413,4 +413,4 @@ output/pdf/Bacovcin-Dissertation.pdf : tex/book/Bacovcin-Dissertation.tex tex/bo
 	xelatex tex/book/Bacovcin-Dissertation
 	mv Bacovcin-Dissertation.pdf output/pdf/Bacovcin-Dissertation.pdf
 	rm Bacovcin-Dissertation*
-	rm *.aux
+	rm tex/book/*.aux
