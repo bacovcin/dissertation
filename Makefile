@@ -4,7 +4,7 @@ ifeq ($(collection),true)
 	####
 	## Preperation for CorpusSearch queries
 	####
-	corpora = $(wildcard analysis/corpora/PCEEC/*.psd) $(wildcard analysis/corpora/PPCEME/*.psd) $(wildcard analysis/corpora/PPCMBE/*.psd) $(wildcard analysis/corpora/PPCME/*.psd) $(wildcard(analysis/corpora/YCOE/*.psd)
+	corpora = $(wildcard analysis/corpora/PCEEC/*.psd) $(wildcard analysis/corpora/PPCEME/*.psd) $(wildcard analysis/corpora/PPCMBE/*.psd) $(wildcard analysis/corpora/PPCME/*.psd) $(wildcard analysis/corpora/YCOE/*.psd)
 	CS_COMMAND=java -classpath analysis/src-collection/CS_2.003.04.jar csearch/CorpusSearch
 	col-tmp = analysis/collection-tmp
 	col-src = analysis/src-collection
@@ -115,7 +115,7 @@ $(dit-tmp)/NomAccOrd.cod : $(dit-tmp)/NomDatOrd.cod $(dit-src)/NomAccOrd.c
 	mv $(dit-src)/NomAccOrd.cod $(col-tmp)/Ditransitives/NomAccOrd.cod
 
 	## run the AccDatOrd.c query on NomAccOrd.cod
-$(dit-tmp)/AccDatOrd.cod : $(dit-tmp)/NomDatOrd.cod $(dit-src)/AccDatOrd.c
+$(dit-tmp)/AccDatOrd.cod : $(dit-tmp)/NomAccOrd.cod $(dit-src)/AccDatOrd.c
 	@echo ---Coding AccDatOrd---
 	$(CS_COMMAND) $(word 2,$^) $<
 	mv $(dit-src)/AccDatOrd.cod $(col-tmp)/Ditransitives/AccDatOrd.cod
@@ -255,12 +255,28 @@ analysis/data/pseudopassives.dat : $(col-tmp)/Pseudopassives/Pseudo.cod.ooo $(co
 	@mkdir -p $(@D)
 	python $(word 2,$^) $(word 3,$^) $< $@ "Verb" "Passive"
 
+$(col-tmp)/PassiveRate/pas.cod : $(col-tmp)/dummy.psd $(col-src)/PassiveRate/pas.c
+	@echo --- Extracting ditransitive verbs ---
+	@mkdir -p $(@D)
+	$(CS_COMMAND) $(word 2,$^) $<
+	mv $(col-src)/PassiveRate/pas.cod $(col-tmp)/PassiveRate/pas.cod
+
+$(col-tmp)/PassiveRate/pas.cod.ooo : $(col-tmp)/PassiveRate/pas.cod $(col-src)/corpus-tools/only-coding.q
+	@echo ---Extracting Heavy NP Shift codes---
+	$(CS_COMMAND) $(word 2,$^) $<
+
+	## Run add_metadata.py to create the final tab-separated file
+analysis/data/pas.dat : $(col-tmp)/PassiveRate/pas.cod.ooo $(col-src)/parsedenglish_database/add_metadata.py $(col-src)/parsedenglish_database/English_database.txt
+	@echo ---Adding metadata and creating final file---
+	@mkdir -p $(@D)
+	python $(word 2,$^) $(word 3,$^) $< $@ "Voice"
+
 .PHONY : collection
-collection : analysis/data/pseudopassives.dat analysis/data/dit.dat analysis/data/Heavy.dat
+collection : analysis/data/pseudopassives.dat analysis/data/dit.dat analysis/data/Heavy.dat analysis/data/pas.dat
 endif
 
 .PHONY : dissertation
-dissertation : tex/book/Bacovcin-Dissertation.pdf 
+dissertation : output/pdf/Bacovcin-Dissertation.pdf 
 
 ## Create intermediate Rdata files by post-processing the raw data
 analysis/rdata-tmp/britdat.RData analysis/rdata-tmp/amdat.RData analysis/rdata-tmp/monotrans.RData: analysis/src-analysis/Dit-Processing.R analysis/data/offer_act_coded_final.dat analysis/data/give_old_coded_final.dat analysis/data/give_act_coded_final.dat analysis/data/offer_pas_coded_final.dat analysis/data/dit.dat
@@ -282,7 +298,7 @@ output/images/shifting.pdf : analysis/src-analysis/Dit-Heavy-Graph.R analysis/rd
 	@mkdir -p $(@D)
 	./$<
 
-analysis/mcmc-runs/heavy.RDS : analysis/src-analysis/Dit-Heavy-MCMC.R analysis/rdata-tmp/britdat.RData analysis/data/Heavy.dat
+analysis/mcmc-runs/heavy.RDS : analysis/src-analysis/Dit-Heavy-MCMC.R analysis/rdata-tmp/britdat.RData analysis/data/Heavy.dat analysis/parameters/parameters.csv
 	@mkdir -p $(@D)
 	./$<
 
@@ -291,7 +307,7 @@ output/tables/heavy-mcmc.tex : analysis/src-analysis/Dit-Heavy-Table.R analysis/
 	./$<
 
 
-analysis/mcmc-runs/weight.RDS : analysis/src-analysis/Dit-Weight-MCMC.R analysis/rdata-tmp/britdat.RData
+analysis/mcmc-runs/weight.RDS : analysis/src-analysis/Dit-Weight-MCMC.R analysis/rdata-tmp/britdat.RData analysis/parameters/parameters.csv
 	@mkdir -p $(@D)
 	./$<
 
@@ -305,23 +321,96 @@ output/images/recpro-to-am.pdf : analysis/src-analysis/Am-RecPro-Graph.R analysi
 	@mkdir -p $(@D)
 	./$<
 
-chhist : tex/book/chhist.tex output/images/kroch-graph.png output/images/to-use.pdf output/tables/to-mcmc.tex
+chhist : tex/book/chhist.tex output/images/kroch-graph.png output/images/to-use.pdf output/tables/to-mcmc.tex output/images/brit-tp.pdf output/images/recpas-pseudo.pdf output/tables/recpas-mcmc.tex output/images/am-change-pass.pdf output/images/brit-pas.pdf output/images/recpas-old-pseudo.pdf output/tables/recpas-old-mcmc.tex
 
-output/images/to-use.pdf : analysis/src-analysis/Dit-RiseofTo-Graph.R analysis/mcmc-runs/ToRaising-Stan-Fit.RDS analysis/rdata-tmp/britdat.RData
+output/images/to-use.pdf : analysis/src-analysis/Dit-RiseofTo-Graph.R analysis/mcmc-runs/ToRaising-Stan-Fit1.RDS analysis/mcmc-runs/ToRaising-Stan-Fit2.RDS analysis/mcmc-runs/ToRaising-Stan-Fit3-resample.RDS analysis/mcmc-runs/ToRaising-Stan-Fit4-resample.RDS analysis/rdata-tmp/britdat.RData
 	@mkdir -p $(@D)
 	./$<
 
-output/tables/to-mcmc.tex : analysis/src-analysis/Dit-RiseofTo-Table.R analysis/mcmc-runs/ToRaising-Stan-Fit.RDS analysis/rdata-tmp/britdat.RData
+output/tables/to-mcmc.tex : analysis/src-analysis/Dit-RiseofTo-Table.R  analysis/mcmc-runs/ToRaising-Stan-Fit1.RDS analysis/mcmc-runs/ToRaising-Stan-Fit2.RDS analysis/mcmc-runs/ToRaising-Stan-Fit3-resample.RDS analysis/mcmc-runs/ToRaising-Stan-Fit4-resample.RDS analysis/rdata-tmp/britdat.RData
 	@mkdir -p $(@D)
 	./$<
 
-analysis/mcmc-runs/ToRaising-Stan-Fit.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC.R analysis/rdata-tmp/britdat.RData
+analysis/rdata-tmp/RoT-dat1.RData analysis/rdata-tmp/RoT-dat2.RData analysis/rdata-tmp/RoT-dat3.RData analysis/rdata-tmp/RoT-dat4.RData: analysis/src-analysis/Dit-RiseofTo-MCMC-prep.R analysis/rdata-tmp/britdat.RData analysis/parameters/parameters.csv analysis/parameters/rise_parameters.csv
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/ToRaising-Stan-Fit1.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC1.R analysis/rdata-tmp/RoT-dat1.RData analysis/parameters/parameters.csv
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/ToRaising-Stan-Fit2.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC2.R analysis/rdata-tmp/RoT-dat2.RData analysis/parameters/parameters.csv
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/ToRaising-Stan-Fit3.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC3.R analysis/rdata-tmp/RoT-dat3.RData analysis/parameters/parameters.csv
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/ToRaising-Stan-Fit3-resample.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC3-prep.R analysis/mcmc-runs/ToRaising-Stan-Fit3.RDS
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/ToRaising-Stan-Fit4.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC4.R analysis/rdata-tmp/RoT-dat4.RData analysis/parameters/parameters.csv
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/ToRaising-Stan-Fit4-resample.RDS : analysis/src-analysis/Dit-RiseofTo-MCMC4-prep.R analysis/mcmc-runs/ToRaising-Stan-Fit4.RDS
+	@mkdir -p $(@D)
+	./$<
+
+output/images/brit-tp.pdf : analysis/src-analysis/Brit-tp-graph.R analysis/rdata-tmp/britdat.RData
+	@mkdir -p $(@D)
+	./$<
+
+output/images/directtheme-am.pdf : analysis/src-analysis/Am-directtheme-graph.R analysis/rdata-tmp/amdat.RData
+	@mkdir -p $(@D)
+	./$<
+
+output/images/recpas-pseudo.pdf : analysis/src-analysis/Recpas-pseudo-Graph.R analysis/mcmc-runs/Pseudo-Stan-Fit.RDS analysis/rdata-tmp/britdat.RData analysis/data/pseudopassives.dat
+	@mkdir -p $(@D)
+	./$<
+
+output/tables/recpas-mcmc.tex : analysis/src-analysis/Recpas-pseudo-Table.R analysis/mcmc-runs/Pseudo-Stan-Fit.RDS
+	@mkdir -p $(@D)
+	./$<
+
+analysis/mcmc-runs/Pseudo-Stan-Fit.RDS : analysis/src-analysis/Recpas-pseudo-MCMC.R analysis/rdata-tmp/britdat.RData analysis/data/pseudopassives.dat analysis/parameters/parameters.csv
+	@mkdir -p $(@D)
+	./$<
+
+output/images/recpas-old-pseudo.pdf : analysis/src-analysis/Recpas-pseudo-old-Graph.R analysis/mcmc-runs/Pseudo-Stan-Fit.RDS analysis/rdata-tmp/britdat.RData analysis/data/pseudopassives.dat
+	@mkdir -p $(@D)
+	./$<
+
+output/tables/recpas-old-mcmc.tex : analysis/src-analysis/Recpas-pseudo-old-Table.R analysis/mcmc-runs/Pseudo-old-Stan-Fit.RDS
+	@mkdir -p $(@D)
+	./$<
+
+
+analysis/mcmc-runs/Pseudo-old-Stan-Fit.RDS : analysis/src-analysis/Recpas-pseudo-old-MCMC.R analysis/rdata-tmp/britdat.RData analysis/rdata-tmp/old-pseudopassives.RData analysis/parameters/parameters.csv
+	@mkdir -p $(@D)
+	./$<
+
+analysis/rdata-tmp/old-pseudopassives.RData : analysis/src-analysis/Recpas-pseudo-old-prep.R analysis/data/pseudopassives-old.csv
+	@mkdir -p $(@D)
+	./$<
+
+output/images/am-change-pass.pdf : analysis/src-analysis/Am-Change-Graph.R analysis/data/give_pasrate_final.dat analysis/data/offer_pasrate_final.dat
+	@mkdir -p $(@D)
+	./$<
+
+output/images/brit-pas.pdf : analysis/src-analysis/Britpas-Graph.R analysis/rdata-tmp/britdat.RData analysis/data/pas.dat
 	@mkdir -p $(@D)
 	./$<
 
 ## Compile the dissertation
-tex/book/Bacovcin-Dissertation.pdf : tex/book/Bacovcin-Dissertation.tex tex/book/chintro.tex tex/book/chbackground.tex tex/book/Abstract.tex tex/book/Acknowledgements.tex tex/book/appendixA.tex tex/book/appendixB.tex tex/book/chconc.tex tex/book/mcbride.bst tex/book/upenndiss.cls tex/diss.bib chactive chpassive chhist
+output/pdf/Bacovcin-Dissertation.pdf : tex/book/Bacovcin-Dissertation.tex tex/book/chintro.tex tex/book/chbackground.tex tex/book/Abstract.tex tex/book/Acknowledgements.tex tex/book/appendixA.tex tex/book/appendixB.tex tex/book/chconc.tex tex/book/mcbride.bst tex/book/upenndiss.cls tex/diss.bib chactive chpassive chhist
+	@mkdir -p $(@D)
 	xelatex tex/book/Bacovcin-Dissertation
-	biblatex tex/book/Bacovcin-Dissertation
+	bibtex Bacovcin-Dissertation
 	xelatex tex/book/Bacovcin-Dissertation
 	xelatex tex/book/Bacovcin-Dissertation
+	mv Bacovcin-Dissertation.pdf output/pdf/Bacovcin-Dissertation.pdf
+	rm Bacovcin-Dissertation*
+	rm *.aux

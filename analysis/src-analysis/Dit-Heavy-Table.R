@@ -15,6 +15,6 @@ rownames(outtab) <- c('Intercept',
 # Save the table to file for use in tex documents
 con <- file('output/tables/heavy-mcmc.tex','w')
 sink(con)
-print(xtable(outtab,label='tab:model-comp-heavy',caption='Uncertainty Interval for Parameter Estimates for comparing \\textit{to} use in recipient--theme contexts and rates of Heavy NP Shift'),floating.environment='subtable')
+print(xtable(outtab,label='tab:model-comp-heavy',caption='Uncertainty Interval for Parameter Estimates for comparing \\textit{to} use in recipient--theme contexts and rates of Heavy NP Shift'),floating.environment='subfloat')
 sink()
 close(con)

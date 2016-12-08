@@ -30,7 +30,7 @@ if (param$prior_dist == 'cauchy') {
 											 scale=param$prior_sd), 
                               prior_intercept = cauchy(location=0,
 													   scale=param$prior_sd),
-							  iter = param$init_iters,
+							  iter = param$iters,
                               chains = param$nchains, seed = param$seed)
 } else if (param$prior_dist == 'normal') {
 	heavymod <- stan_glm(isTo ~ zSizeDiff*ThemeHasCP+zYear,
@@ -40,7 +40,7 @@ if (param$prior_dist == 'cauchy') {
 											 scale=param$prior_sd), 
                               prior_intercept = normal(location=0,
 													   scale=param$prior_sd),
-							  iter = param$init_iters,
+							  iter = param$iters,
                               chains = param$nchains, seed = param$seed)
 }
 saveRDS(heavymod,file='analysis/mcmc-runs/weight.RDS')

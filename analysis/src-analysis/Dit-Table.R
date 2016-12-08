@@ -1,6 +1,5 @@
 #!/usr/bin/env Rscript
 library(xtable)
-library(rstanarm)
 options(mc.cores = parallel::detectCores())
 options(xtable.timestamp = "")
 
@@ -14,7 +13,8 @@ britdat$teras<-cut(britdat$year,breaks=c(1200,1300,1400,1500,1600),labels=c('120
 tdat <- subset(britdat,Voice=='ACT'&NVerb%in%c('PROMISE','GIVE'))
 
 # Create the row categories
-levels(tdat$Envir)<-c('I gave theme (to) recipient','I gave (to) recipient theme','(To) recipient, I gave theme','Theme, I gave (to) recipient','I gave theme (to) recipient','I gave (to) recipient theme',NA,NA,NA,NA)
+tdat$Envir<-factor(tdat$Envir)
+levels(tdat$Envir)<-c('I gave theme (to) recipient','I gave (to) recipient theme','(To) recipient, I gave theme','Theme, I gave (to) recipient','I gave theme (to) recipient','I gave (to) recipient theme')
 tdat$Envir<-factor(tdat$Envir,levels=c('I gave theme (to) recipient',
 									   '(To recipient), I gave theme',
 									   'I gave (to) recipient theme',

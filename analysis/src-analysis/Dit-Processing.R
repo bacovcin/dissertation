@@ -285,10 +285,16 @@ gdit$isDatAcc<-as.numeric(as.character(gdit$isDatAcc))
 
 # Relabel IO and DO variables
 gdit$NIO<-factor(gdit$IO)
-levels(gdit$NIO)<-c('Recipient Noun','Recipient Pronoun','Recipient Noun', 'Recipient Pronoun', 'Recipient Empty')
+levels(gdit$NIO)[levels(gdit$NIO)=='DatNoun']<-'Recipient Noun'
+levels(gdit$NIO)[levels(gdit$NIO)=='DatPronoun']<-'Recipient Pronoun'
+levels(gdit$NIO)[levels(gdit$NIO)=='NomNoun']<-'Recipient Noun'
+levels(gdit$NIO)[levels(gdit$NIO)=='NomPronoun']<-'Recipient Pronoun'
 
 gdit$NDO<-factor(gdit$DO)
-levels(gdit$NDO)<-c('Theme Noun','Theme Empty','Theme Pronoun','Theme Noun','Theme Pronoun','Theme Empty')
+levels(gdit$NDO)[levels(gdit$NDO)=='AccNoun']<-'Theme Noun'
+levels(gdit$NDO)[levels(gdit$NDO)=='AccPronoun']<-'Theme Pronoun'
+levels(gdit$NDO)[levels(gdit$NDO)=='NomNoun']<-'Theme Noun'
+levels(gdit$NDO)[levels(gdit$NDO)=='NomPronoun']<-'Theme Pronoun'
 
 # Create bins for graphing
 gdit$YoC<-as.numeric(as.character(gdit$YoC))
@@ -336,6 +342,10 @@ levels(am.joint$cond)<-c('NA','gave it him','gave him it','gave it to him','gave
 nbrit <- subset(gdit, !is.na(Envir))
 nbrit$Envir <- factor(nbrit$Envir)
 
+brit.act <- subset(nbrit,Pas=='ACT'&((YoC <= 1100 & isTo==0) | YoC >= 1100))
+brit.pas <- subset(nbrit,Pas=='PAS')
+
+nbrit <- as.data.frame(rbind(brit.act,brit.pas))
 
 britdat <- data.frame(token=paste0(nbrit$TextName,',',nbrit$token.id),
 		      year=nbrit$YoC,
