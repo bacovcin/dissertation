@@ -10,7 +10,7 @@ load("analysis/rdata-tmp/britdat.RData")
 britdat$teras<-cut(britdat$year,breaks=c(1200,1300,1400,1500,1600),labels=c('1200--1300','1300--1400','1400--1500','1500-1600'))
 
 # Get the relevant data for the table 
-tdat <- subset(britdat,Voice=='ACT'&NVerb%in%c('PROMISE','GIVE'))
+tdat <- subset(britdat,Voice=='ACT'&NVerb%in%c('PROMISE','GIVE')&DO!='Theme Pronoun'&IO!='Recipient Pronoun')
 
 # Create the row categories
 tdat$Envir<-factor(tdat$Envir)
@@ -19,6 +19,9 @@ tdat$Envir<-factor(tdat$Envir,levels=c('I gave theme (to) recipient',
 									   '(To recipient), I gave theme',
 									   'I gave (to) recipient theme',
 									   'Theme, I gave (to) recipient'))
+
+tdat <- subset(tdat, Envir %in% c('I gave theme (to) recipient','I gave (to) recipient theme'))
+tdat$Envir <- factor(tdat$Envir)
 
 # Generate the table
 tabnums<-xtabs(tdat$isTo~tdat$Envir+tdat$teras)
@@ -31,6 +34,6 @@ outtab[,4] <- paste0(outtab[,4],'% (',tabnums[,4],')')
 # Save the table to file for use in tex documents
 con <- file('output/tables/To-Prop.tex','w')
 sink(con)
-xtable(outtab,label='tab:britto',caption='\\% of Middle and Early Modern English \\textit{give} and \\textit{promise} type ditransitives with \\textit{to}-marking (number of tokens in parentheses)',file='../../output/tables/To-Prop.tex')
+xtable(outtab,label='tab:britto',caption='\\% of Middle and Early Modern English \\textit{give} and \\textit{promise} type ditransitives with \\textit{to}-marking when both recipient and theme are full noun phrases (number of tokens in parentheses)',file='../../output/tables/To-Prop.tex')
 sink()
 close(con)

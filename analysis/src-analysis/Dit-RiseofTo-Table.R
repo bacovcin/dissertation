@@ -52,22 +52,21 @@ quantile(slope2.diff,c(0.05,0.5,0.95)),
 quantile(slope1a.diff,c(0.05,0.5,0.95)),
 quantile(slope1b.diff,c(0.05,0.5,0.95)),
 quantile(slope1c.diff,c(0.05,0.5,0.95)),
-quantile(slope1d.diff,c(0.05,0.5,0.95))
-						 ))
+quantile(slope1d.diff,c(0.05,0.5,0.95))))
 
 rownames(outtab)<-c(
-					'Reanalysis Year (Nouns)',
-					'Reanalysis Difference',
-					'CH2: Slope Difference',
-					'TR-Noun Pronoun Slope Difference',
-					'RT-TR Noun Slope Diffence',
-					'RT Pronoun - TR Noun Slope Diff.',
-					'RT-TR Pronoun Slope Difference'
+					'Reanalysis (Nouns)',
+					'Reanalysis Diff.',
+					'CH2 Interaction',
+					'CH1 Interaction (a)',
+					'CH1 Interaction (b)',
+					'CH1 Interaction (c)',
+					'CH1 Interaction (d)'
 					)
-colnames(outtab) <- c('Lower Bound (5%)','Point Estimate','Upper Bound (95%)')
+colnames(outtab) <- c('5%','Point Estimate','95%')
 
 con <- file('output/tables/to-mcmc.tex','w')
 sink(con)
-print(xtable(outtab,label='tab:to-mcmc',caption='Parameter results from Bayesian Inference, CH2=Fall of \\textit{to}, TR = Theme--Recipient, RT=Recipient--Theme,))
+print(xtable(outtab,label='tab:to-mcmc',caption='Parameter results from Bayesian Inference, CH2 Interaction shows the interaction between year and recipient type for the loss of \\textit{to}; CH1 Interaction (a) shows the interaction with year between "I gave the book (to) John" and "I gave the book (to) him"; CH1 Interaction (b) shows the interaction with year between "I gave the book (to) John" and "I gave (to) John the book"; CH1 Interaction (c) shows the interaction with year between "I gave the book (to) John" and "I gave (to) him the book"; CH1 Interaction (d) shows the interaction with year between "I gave the book (to) him" and "I gave (to) him the book"'))
 sink()
 close(con)

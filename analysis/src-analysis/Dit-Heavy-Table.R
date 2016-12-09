@@ -6,7 +6,7 @@ heavymcmc<-readRDS('analysis/mcmc-runs/heavy.RDS')
 # Generate table
 outtab <- posterior_interval(heavymcmc, prob = 0.90)
 outtab <- as.table(cbind(outtab[,1],heavymcmc$coef,outtab[,2]))
-colnames(outtab) <- c('Lower Bound (5%)','Point Estimate','Upper Bound (95%)')
+colnames(outtab) <- c('5%','Point Estimate','95%')
 rownames(outtab) <- c('Intercept',
 					   'Year of Composition (z-squared)',
 					   'Difference between \textit{to} and Heavy NP Shift',

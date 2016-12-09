@@ -321,7 +321,7 @@ output/images/recpro-to-am.pdf : analysis/src-analysis/Am-RecPro-Graph.R analysi
 	@mkdir -p $(@D)
 	./$<
 
-chhist : tex/book/chhist.tex output/images/kroch-graph.png output/images/to-use.pdf output/tables/to-mcmc.tex output/images/brit-tp.pdf output/images/recpas-pseudo.pdf output/tables/recpas-mcmc.tex output/images/am-change-pass.pdf output/images/brit-pas.pdf output/images/recpas-old-pseudo.pdf output/tables/recpas-old-mcmc.tex
+chhist : tex/book/chhist.tex output/images/kroch-graph.png output/images/to-use.pdf output/tables/to-mcmc.tex output/images/brit-tp.pdf output/images/recpas-pseudo.pdf output/tables/recpas-mcmc.tex output/images/am-change-pass.pdf output/images/brit-pas.pdf output/images/recpas-old-pseudo.pdf output/tables/recpas-old-mcmc.tex output/tables/pas-mcmc.tex
 
 output/images/to-use.pdf : analysis/src-analysis/Dit-RiseofTo-Graph.R analysis/mcmc-runs/ToRaising-Stan-Fit1.RDS analysis/mcmc-runs/ToRaising-Stan-Fit2.RDS analysis/mcmc-runs/ToRaising-Stan-Fit3-resample.RDS analysis/mcmc-runs/ToRaising-Stan-Fit4-resample.RDS analysis/rdata-tmp/britdat.RData
 	@mkdir -p $(@D)
@@ -404,6 +404,13 @@ output/images/brit-pas.pdf : analysis/src-analysis/Britpas-Graph.R analysis/rdat
 	@mkdir -p $(@D)
 	./$<
 
+analysis/mcmc-runs/pas.RDS : analysis/src-analysis/Dit-Passive-MCMC.R analysis/rdata-tmp/britdat.RData analysis/data/pas.dat
+	@mkdir -p $(@D)
+	./$<
+
+output/tables/pas-mcmc.tex : analysis/src-analysis/Dit-Passive-Table.R analysis/mcmc-runs/pas.RDS
+	@mkdir -p $(@D)
+	./$<
 ## Compile the dissertation
 output/pdf/Bacovcin-Dissertation.pdf : tex/book/Bacovcin-Dissertation.tex tex/book/chintro.tex tex/book/chbackground.tex tex/book/Abstract.tex tex/book/Acknowledgements.tex tex/book/appendixA.tex tex/book/appendixB.tex tex/book/chconc.tex tex/book/mcbride.bst tex/book/upenndiss.cls tex/diss.bib chactive chpassive chhist
 	@mkdir -p $(@D)
