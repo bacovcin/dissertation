@@ -20,12 +20,6 @@ levels(brit.act$NAdj)<-c('Not Adjacent','Adjacent')
 pdf(file='output/images/brit-tp.pdf',paper='USr')
 gdat<-subset(brit.act,DO=='Theme Pronoun'&isDatAcc==0)
 
-mean(gdat$isTo[gdat$IO=='Recipient Pronoun'&gdat$year>1425&gdat$year<1700])
-# [1] 0.4247788
-
-mean(gdat$isTo[gdat$IO!='Recipient Pronoun'&gdat$year>1425&gdat$year<1700])
-# [1] 0.9272727
-
 gpoints<-group_by(gdat,era,IO)%>%summarise(isTo=mean(isTo),n=n())
 ggplot(gpoints,aes(era,isTo,linetype=factor(IO)))+geom_point(aes(size=log(n),pch=IO))+stat_smooth(method='loess',data=gdat,aes(x=year))+
 	scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+

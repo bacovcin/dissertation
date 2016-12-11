@@ -109,12 +109,13 @@ levels(pred$Order)<-c('Theme-recipient','Recipient-theme')
 levels(pred$IO)<-c('Recipient Noun','Recipient Pronoun')
 
 bpoints<-group_by(brit.act,era,IO,Order)%>%summarise(isTo=mean(isTo),n=n())
-pdf(file='output/images/to-use.pdf')
+pdf(file='output/images/to-use.pdf',width=8,height=6)
 ggplot(bpoints,aes(era,isTo,colour=factor(Order)))+geom_point(aes(size=n))+geom_line(data=pred,aes(x=year))+
   scale_x_continuous(name='Year of Composition',breaks=seq(900,1900,100),labels=seq(900,1900,100))+
   scale_y_continuous(name="% `To'-marking",breaks=c(0,.2,.4,.5,.6,.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+
   scale_size_continuous(name="Number of Tokens/50yrs")+
   scale_colour_discrete(name="Word Order")+
   scale_linetype_discrete(name="Recipient Status")+
-  scale_shape_discrete(name="Recipient Status")+facet_wrap(~IO)
+  scale_shape_discrete(name="Recipient Status")+facet_wrap(~IO)+
+  theme(axis.text.x = element_text(angle = 45))
 dev.off()

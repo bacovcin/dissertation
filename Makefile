@@ -321,7 +321,11 @@ output/images/recpro-to-am.pdf : analysis/src-analysis/Am-RecPro-Graph.R analysi
 	@mkdir -p $(@D)
 	./$<
 
-chhist : tex/book/chhist.tex output/images/kroch-graph.png output/images/to-use.pdf output/tables/to-mcmc.tex output/images/brit-tp.pdf output/images/recpas-pseudo.pdf output/tables/recpas-mcmc.tex output/images/am-change-pass.pdf output/images/brit-pas.pdf output/images/recpas-old-pseudo.pdf output/tables/recpas-old-mcmc.tex output/tables/pas-mcmc.tex
+chhist : tex/book/chhist.tex output/images/kroch-graph.png output/images/to-use.pdf output/tables/to-mcmc.tex output/images/brit-tp.pdf output/images/recpas-pseudo.pdf output/tables/recpas-mcmc.tex output/images/am-change-pass.pdf output/images/brit-pas.pdf output/images/recpas-old-pseudo.pdf output/tables/recpas-old-mcmc.tex output/tables/pas-mcmc.tex output/tables/fnpr-dtp.tex output/tables/pr-dtp.tex output/images/directtheme-am.pdf
+
+output/tables/fnpr-dtp.tex output/tables/pr-dtp.tex : analysis/src-analysis/Brit-tp-tables.R analysis/rdata-tmp/britdat.RData
+	@mkdir -p $(@D)
+	./$<
 
 output/images/to-use.pdf : analysis/src-analysis/Dit-RiseofTo-Graph.R analysis/mcmc-runs/ToRaising-Stan-Fit1.RDS analysis/mcmc-runs/ToRaising-Stan-Fit2.RDS analysis/mcmc-runs/ToRaising-Stan-Fit3-resample.RDS analysis/mcmc-runs/ToRaising-Stan-Fit4-resample.RDS analysis/rdata-tmp/britdat.RData
 	@mkdir -p $(@D)
