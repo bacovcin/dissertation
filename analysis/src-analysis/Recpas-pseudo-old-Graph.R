@@ -20,7 +20,7 @@ bdat <- data.frame(Year=recpas$year,Val=recpas$isNom,Type='Recipient Passive')
 
 joint.data <- as.data.frame(rbind(pdat,bdat))
 
-fit <- readRDS('analysis/mcmc-runs/Pseudo-Stan-Fit.RDS')
+fit <- readRDS('analysis/mcmc-runs/Pseudo-old-Stan-Fit.RDS')
 
 a <- as.data.frame(extract(fit))
 
@@ -54,6 +54,7 @@ joint.points <- group_by(joint.data,era,Type)%>%summarise(Val=mean(Val),
 pdf(file='output/images/recpas-old-pseudo.pdf')
 ggplot(joint.points,aes(era,Val,colour=Type))+geom_point(aes(size=n))+
 	geom_line(data=pred,aes(x=year,y=y))+
+	stat_smooth(data=joint.data,aes(x=Year,linetype='LOESS Smooth'),method='loess')+
 	scale_x_continuous(name='Year of Composition',
 					   breaks=seq(900,1900,100),
 					   labels=seq(900,1900,100))+

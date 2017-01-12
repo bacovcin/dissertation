@@ -61,8 +61,9 @@ joint.points <- group_by(joint.data,era,Type)%>%summarise(Val=mean(Val),
 														  n=n())
 
 pdf(file='output/images/recpas-pseudo.pdf')
-ggplot(joint.points,aes(era,Val,colour=Type))+geom_point(aes(size=n))+
+ggplot(joint.points,aes(era,Val,colour=Type,linetype='Logistic Fit'))+geom_point(aes(size=n))+
 	geom_line(data=pred,aes(x=year,y=y))+
+	stat_smooth(data=joint.data,aes(x=Year,linetype='LOESS Smooth'),method='loess')+
 	scale_x_continuous(name='Year of Composition',
 					   breaks=seq(900,1900,100),
 					   labels=seq(900,1900,100))+

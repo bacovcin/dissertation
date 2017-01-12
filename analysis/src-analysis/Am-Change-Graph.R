@@ -53,9 +53,15 @@ newam3<-group_by(newam2,year,Verb)%>%summarise(DatAccToTotal=sum(DatAccToCount),
 					       AccDatToTotal=sum(AccDatToCount),AccDatToAct=AccDatToCount[Voice=='Active'],AccDatToRate=1.0-(AccDatToAct/AccDatToTotal),
 					       AccDatNoToTotal=sum(AccDatNoToCount),AccDatNoToAct=AccDatNoToCount[Voice=='Active'],AccDatNoToRate=1.0-(AccDatNoToAct/AccDatNoToTotal))
 
-
+ampas <- read.csv('analysis/data/coha_pascounts.txt',sep='\t')
+ampas$pasact <- ampas$passives+ampas$actives
+newam4 <- merge(newam3,ampas)
 
 pdf(file='output/images/am-change-pass.pdf')
-ggplot(newam3,aes(year,AccDatToRate,colour='Theme-Recipient',linetype=Verb,weight=AccDatToTotal))+stat_smooth()+stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme'))+coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))+scale_colour_discrete(name="Word Order")
+ggplot(newam4,aes(year,AccDatToRate,colour='Theme-Recipient',linetype=Verb,weight=AccDatToTotal))+
+  stat_smooth()+
+  stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme'))+
+  stat_smooth(aes(y=pasrate,weight=pasact,colour='General Passivisation'))+
+  coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))+scale_colour_discrete(name="Type")
 dev.off()
 

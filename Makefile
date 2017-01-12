@@ -400,7 +400,7 @@ analysis/rdata-tmp/old-pseudopassives.RData : analysis/src-analysis/Recpas-pseud
 	@mkdir -p $(@D)
 	./$<
 
-output/images/am-change-pass.pdf : analysis/src-analysis/Am-Change-Graph.R analysis/data/give_pasrate_final.dat analysis/data/offer_pasrate_final.dat
+output/images/am-change-pass.pdf : analysis/src-analysis/Am-Change-Graph.R analysis/data/give_pasrate_final.dat analysis/data/offer_pasrate_final.dat analysis/data/coha_pascounts.txt
 	@mkdir -p $(@D)
 	./$<
 
