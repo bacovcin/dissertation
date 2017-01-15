@@ -57,11 +57,36 @@ ampas <- read.csv('analysis/data/coha_pascounts.txt',sep='\t')
 ampas$pasact <- ampas$passives+ampas$actives
 newam4 <- merge(newam3,ampas)
 
+recpas <- data.frame(year = newam4$year,
+					 val=newam4$DatAccNoToRate,
+					 type='Recipient Passivisation',
+					 num=newam4$DatAccNoToTotal)
+
+amdat$isDatAcc<-factor(amdat$Order)
+levels(amdat$isDatAcc)<-c(0,1)
+amdat$isDatAcc<-as.numeric(as.character(amdat$isDatAcc))
+
+levels(amdat$IO)<-c('Recipient Noun','Recipient Pronoun')
+levels(amdat$DO)<-c('Theme Noun','Theme Pronoun')
+
+# Generate graph of American English direct theme passive rates
+am.pas<-subset(amdat,Voice=='Passive'&!is.na(Order)&!is.na(DO))
+am.the<-subset(am.pas,isDatAcc==0&IO=='Recipient Noun')
+
+am.the$isTo<-factor(am.the$To)
+levels(am.the$isTo)<-c(1,0)
+am.the$isTo<-as.numeric(as.character(am.the$isTo))
+
+am.the.g <- group_by(am.the,year)%>%summarise(val=mean(isTo),
+											  type='Direct Theme Passivisation',
+											  num=sum(!is.na(isTo)))
+
+gdat <- as.data.frame(rbind(recpas,am.the.g))
+
 pdf(file='output/images/am-change-pass.pdf')
-ggplot(newam4,aes(year,AccDatToRate,colour='Theme-Recipient',linetype=Verb,weight=AccDatToTotal))+
-  stat_smooth()+
-  stat_smooth(aes(y=DatAccNoToRate,weight=DatAccNoToTotal,colour='Recipient-Theme'))+
-  stat_smooth(aes(y=pasrate,weight=pasact,colour='General Passivisation'))+
-  coord_cartesian(ylim=c(0,.25))+scale_y_continuous(name="",breaks=c(0,0.05,0.1,0.15,0.2,0.25),labels=c('0%','5%','10%','15%','20%','25%'))+scale_colour_discrete(name="Type")
+ggplot(gdat,aes(year,val,colour=type,linetype=type,weight=num))+
+  stat_smooth(method='loess')+
+  geom_point(aes(year,val,size=num))+
+  coord_cartesian(ylim=c(0,1))+scale_y_continuous(name="",breaks=c(0,0.2,0.4,0.5,0.6,0.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+scale_colour_discrete(name="Type")+scale_linetype_discrete(name='Type')+scale_size_continuous('Num of Tokens/year')
 dev.off()
 

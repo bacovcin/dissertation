@@ -16,6 +16,6 @@ rownames(outtab) <- c('Intercept',
 # Save the table to file for use in tex documents
 con <- file('output/tables/weight-mcmc.tex','w')
 sink(con)
-print(xtable(outtab,label='tab:model-comp-weight',caption='Uncertainty Interval for Parameter Estimates for predicting \\textit{to} use in recipient--theme contexts after 1425'),floating.environment='subfloat')
+print(xtable(outtab),floating=FALSE)
 sink()
 close(con)
