@@ -426,3 +426,15 @@ output/pdf/Bacovcin-Dissertation.pdf : tex/book/Bacovcin-Dissertation.tex tex/bo
 	mv Bacovcin-Dissertation.pdf output/pdf/Bacovcin-Dissertation.pdf
 	rm Bacovcin-Dissertation*
 	rm tex/book/*.aux
+
+.PHONY : defence
+defence : output/pdf/OralDefence-21-April-2017.pdf 
+## Compile the oral defense
+output/pdf/OralDefence-21-April-2017.pdf : tex/presentations/OralDefence-21-April-2017.tex tex/diss.bib chactive chpassive chhist
+	@mkdir -p $(@D)
+	xelatex tex/presentations/OralDefence-21-April-2017
+	bibtex OralDefence-21-April-2017
+	xelatex tex/presentations/OralDefence-21-April-2017
+	xelatex tex/presentations/OralDefence-21-April-2017
+	mv OralDefence-21-April-2017.pdf output/pdf/OralDefence-21-April-2017.pdf
+	rm OralDefence*

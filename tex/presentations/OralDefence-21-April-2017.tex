@@ -1,0 +1,606 @@
+\documentclass{beamer}
+\usetheme{Frankfurt}
+
+\usepackage[authoryear]{natbib}
+\usepackage{gb4e}
+\usepackage{dcolumn}
+\usepackage{hyperref}
+\usepackage[all]{xypic}
+\noautomath
+
+\mode<handout>
+{
+  \usepackage{pgf}
+  \usepackage{pgfpages}
+
+\pgfpagesdeclarelayout{4 on 1 boxed}
+{
+  \edef\pgfpageoptionheight{\the\paperheight} 
+  \edef\pgfpageoptionwidth{\the\paperwidth}
+  \edef\pgfpageoptionborder{0pt}
+}
+{
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=4,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth%
+  }
+  \pgfpageslogicalpageoptions{1}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.25\pgfphysicalwidth}{.75\pgfphysicalheight}%
+  }%
+  \pgfpageslogicalpageoptions{2}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.75\pgfphysicalwidth}{.75\pgfphysicalheight}%
+  }%
+  \pgfpageslogicalpageoptions{3}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.25\pgfphysicalwidth}{.25\pgfphysicalheight}%
+  }%
+  \pgfpageslogicalpageoptions{4}
+  {%
+    border code=\pgfsetlinewidth{2pt}\pgfstroke,%
+    border shrink=\pgfpageoptionborder,%
+    resized width=.5\pgfphysicalwidth,%
+    resized height=.5\pgfphysicalheight,%
+    center=\pgfpoint{.75\pgfphysicalwidth}{.25\pgfphysicalheight}%
+  }%
+}
+
+
+  \pgfpagesuselayout{4 on 1 boxed}[letterpaper, border shrink=5mm, landscape]
+  \nofiles
+  }
+
+
+\title[]{\textbf{Parameterising Germanic ditransitive variation: A historical-comparative study}}
+\author{Hezekiah Akiva Bacovcin}
+\institute{University of Pennsylvania - Department of Linguistics}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Outline}
+\begin{frame}
+\frametitle{Outline}
+\begin{enumerate}
+\item Introduction
+\item Theoretical Analysis
+\item Swedish Data
+\item Historical English Data
+\item Conclusions and Questions
+\end{enumerate}
+\end{frame}
+
+\section{Introduction}
+\begin{frame}
+		\frametitle{Contributions}
+		\begin{enumerate}
+			\item New analysis of recipient ditransitives: \textbf{Recipients are universally introduced as dative PPs in the specifier of an applicative phrase}
+			\item Complete syntax framework: Complete set of additional syntactic machinery to explain Germanic recipient ditransitive data
+			\item Typological summary: Collection of all of the relevant data on Germanic recipient ditransitives in one place
+			\item New historical data: Collection of new data on the history of English from parsed corpora
+			\item New historical methods: Applications of new techniques to use historical data in theoretical syntax investigations
+		\end{enumerate}
+\end{frame}
+
+\section{Theoretical Analysis}
+\begin{frame}
+	\frametitle{Theory Outline}
+	\begin{itemize}
+		\item What is a recipient?
+		\item What is a dative PP?
+		\item Where is the specifier of an applicative phrase?
+		\item What syntactic mechanisms do we need to posit for empirical coverage?
+		\item Why should we prefer this analysis \textbf{on conceptual grounds}?
+	\end{itemize}
+\end{frame}
+
+\subsection{Thematic Roles}
+\begin{frame}
+	\frametitle{Theta Role Theory}
+	\begin{itemize}
+		\item Recipient is one of a number of theta roles
+		\item Building on \cite{Dowty.1991}:
+			\begin{itemize}
+				\item Theta roles are morphosyntactic categories (like singular/plural)
+				\item Each role is associated with prototypical features
+				\item Prototypes \textbf{guide} assignment of theta roles to agruments
+				\item Ambiguous cases are determined by local cultural/linguistic norms
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Recipients}
+	\begin{itemize}
+		\item Recipients are the endpoint of a transfer of possession event (that may or may not involve movement)
+		\item GIVE is the prototypical recipient action (an AGENT transfers a THEME to a RECIPIENT)
+	\end{itemize}
+\end{frame}
+
+\subsection{Case Theory}
+\begin{frame}
+	\frametitle{Structural vs. Non-structural case}
+	\begin{itemize}
+		\item Long history of a distinction between structural and non-structural case (\citet{Woolford.2006} gives a summary of arguments)
+		\item Structural cases alternate, while non-structural cases do not
+		\item Dative case (typical for recipients) has usually been regarded as non-structural
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prepositional theory of non-structural case}
+	\begin{itemize}
+		\item Non-structural case can be distinguished by the addition of an extra syntactic layer \citep{Bittner.1996,Bayer.2001}
+		\item Recent proposals associate this extra layer with prepositional phrases \citep{Asbury.2005,Asbury.2007,Rezac.2008,Caha.2009}
+		\item As a non-structural case, the case marking on recipients (often called dative) is actually just the morphological reflex of a preposition
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Prepositions, thematic roles, and case}
+	\begin{itemize}
+		\item The preposition that introduces an argument (or adjunct) is \textbf{syntactically} associated with the thematic role of the argument
+		\item All recipients are introduced with a recipient P
+		\item Dative case is the syncretic realization of multiple different P heads (or DP concord with a governing P head)
+		\item Example: [P$_{recipient}$ [DP Recipient]]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Structural cases}
+	\begin{itemize}
+		\item Nominative and accusative (structural cases) are features of ungoverned DPs (i.e., not embedded in PPs)
+		\item DPs under prepositions do \textbf{not} receive syntactic structural case (although the reflexes of non-strucutral case may be morphologically syncretic with structural cases)
+	\end{itemize}
+\end{frame}
+
+\subsection{Argument Structure}
+\begin{frame}
+	\frametitle{Applicative Analysis}
+			\xymatrix@=2pt{
+			& ApplP\ar@{-}[dl]\ar@{-}[dr]\\
+			PP_{\text{Recipient}} & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
+			& Appl & & VP\ar@{-}[dl]\ar@{-}[dr]\\
+			& & V & & DP_{\text{Theme}}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Properties of Analysis}
+	\begin{itemize}
+		\item Applicatives do \textbf{not} assign thematic roles (prepositions do)
+		\item Applicatives only provide a syntactic position for applied arguments to enter the derivation
+		\item Completely exchangable with a Larsonian VP-shell analysis \citep{Larson.1988}
+	\end{itemize}
+\end{frame}
+
+\subsection{Morphosyntactic Operations}
+\begin{frame}
+	\frametitle{Five morphosyntactic operations}
+	\begin{enumerate}
+		\item Contextual allomorphy
+		\item VP-internal scrambling
+		\item Cliticisation
+		\item P-incorporation
+		\item Locality/intervention effects
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{English Examples}
+\begin{exe}
+	\ex Active
+	\begin{xlist}
+		\ex I gave the woman the book.
+		\ex I gave the book to the woman.
+		\ex I gave it the woman
+	\end{xlist}
+\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Contextual allomorphy}
+	\begin{itemize}
+		\item The realization of recipient P is subject to allomorphy
+		\item In some languages, this allomorphy is determined contextually by adjacency to particular words
+		\item Same mechanism that determines "many dog-s" vs. "many sheep"
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{English}
+	\vfill
+	I gave $\emptyset$ the woman the book
+	\vfill
+\end{frame}
+
+\begin{frame}
+	\frametitle{VP-internal scrambling}
+	\begin{itemize}
+		\item Many languages allow two word orders for recipients and themes (RT vs TR)
+		\item RT word order is base generated; TR derived by VP-internal scrambling \citep{Takano.1998,Lenerz.1977}
+		\item Theme moves to a higher specifier of the ApplP \citep{McGinnis.1998}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Scrambling Analysis:}
+	\begin{exe}
+		\ex
+\xymatrix@=2pt{
+ & vP\ar@{-}[dl]\ar@{-}[dr]\\
+DP\ar@{-}[d] & & \bar{v}\ar@{-}[dl]\ar@{-}[dr]\\
+\text{I} & \text{v} & & ApplP\ar@{-}[dl]\ar@{-}[dr]\\
+ & & DP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
+ & & \text{the book$_{i}$}\ar@{<-}@(dl,dl)[ddrrr] & PP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
+ & & & \text{to the woman} & Appl & & VP\ar@{-}[dl]\ar@{-}[dr]\\
+ & & & & & DP_{i} & & \bar{V}\ar@{-}[d]\\
+ & & & & & & & V\ar@{-}[d] \\
+ & & & & & & & \text{give}\\}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Cliticisation}
+	\begin{itemize}
+		\item For the purposes here, can be treated as head movement of a pronoun into a higher element
+		\item Allows two constructions (``violating'' locality):
+		\begin{enumerate}
+			\item Theme cliticisation: John [gave it] $\emptyset$ him.
+			\item Recipient cliticisation: The book was [given $\emptyset$ him].
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{English Examples}
+\begin{exe}
+	\ex Active
+	\begin{xlist}
+		\ex The woman was given the book.
+		\ex To the woman was given the book.
+		\ex The book was given to the woman.
+		\ex The book was given the woman.
+	\end{xlist}
+\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{P-incorporation}
+	\begin{itemize}
+		\item P-incorporation allows dative-to-nominative conversion \citep{Alexiadou.2014}
+		\item P-incorporation is a type of head movement
+	 	\item \textbf{Head Movement Targeting Condition:} When head movement is triggered, the head triggering the movement adjoins to the nearest head that asymmetrically c-commands the highest position of the triggering head. \label{ex:headmovement}
+	\end{itemize}
+ \end{frame}
+
+ \begin{frame}
+	\frametitle{English}
+	\vfill
+	The woman was [given $\emptyset$] the book
+	\vfill
+\end{frame}
+
+ \begin{frame}
+	 \frametitle{Incompatibility with VP-internal scrambling}
+ \xymatrix@=2pt{
+ & vP\ar@{-}[dl]\ar@{-}[dr]\\
+	 \text{v}_{\text{passive}} & & ApplP\ar@{-}[dl]\ar@{-}[dr]\\
+ & DP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
+ & \text{the book$_{i}$}\ar@{<-}@(dl,dl)[ddrrr] & PP\ar@{-}[d] & & \bar{Appl}\ar@{-}[dl]\ar@{-}[dr]\\
+ & & \text{to the woman} & Appl & & VP\ar@{-}[dl]\ar@{-}[dr]\\
+ & & & & DP_{i} & & \bar{V}\ar@{-}[d]\\
+ & & & & & & V\ar@{-}[d] \\
+ & & & & & & \text{give}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Passivisation and Properties of T}
+	\begin{itemize}
+		\item Two crucial properties: Locality and Argument Validity
+		\item Assumptions:
+		\begin{enumerate}
+			\item Only DPs (not PPs) can receive nominative case
+			\item Languages vary in whether or not PPs can move to subject position
+			\item Language vary in whether they can inspect multiple arguments for movement/case assignment
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Consequences of T variation}
+	\begin{tabular}{cc}
+		&	PP Subjects \\
+Two Arguments	& DAT recipient subject and NOM theme object \\
+One Argument    & ?DAT recipient subject and ACC theme object\\
+\hline
+	      & No PP Subjects \\
+Two Arguments & NOM theme subject and DAT recipient object\\
+One Argument  & Ungrammaticality\\
+	\end{tabular}
+\end{frame}
+
+\section{Swedish}
+\subsection{Introduction}
+\begin{frame}
+	\frametitle{Swedish Introduction}
+	\begin{itemize}
+		\item Swedish provides best evidence for prepositional analysis of recipient case
+		\item Necessary facts about Swedish:
+		\begin{itemize}
+			\item No remaining synthetic accusative--dative distinction
+			\item V2 language
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Swedish Incorporation}
+	\begin{itemize}
+		\item \textbf{Swedish shows P-incorporation overtly} \citep{Holmberg.1995}
+		\item Verbs without prepositional prefixes (e.g., \textit{gav} `give'):
+		\begin{itemize}
+				\item Allow TR and RT orders
+				\item Allow overt prepositional marking on the recipient
+				\item Only allow theme passivisation (with prepositional marking on recipient)
+		\end{itemize}
+	\item Verbs with prepositional prefixes (e.g., \textit{er-bjod} `offer'):
+		\begin{itemize}
+				\item Only allow RT orders
+				\item Never allow prepositional marking on the recipient
+				\item Only allow recipient passivisation
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\subsection{Non-Particle Verbs}
+\begin{frame}
+	\frametitle{Swedish Non-Particle Verbs: Active}
+	\begin{exe}
+	\ex Swedish:
+		\gll Jag gav Johan en bok.\\
+		I gave John a book.\\
+		\trans `I gave John a book \citep{Holmberg.1995}.'
+	\ex Swedish:
+		\gll Jag gav en bok *(til) Johan.\\
+		I gave a book to John.\\
+		\trans `I gave a book to John \citep{Holmberg.1995}.'
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Swedish Non-Particle Verbs: Passive}
+	\begin{exe}
+		\ex[*]{\gll Pelle gavs ett äpple\\
+			Pelle gave.PASS a apple\\
+			\trans `Pelle was given an apple (\citealt{Anward.1989}, \citealt{Lundquist.2006}).'}
+		\ex[ ]{
+			\gll Ett äpple gavs *(til) Pelle.\\
+			An apple gave.PASS *(to) Pelle.\\
+			 \trans `An apple was given to Pelle (\citealt{Anward.1989},\citealt{Lundquist.2006}).'}
+	\end{exe}
+\end{frame}
+\subsection{Active}
+\begin{frame}
+	\frametitle{Swedish Particle Verbs: Active}
+	\begin{exe}
+				\ex[ ]{\gll Han erbjöd Jan ett nytt jobb\\
+				he.NOM offered John a new job\\
+			\trans `He offered John a new job'}
+				\ex[??]{\gll Han erbjöd ett nytt jobb til Jan\\
+				he.NOM offered a new job to John\\
+			\trans `He offered a new job to John'}
+				\ex[*]{\gll Han erbjöd ett nytt jobb Jan\\
+				he.NOM offered a new job John\\
+			\trans `He offered a new job to John'}
+\end{exe}
+\end{frame}
+\subsection{Recipient Passive}
+\begin{frame}
+	\frametitle{Swedish Particle Verbs: Recipient Passive}
+\begin{exe}
+		\ex Recipient passive:\\
+		\gll Han erbjöds ett nytt jobb\\
+			he.NOM offered.PASS a new job\\
+			\trans `He was offered a new job (\citealt{Anward.1989}, \citealt{Lundquist.2006}).'
+\end{exe}
+\end{frame}
+
+\subsection{Theme Passive}
+\begin{frame}
+	\frametitle{Swedish Particle Verbs: Theme Passive (Take 1)}
+	\begin{exe}
+	\ex Recipient clitic passive:\\
+		\gll Ett nytt jobb erbjöds=honom.\\
+		A new job offered.PASS=him.OBL.\\
+		\trans `A new job was offered to him (\citealt{Anward.1989},\citealt{Falk.1990},\citealt{Lundquist.2006}).'
+	\ex ``Theme passive'': \\
+		\gll Jobbet erbjöds mannen med den långa svarta kappan.\\
+		job.DEF offered.PASS man.DEF with the long black coat\\
+		'The job was offered to the man with the long black coat \citep[ex 26]{Lundquist.2004}.'
+\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Problem!!!}
+	\begin{itemize}
+		\item Theme passive with P-incorporation should be impossible (without recipient cliticization)
+		\item But theme passives are reported grammatical with particle verbs in Swedish!!!
+		\pause
+		\item Solution: In V2 languages, preverbal position is \textbf{not} an unambiguous subject position
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Swedish Particle Verbs: Theme Passive Redo}
+	\begin{exe}
+	\ex Between auxiliary and participle:
+		\begin{xlist}
+			\ex[ ]{\gll \textbf{DET jobbet} har Kalle tilldelats.\\
+			that job.DEF has Kalle assigned.PART.PASS\\
+			\trans `THAT job, Kalle has been assigned \citep[ex. 59]{Lundquist.2004}.'}
+			\ex[??]{\gll DEN mannen har jobbet tilldelats.\\
+			that man.DEF has job.DEF assigned.PART.PASS\\
+			\trans `To THAT man, the job has been assigned \citep[ex. 58]{Lundquist.2004}.'}
+		\end{xlist}
+\end{exe}
+\end{frame}
+\subsection{Conclusions}
+\begin{frame}
+	\frametitle{Cconclusion}
+	\vfill
+	\Large
+	Swedish verbs show P-incorporation overtly
+	\vfill
+\end{frame}
+
+\section{Historical English}
+\subsection{Introduction}
+\begin{frame}
+	\frametitle{Historical Oultine}
+	\begin{enumerate}
+		\item Background on Technique
+		\item Case \#1: Introduction of P-incorporation
+		\item Case \#2: Introduction of recipient ``to''
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Background}
+	\begin{itemize}
+		\item Syntactic variation is caused by ``competing grammars'' \citep{Kroch.1989}
+		\item The choice between grammatical options can be modelled using logistic regression
+		\item Time based regression models captures \textbf{diffusion} of a syntactic option
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Linking Hypothesis}
+	\vfill
+	\Large
+	Shared historical behaviour \textbf{implies} shared syntactic representation
+	\vfill
+\end{frame}
+
+\begin{frame}
+	\frametitle{Technical Details}
+	\begin{itemize}
+		\item Bayesian models used with weakly informative priors
+		\item Results interpretation: Probability distribution over parameter values
+		\item All models fit with STAN
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Technical Takeaway}
+	\vfill
+	Interaction term of zero \textbf{suggests} shared historical behaviour
+	\vfill
+\end{frame}
+\subsection{Case 1: P-incorporation}
+
+\begin{frame}
+	\frametitle{Shared Property}
+	\begin{itemize}
+		\item The existence of P-incorporation permitted two surface constructions:
+			\begin{enumerate}
+				\item Nominative recipient passives
+				\item Pseudopassives
+			\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Recipient Passive}
+	\begin{exe}
+		\ex Middle English \citep{Kroch.2000} and Early Modern English \citep{Kroch.2004}
+		\begin{xlist}
+			\ex\label{ex:obliq-to-rec-eng} to thy holy name be given laude and praise (STOW-E2-P2,581.96)
+			\ex\label{ex:obliq-rec-eng} the king Gurthym, that we clepteth Gurmundus, were i-yeve the provinces of Est Anglia and Northumbria (CMPOLYCH-M3,VI,377.2770)
+			\ex\label{ex:nom-rec-eng} for the prioress is given a matter to proud in the beginning of her ordinance (CMBENRULE-M3,43.1346)
+		\end{xlist}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Pseudopassive}
+	\begin{exe}
+		\ex Pseudopassive:
+		\begin{xlist}
+			\ex I slept in the bed.
+			\ex The bed was slept in.
+		\end{xlist}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Graph}
+	\includegraphics[width=\linewidth,height=.8\paperheight]{output/images/recpas-old-pseudo}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Parameter Estimates}
+	\input{output/tables/recpas-old-mcmc.tex}
+\end{frame}
+
+\subsection{Case 2: Rise and Fall of `to`}
+\begin{frame}
+	\frametitle{Stages of `to'}
+	\begin{enumerate}
+		\item Old English: Recipient P realised as null 
+		\item Early Middle English: Spread of `to' realisation
+		\item Early Modern English: Spread of null contextual allomorph
+	\end{enumerate}
+\end{frame}
+
+\section{Conclusions}
+\subsection{Conclusions}
+\begin{frame}
+	\frametitle{Conclusions}
+	\begin{itemize}
+		\item Recipients are base-generated as PPs in the specifier of an applicative phrase
+		\item Historical data can provide independent evidence for syntactic theory
+	\end{itemize}
+\end{frame}
+\subsection{Thank you}
+\begin{frame}
+\vfill
+\begin{center}
+THANK YOU!
+\end{center}
+\vfill
+\end{frame}
+
+\begin{frame}
+\vfill
+\begin{center}
+	QUESTIONS?
+\end{center}
+\vfill
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]
+\frametitle{References}
+\nocite{Haddican.2011,Haddican.2012,Gerwin.2013}
+\bibliographystyle{tex/book/mcbride}
+\bibliography{tex/diss}{}
+\end{frame}
+
+\end{document}
