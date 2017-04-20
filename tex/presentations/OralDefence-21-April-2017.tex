@@ -1,6 +1,6 @@
 \documentclass{beamer}
 \usetheme{Frankfurt}
-
+\usepackage[T1]{fontenc}
 \usepackage[authoryear]{natbib}
 \usepackage{gb4e}
 \usepackage{dcolumn}
@@ -567,6 +567,76 @@ One Argument  & Ungrammaticality\\
 		\item Early Middle English: Spread of `to' realisation
 		\item Early Modern English: Spread of null contextual allomorph
 	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Old English: Data}
+	\begin{exe}
+		\ex Examples using Both Word Orders:
+		\begin{xlist}
+			\ex \gll and sealde healfne dael (*to) \TH am gesaeligan \TH earfan\\
+			and gave half portion.ACC to the.DAT blessed.DAT needy.DAT\\
+			\trans ` and gave a half portion to the blessed needy (coaelive.03,+ALS\_[Martin]:69.6009)'
+			\ex \gll Man sceal eac syllan (*to) \TH am seocan men husel\\
+			one should also give to the.DAT sick.DAT man.DAT eucharist.ACC\\
+			\trans `One should also give the sick man eucharist (coaelhom.03,+AHom\_11:177.1583)'
+		\end{xlist}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Old English: Analysis}
+	\begin{exe}
+		\ex Vocabulary Items (6th--11th Centuries):\label{ex:old-eng-vi}
+		\begin{xlist}
+			\ex Universal Null Item:  /$\emptyset$/ $\leftrightarrow$ [dative P]
+		\end{xlist}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Middle English: Data}
+	\begin{exe}
+		\ex Examples using Both Word Orders:
+		\begin{xlist}
+		\ex I have given \textbf{Purry} a gown (PASTON,I,232.2716)
+		\ex They gave \textbf{to the people} this bread (CMWYCSER-M3,248.452)\label{ex:mideng-rt-to}
+		\ex Thou givest thine aught (possessions) \textbf{God} (CMVICES1-M1,37.437)
+		\ex Lord, in thy will, thou gave virtue \textbf{to my fairness} (CMEARLPS-M2,32.1360)
+	\end{xlist}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Middle English: Analysis}
+	\begin{exe}
+		\ex Vocabulary Items (11th--14th Centuries):\label{ex:simple-vis-eng}
+		\begin{xlist}
+			\ex Universal Null Item: /$\emptyset$/ $\leftrightarrow$ [dative P]
+			\ex To Item: /tu/ $\leftrightarrow$ [dative P]
+		\end{xlist}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{English `to' Graph}
+	\includegraphics[width=\linewidth,height=.85\paperheight]{output/images/to-use}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Early Modern English: Analysis}
+	\begin{exe}
+		\ex Vocabulary Items (14th--18th Centuries):
+		\begin{xlist}
+			\ex (Null Allomorph Item: /$\emptyset$/ $\leftrightarrow$ [dative P] / verb$^{\smallfrown}$\_)
+			\ex To Item: /tu/ $\leftrightarrow$ [dative P]
+		\end{xlist}
+	\end{exe}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Quantitative Results}
+	\input{'output/tables/to-mcmc.tex'}
 \end{frame}
 
 \section{Conclusions}
