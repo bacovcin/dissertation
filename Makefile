@@ -436,5 +436,5 @@ output/pdf/OralDefence-21-April-2017.pdf : tex/presentations/OralDefence-21-Apri
 	bibtex OralDefence-21-April-2017
 	xelatex tex/presentations/OralDefence-21-April-2017
 	xelatex tex/presentations/OralDefence-21-April-2017
-	mv OralDefence-21-April-2017.pdf output/pdf/OralDefence-21-April-2017.pdf
+	mv OralDefence-21-April-2017.pdf output/pdf/Bacovcin-Defence.pdf
 	rm OralDefence*
