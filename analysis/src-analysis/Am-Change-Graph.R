@@ -4,10 +4,13 @@ library(dplyr)
 
 # American English
 load('analysis/rdata-tmp/amdat.RData')
+
+# Load data sets for passivisation rates
 givepr<-read.csv('analysis/data/give_pasrate_final.dat',sep='\t',quote='')
 offerpr<-read.csv('analysis/data/offer_pasrate_final.dat',sep='\t',quote='')
 ampr<-as.data.frame(rbind(givepr,offerpr))
 
+# Code to and word order
 amdat$isTo<-factor(amdat$To)
 levels(amdat$isTo)<-c(0,1)
 amdat$isTo<-as.numeric(as.character(amdat$isTo))
@@ -16,19 +19,30 @@ amdat$isDatAcc <- factor(amdat$Order)
 levels(amdat$isDatAcc) <- c(0,1)
 amdat$isDatAcc <- as.numeric(as.character(amdat$isDatAcc))
 
+# Create a counter variable for summation 
 amdat$counter <- 1
 
+# Count active and passive clauses by verb and voice
 amprgb<-group_by(ampr,year,Verb,Voice)%>%summarise(pasCount=n())
-amda<-filter(amdat,!is.na(To))%>%filter(!is.na(isDatAcc))%>%group_by(year,Voice,Verb)%>%summarise(isDatAccTo=sum(counter[isDatAcc==1&isTo==1])/n(),isDatAccNoTo=sum(counter[isDatAcc==1&isTo==0])/n(),isAccDatTo=sum(counter[isDatAcc==0&isTo==1])/n())
 
+# Normalise dataset by calculating portion of active and passive sentences of each type per year
+amda<-filter(amdat,!is.na(To))%>%filter(!is.na(isDatAcc))%>%
+  group_by(year,Voice,Verb)%>%
+  summarise(isDatAccTo=sum(counter[isDatAcc==1&isTo==1])/n(),
+            isDatAccNoTo=sum(counter[isDatAcc==1&isTo==0])/n(),
+            isAccDatTo=sum(counter[isDatAcc==0&isTo==1])/n())
+
+# Merge the normalised dataset and passive rate data to get estimated yearly counts of each type
 newam<-merge(amda,amprgb)
 newam$DatAccToCount<-round(newam$pasCount*newam$isDatAccTo)
 newam$DatAccNoToCount<-round(newam$pasCount*newam$isDatAccNoTo)
 newam$AccDatToCount<-round(newam$pasCount*newam$isAccDatTo)
 newam$AccDatNoToCount<-newam$pasCount-(newam$DatAccToCount+newam$DatAccNoToCount+newam$AccDatToCount)
 
+# Remove NAs
 newam2<-subset(newam,!is.nan(DatAccToCount)&!is.nan(DatAccNoToCount)&!is.nan(AccDatToCount)&!is.nan(AccDatNoToCount))
 
+# Calculate tables
 amtabdat<-subset(newam2,year>=1950)
 
 amtabdat2<-group_by(amtabdat,Voice)%>%summarise(DatAcc=sum(DatAccNoToCount),AccDat=sum(AccDatToCount))
@@ -48,10 +62,19 @@ chisq.test(as.table(ammat))
 # X-squared = 17.279, df = 1, p-value = 3.228e-05
 # 
 
-newam3<-group_by(newam2,year,Verb)%>%summarise(DatAccToTotal=sum(DatAccToCount),DatAccToAct=DatAccToCount[Voice=='Active'],DatAccToRate=1.0-(DatAccToAct/DatAccToTotal),
-					       DatAccNoToTotal=sum(DatAccNoToCount),DatAccNoToAct=DatAccNoToCount[Voice=='Active'],DatAccNoToRate=1.0-(DatAccNoToAct/DatAccNoToTotal),
-					       AccDatToTotal=sum(AccDatToCount),AccDatToAct=AccDatToCount[Voice=='Active'],AccDatToRate=1.0-(AccDatToAct/AccDatToTotal),
-					       AccDatNoToTotal=sum(AccDatNoToCount),AccDatNoToAct=AccDatNoToCount[Voice=='Active'],AccDatNoToRate=1.0-(AccDatNoToAct/AccDatNoToTotal))
+# Calculate relevant passivisation rates
+newam3<-group_by(newam2,year,Verb)%>%summarise(DatAccToTotal=sum(DatAccToCount),
+                                               DatAccToAct=DatAccToCount[Voice=='Active'],
+                                               DatAccToRate=1.0-(DatAccToAct/DatAccToTotal),
+					       DatAccNoToTotal=sum(DatAccNoToCount),
+					       DatAccNoToAct=DatAccNoToCount[Voice=='Active'],
+					       DatAccNoToRate=1.0-(DatAccNoToAct/DatAccNoToTotal),
+					       AccDatToTotal=sum(AccDatToCount),
+					       AccDatToAct=AccDatToCount[Voice=='Active'],
+					       AccDatToRate=1.0-(AccDatToAct/AccDatToTotal),
+					       AccDatNoToTotal=sum(AccDatNoToCount),
+					       AccDatNoToAct=AccDatNoToCount[Voice=='Active'],
+					       AccDatNoToRate=1.0-(AccDatNoToAct/AccDatNoToTotal))
 
 ampas <- read.csv('analysis/data/coha_pascounts.txt',sep='\t')
 ampas$pasact <- ampas$passives+ampas$actives
@@ -81,12 +104,16 @@ am.the.g <- group_by(am.the,year)%>%summarise(val=mean(isTo),
 											  type='Direct Theme Passivisation',
 											  num=sum(!is.na(isTo)))
 
-gdat <- as.data.frame(rbind(recpas,am.the.g))
+am.pas.g <- group_by(ampas,year)%>%summarise(val=mean(pasrate),
+                                              type='Overall Passivisation',
+                                              num=sum(pasact))
+
+gdat <- as.data.frame(rbind(recpas,am.the.g,am.pas.g))
 
 pdf(file='output/images/am-change-pass.pdf')
 ggplot(gdat,aes(year,val,colour=type,linetype=type,weight=num))+
   stat_smooth(method='loess')+
   geom_point(aes(year,val,size=num))+
-  coord_cartesian(ylim=c(0,1))+scale_y_continuous(name="",breaks=c(0,0.2,0.4,0.5,0.6,0.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+scale_colour_discrete(name="Type")+scale_linetype_discrete(name='Type')+scale_size_continuous('Num of Tokens/year')
+  coord_cartesian(ylim=c(0,1))+scale_y_continuous(name="",breaks=c(0,0.2,0.4,0.5,0.6,0.8,1),labels=c('0%','20%','40%','50%','60%','80%','100%'))+scale_colour_discrete(name="Type")+scale_linetype_discrete(name='Type')+scale_size_continuous('Num of Tokens/year',range = c(0.25, 3))
 dev.off()
 
